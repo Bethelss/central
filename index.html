@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Банкетный комплекс Центральный — премиальные залы для свадеб, корпоративов и торжеств в Курске">
+  <title>ЦЕНТРАЛЬНЫЙ — Банкетный Комплекс | Курск</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:  #2B2A29;
+      --white:  #FEFEFE;
+      --br-1:   #4A3D35;
+      --br-2:   #6B5A50;
+      --br-3:   #826651;
+      --br-4:   #A08977;
+      --br-5:   #CFAB8B;
+      --cream:  #FAF6EF;
+      --cream2: #F0EAE0;
+      --serif: 'Cormorant Garamond', 'Bookman Old Style', 'PT Serif', Georgia, serif;
+      --sans:  'Raleway', 'PT Sans', sans-serif;
+      --ease:  cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --sec-pad: clamp(100px, 12vw, 160px);
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { font-family: var(--sans); background: var(--cream); color: var(--black); overflow-x: hidden; line-height: 1.8; font-weight: 300; }
+    img  { display: block; max-width: 100%; }
+    a    { text-decoration: none; color: inherit; }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--cream2); }
+    ::-webkit-scrollbar-thumb { background: var(--br-4); border-radius: 0; }
+
+    .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 52px; }
+
+    /* ── TYPOGRAPHY SYSTEM ─── */
+    .tag {
+      font-family: var(--sans); font-size: 9.5px; font-weight: 500;
+      letter-spacing: 0.42em; text-transform: uppercase;
+      color: var(--br-3); display: flex; align-items: center; gap: 14px;
+      margin-bottom: 20px;
+    }
+    .tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--br-4); flex-shrink: 0; }
+    .tag.light { color: var(--br-5); }
+    .tag.light::before { background: var(--br-5); opacity: 0.6; }
+
+    h1, h2, h3 { font-family: var(--serif); line-height: 1.05; }
+
+    /* ── BUTTONS — refined, minimal ─── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 14px 36px; cursor: pointer; border: none;
+      font-family: var(--sans); font-size: 9.5px; font-weight: 500;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      transition: background 0.35s var(--ease), transform 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease);
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-arrow { display: none; font-size: 14px; }
+    .btn:focus-visible { outline: 1px solid var(--br-3); outline-offset: 4px; }
+
+    .btn-solid { background: rgba(130,102,81,0.55); color: var(--white); backdrop-filter: blur(8px); border: 1px solid rgba(207,171,139,0.25); }
+    .btn-solid:hover { background: rgba(130,102,81,0.82); transform: translateY(-1px); }
+
+    .btn-ghost { background: transparent; color: var(--white); border: 1px solid rgba(254,254,254,0.3); }
+    .btn-ghost:hover { border-color: rgba(254,254,254,0.7); background: rgba(254,254,254,0.07); }
+
+    .btn-dark { background: transparent; color: var(--black); border: 1px solid rgba(43,42,41,0.18); }
+    .btn-dark:hover { background: var(--br-3); color: var(--white); border-color: var(--br-3); transform: translateY(-1px); }
+
+    .btn-line {
+      background: transparent; color: var(--br-3); border: none; padding: 0;
+      font-family: var(--sans); font-size: 9.5px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 10px; position: relative;
+    }
+    .btn-line::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 1px; background: var(--br-3); transform: scaleX(0.3); transform-origin: left; transition: transform 0.3s var(--ease); }
+    .btn-line:hover::after { transform: scaleX(1); }
+
+    /* ── ANIMATIONS ─── */
+    .r  { opacity: 0; transform: translateY(24px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+    .rl { opacity: 0; transform: translateX(-24px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+    .rr { opacity: 0; transform: translateX(24px);  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+    .r.on, .rl.on, .rr.on { opacity: 1; transform: none; }
+    .d1{transition-delay:.12s} .d2{transition-delay:.24s} .d3{transition-delay:.36s} .d4{transition-delay:.48s} .d5{transition-delay:.6s}
+
+    /* ── MARQUEE ─── */
+    .hero-marquee { position: absolute; bottom: 0; left: 0; right: 0; z-index: 3; }
+
+    .marquee {
+      background: rgba(130,102,81,0.45); padding: 14px 0; overflow: hidden; backdrop-filter: blur(4px);
+    }
+    .marquee-inner {
+      display: flex; gap: 0; width: max-content;
+      animation: marqueeMove 32s linear infinite;
+    }
+    .marquee-inner:hover { animation-play-state: paused; }
+    .marquee-item {
+      font-family: var(--serif); font-size: 13px; font-weight: 400; 
+      color: rgba(254,254,254,0.75); letter-spacing: 0.07em;
+      padding: 0 44px; white-space: nowrap;
+      display: flex; align-items: center; gap: 44px;
+    }
+    .marquee-item::after { content: ''; display: inline-block; width: 24px; height: 1px; background: rgba(207,171,139,0.4); margin-left: 44px; vertical-align: middle; }
+    @keyframes marqueeMove { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ── NAV ─── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 22px 0;
+      transition: padding 0.4s var(--ease), background 0.4s, border-color 0.4s;
+    }
+    .nav.s {
+      padding: 14px 0;
+      background: rgba(52,35,22,0.82);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(130,102,81,0.12);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 13px; line-height: 1; }
+    .nav-logo img { height: 34px; filter: brightness(0) invert(1); transition: filter 0.4s; }
+    .nav.s .nav-logo img { filter: brightness(0) invert(1); }
+    .nav-logo-name { font-family: var(--serif); font-size: 17px; font-weight: 500; letter-spacing: 0.12em; color: var(--white); display: block; line-height: 1; transition: color 0.4s; }
+    .nav.s .nav-logo-name { color: var(--white); }
+    .nav-logo-sub  { font-family: var(--sans); font-size: 7.5px; font-weight: 400; letter-spacing: 0.34em; text-transform: uppercase; color: rgba(254,254,254,0.5); display: block; margin-top: 3px; transition: color 0.4s; }
+    .nav.s .nav-logo-sub { color: rgba(254,254,254,0.45); }
+
+    .nav-links { display: flex; gap: 34px; list-style: none; }
+    .nav-links a {
+      font-size: 9.5px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(254,254,254,0.5); position: relative; padding-bottom: 2px;
+      transition: color 0.3s;
+    }
+    .nav.s .nav-links a { color: rgba(254,254,254,0.5); }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 50%; right: 50%;
+      height: 1px; background: var(--br-3);
+      transition: left 0.3s var(--ease), right 0.3s var(--ease);
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav.s .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { left: 0; right: 0; }
+    .nav-links a.active { color: var(--white); }
+    .nav.s .nav-links a.active { color: var(--white); }
+    .nav-links a.active::after { left: 0; right: 0; }
+
+    .nav-cta {
+      font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em;
+      color: rgba(254,254,254,0.6); border: 1px solid rgba(254,254,254,0.2); padding: 8px 18px;
+      transition: all 0.3s;
+    }
+    .nav.s .nav-cta { color: rgba(254,254,254,0.6); border-color: rgba(254,254,254,0.2); }
+    .nav-cta:hover { background: var(--br-3); color: var(--white); border-color: var(--br-3); }
+
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .burger span { display: block; width: 24px; height: 1px; background: var(--white); transition: transform 0.3s, opacity 0.3s; }
+    .nav.s .burger span { background: var(--white); }
+
+    /* ── MOBILE MENU ─── */
+    .mmenu { position: fixed; inset: 0; background: var(--cream); z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; opacity: 0; pointer-events: none; transition: opacity 0.35s; }
+    .mmenu.on { opacity: 1; pointer-events: all; }
+    .mmenu a { font-family: var(--serif); font-size: 40px; font-weight: 400; color: rgba(43,42,41,0.55); transition: color 0.3s; }
+    .mmenu a:hover { color: var(--br-3); }
+
+    /* ── HERO ─── */
+    .hero { position: relative; height: 100vh; min-height: 700px; display: flex; flex-direction: column; justify-content: flex-start; overflow: hidden; }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('photos/ChatGPT Image 16 мар. 2026 г., 12_33_33.png') center/cover no-repeat;
+      will-change: transform;
+    }
+    .hero-ov { position: absolute; inset: 0; background: linear-gradient(170deg, rgba(20,14,8,0.88) 0%, rgba(20,14,8,0.68) 45%, rgba(20,14,8,0.90) 100%); }
+
+    /* Vertical side text */
+    .hero-side {
+      position: absolute; right: 52px; top: 50%; transform: translateY(-50%);
+      writing-mode: vertical-rl; text-orientation: mixed;
+      font-family: var(--sans); font-size: 8.5px; font-weight: 400;
+      letter-spacing: 0.38em; text-transform: uppercase;
+      color: rgba(254,254,254,0.22); z-index: 2;
+      opacity: 0; animation: fu 1s var(--ease) 2s forwards;
+    }
+
+    .hero-body {
+      position: relative; z-index: 2; flex: 1;
+      display: flex; flex-direction: column; justify-content: center;
+      padding-bottom: clamp(80px, 12vh, 140px);
+      padding-top: clamp(100px, 16vh, 180px);
+    }
+
+    .hero-text { max-width: 820px; }
+
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 14px; margin-bottom: 32px;
+      opacity: 0; animation: fu 1s var(--ease) 0.3s forwards;
+    }
+    .hero-eyebrow-line { width: 36px; height: 1px; background: var(--br-5); display: block; }
+    .hero-eyebrow span { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.38em; text-transform: uppercase; color: var(--br-5); }
+
+    .hero-title {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(60px, 9.5vw, 122px);
+      line-height: 0.93; letter-spacing: -0.015em;
+      color: #fff; margin-bottom: 40px;
+      text-shadow: 0 4px 32px rgba(0,0,0,0.35);
+      opacity: 0; animation: fu 1.1s var(--ease) 0.5s forwards;
+    }
+    .hero-title-sub {
+      font-family: var(--sans); font-size: clamp(9px, 0.9vw, 11px); font-weight: 400;
+      letter-spacing: 0.45em; text-transform: uppercase; color: rgba(207,171,139,0.6);
+      margin-bottom: 36px;
+      opacity: 0; animation: fu 1s var(--ease) 0.75s forwards;
+    }
+
+    .hero-sep {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 44px;
+      opacity: 0; animation: fu 1s var(--ease) 0.9s forwards;
+    }
+    .hero-sep-line { width: 40px; height: 1px; background: var(--br-5); opacity: 0.6; flex-shrink: 0; }
+    .hero-sep-text { font-family: var(--sans); font-size: clamp(18px, 2.2vw, 28px); font-weight: 300; color: rgba(254,254,254,0.92); letter-spacing: 0.04em; text-shadow: 0 2px 16px rgba(0,0,0,0.4); }
+
+    .hero-actions {
+      opacity: 0; animation: fu 1s var(--ease) 1.1s forwards;
+      display: flex; gap: 14px; flex-wrap: wrap;
+    }
+
+    /* Hero facts bar — refined horizontal rule approach */
+    .hero-facts {
+      display: flex; gap: 0;
+      padding-top: 40px; margin-top: 72px;
+      border-top: 1px solid rgba(207,171,139,0.18);
+      opacity: 0; animation: fu 1s var(--ease) 1.4s forwards;
+    }
+    .hero-fact {
+      flex: 1; padding: 0 32px 0 0;
+    }
+    .hero-fact:not(:last-child) {
+      border-right: 1px solid rgba(207,171,139,0.12);
+      margin-right: 32px;
+    }
+    .hero-fact:first-child { padding-left: 0; }
+    .hf-n { font-family: var(--serif); font-size: clamp(32px, 3.2vw, 46px); font-weight: 500; color: var(--br-5); display: block; line-height: 1; text-shadow: 0 2px 12px rgba(0,0,0,0.6), 0 0 1px rgba(0,0,0,0.8); }
+    .hf-l { font-size: 8.5px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(254,254,254,0.45); margin-top: 8px; display: block; text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
+
+    .hero-scroll {
+      position: absolute; bottom: 48px; left: 50%; transform: translateX(-50%);
+      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+      padding-bottom: 0; cursor: pointer;
+      opacity: 0; animation: fu 1s var(--ease) 1.9s forwards;
+    }
+    .hero-scroll span { font-size: 8px; font-weight: 400; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(254,254,254,0.22); }
+    .scroll-tick { width: 1px; height: 44px; background: linear-gradient(to bottom, rgba(207,171,139,0.5), transparent); animation: scrollPulse 2.2s ease-in-out infinite; }
+    @keyframes scrollPulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+    @keyframes fu { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── ABOUT — Full-bleed editorial split ─── */
+    .about { display: grid; grid-template-columns: 1fr 1fr; min-height: 60vh; background: var(--cream); overflow: hidden; }
+
+    .about-img-col { position: relative; overflow: hidden; }
+    .about-img-col .about-main-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.6s var(--ease); }
+    .about-img-col:hover .about-main-img { transform: scale(1.04); }
+
+    .about-text-col {
+      padding: clamp(80px, 9vw, 130px) clamp(52px, 7vw, 100px);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .about-rule { width: 36px; height: 1px; background: var(--br-4); margin-bottom: 32px; }
+    .about-h { font-size: clamp(36px, 3.6vw, 52px); font-weight: 300; color: var(--black); margin-bottom: 32px; letter-spacing: -0.02em; line-height: 1.05; }
+    .about-p { font-family: var(--sans); font-size: 14px; font-weight: 300; color: #6B5B4E; line-height: 1.9; margin-bottom: 20px; }
+
+    .about-quote {
+      margin: 36px 0 40px;
+      padding: 4px 0 4px 24px;
+      border-left: 1px solid rgba(160,137,119,0.45);
+    }
+    .about-quote p { font-family: var(--serif); font-size: 20px;  font-weight: 400; color: var(--br-2); line-height: 1.65; }
+
+    /* ── STATS — light cream2 background ─── */
+    .stats { background: var(--cream2); position: relative; overflow: hidden; }
+    .stats::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(130,102,81,0.25), transparent); }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); position: relative; z-index: 3; }
+    .stat {
+      padding: 40px 36px 36px;
+      border-top: 2px solid var(--br-3);
+      position: relative;
+    }
+    .stat:not(:last-child) { border-right: 1px solid rgba(130,102,81,0.12); }
+    .stat-n {
+      font-family: var(--serif); font-size: clamp(56px, 5vw, 76px);
+      font-weight: 300; color: var(--br-3) !important; line-height: 1; display: block;
+      margin-bottom: 12px;
+    }
+    .stat-u { font-size: 0.55em; }
+    .stat-l {
+      font-size: 9px; font-weight: 500; letter-spacing: 0.26em;
+      text-transform: uppercase; color: var(--br-4); display: block;
+    }
+
+    /* ── HALLS — Editorial alternating rows ─── */
+    .halls { background: var(--cream2); }
+    .halls-head-wrap { padding: 56px 0 48px; }
+    .halls-head { text-align: center; }
+    .halls-head .tag { justify-content: center; }
+    .halls-h { font-size: clamp(40px, 4.5vw, 66px); font-weight: 300; color: var(--black); letter-spacing: -0.02em; }
+
+    .hall-row { display: grid; grid-template-columns: 3fr 2fr; height: clamp(520px, 68vh, 780px); overflow: hidden; }
+    .hall-row.hall-row-flip { grid-template-columns: 2fr 3fr; }
+
+    .hall-row-img { overflow: hidden; position: relative; }
+    .hall-row-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.4s var(--ease); }
+    .hall-row:hover .hall-row-img img { transform: scale(1.04); }
+
+    .hall-row-text {
+      padding: clamp(48px, 5vw, 80px) clamp(52px, 6vw, 88px);
+      display: flex; flex-direction: column; justify-content: center;
+      background: var(--cream); overflow: hidden;
+    }
+    .hall-row-flip .hall-row-text { background: var(--cream2); }
+
+    .hall-row-name { font-family: var(--serif); font-size: clamp(32px, 3.4vw, 50px); font-weight: 300; color: var(--black); line-height: 1.1; margin-bottom: 12px; letter-spacing: -0.02em; }
+    .hall-row-cap { font-size: 9px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--br-3); margin-bottom: 24px; display: block; }
+    .hall-row-desc { font-size: 14px; font-weight: 300; color: #6B5B4E; line-height: 1.9; margin-bottom: 28px; }
+
+    /* ── EVENTS — dark photo background ─── */
+    .events { background: var(--black); padding: var(--sec-pad) 0; position: relative; overflow: hidden; }
+    .events-bg { position: absolute; inset: 0; background: url('Банкетный%20комплекс%20Центральный/люди2.jpg') center/cover; }
+    .events-ov { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(10,8,6,0.68) 0%, rgba(10,8,6,0.52) 100%); }
+    .events-rule { display: none; }
+
+    .events-inner { position: relative; z-index: 3; }
+    .events-top { display: grid; grid-template-columns: 1fr 1fr; gap: 88px; align-items: end; margin-bottom: 72px; }
+    .events-h { font-size: clamp(40px, 4.5vw, 66px); font-weight: 300; color: var(--white); letter-spacing: -0.02em; line-height: 1.1; }
+    .events-p { font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.42); line-height: 1.9; }
+
+    .events-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+    .ecard {
+      background: transparent; padding: 48px 36px 44px; position: relative;
+      transition: background 0.3s;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .ecard:last-child { border-right: none; }
+    .ecard:hover { background: rgba(255,255,255,0.04); }
+    .ecard::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: transparent; }
+    .ecard-hover-line {
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: var(--br-5);
+      transform: scaleX(0); transition: transform 0.45s var(--ease);
+    }
+    .ecard:hover .ecard-hover-line { transform: scaleX(1); }
+
+    .ecard-num { font-family: var(--serif); font-size: 80px; font-weight: 300; color: rgba(255,255,255,0.05); line-height: 1; margin-bottom: -10px; display: block;  }
+    .ecard-icon {
+      width: 36px; height: 36px; border: 1px solid rgba(207,171,139,0.25);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+    }
+    .ecard-icon svg { width: 16px; height: 16px; stroke: var(--br-5); fill: none; stroke-width: 1.5; }
+    .ecard-name { font-family: var(--serif); font-size: 24px; font-weight: 400; color: var(--white); margin-bottom: 12px; line-height: 1.2; text-shadow: 0 1px 12px rgba(0,0,0,0.6); }
+    .ecard-desc { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.72); line-height: 1.85; text-shadow: 0 1px 8px rgba(0,0,0,0.5); }
+
+    /* ── GALLERY ─── */
+    .gallery { padding: var(--sec-pad) 0; background: var(--cream); }
+    .gallery-head { text-align: center; margin-bottom: 64px; }
+    .gallery-h { font-size: clamp(40px, 4.5vw, 66px); font-weight: 300; color: var(--black); letter-spacing: -0.02em; }
+
+    .gallery-grid { display: grid; grid-template-columns: 7fr 5fr; grid-template-rows: 380px 300px; gap: 8px; }
+    .gitem { overflow: hidden; position: relative; cursor: zoom-in; }
+    .gitem:nth-child(1) { grid-row: span 2; }
+    .gitem:nth-child(4) { grid-column: span 2; }
+    .gitem img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.85s var(--ease); }
+    .gitem:nth-child(4) img { height: 320px; }
+    .gitem:hover img { transform: scale(1.04); }
+
+    /* Clean zoom — no tint overlays */
+    .gitem-ov { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; background: rgba(43,42,41,0.12); }
+    .gitem:hover .gitem-ov { opacity: 1; }
+
+    .gallery-video-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+    .gitem-video { overflow: hidden; position: relative; cursor: pointer; aspect-ratio: 9/16; }
+    .gitem-video video { width: 100%; height: 100%; object-fit: contain; background: #000; display: block; transition: transform 0.85s var(--ease); }
+    .gitem-video:hover video { transform: scale(1.03); }
+    .gitem-video-ov { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(43,42,41,0); transition: background 0.3s; }
+    .gitem-video:hover .gitem-video-ov { background: rgba(43,42,41,0.32); }
+    .video-play-btn { width: 72px; height: 72px; border: 1.5px solid rgba(255,255,255,0.7); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; opacity: 0; transition: opacity 0.3s, transform 0.25s var(--ease), background 0.25s; }
+    .gitem-video:hover .video-play-btn { opacity: 1; transform: scale(1.1); background: rgba(255,255,255,0.12); }
+    .video-play-btn svg { margin-left: 4px; }
+    .zoom-btn { width: 44px; height: 44px; border: 1px solid rgba(254,254,254,0.7); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 20px; font-weight: 300; }
+
+    /* ── ADV — the ONE dark section ─── */
+    .adv { background: var(--br-1); padding: clamp(72px, 8vw, 110px) 0; position: relative; overflow: hidden; }
+    .adv-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start; position: relative; z-index: 3; max-width: 960px; }
+    .adv-left { position: static; }
+    .adv-h { font-size: clamp(36px, 3.8vw, 54px); font-weight: 300; color: var(--white); letter-spacing: -0.02em; margin-bottom: 24px; line-height: 1.1; }
+    .adv-p { font-size: 14px; font-weight: 300; color: rgba(254,254,254,0.38); line-height: 1.9; margin-bottom: 44px; }
+
+    .adv-list { display: flex; flex-direction: column; gap: 0; }
+    .adv-item {
+      display: grid; grid-template-columns: 48px 1fr; gap: 24px; align-items: start;
+      padding: 28px 0; border-bottom: 1px solid rgba(254,254,254,0.06);
+      transition: padding-left 0.3s var(--ease);
+      cursor: default;
+    }
+    .adv-item:first-child { border-top: 1px solid rgba(254,254,254,0.06); }
+    .adv-item:hover { padding-left: 8px; }
+    .adv-num { font-family: var(--serif); font-size: 13px;  color: var(--br-5); opacity: 0.6; padding-top: 4px; }
+    .adv-name { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--white); margin-bottom: 6px; }
+    .adv-desc { font-size: 13px; font-weight: 300; color: rgba(254,254,254,0.32); line-height: 1.85; }
+
+    .adv-photo { margin-top: 40px; overflow: hidden; position: relative; }
+    .adv-photo img { width: 100%; aspect-ratio: 4/3; object-fit: cover; mix-blend-mode: luminosity; opacity: 0.4; display: block; }
+    .adv-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 50%, var(--br-1) 100%); }
+
+    /* ── CTA BANNER ─── */
+    .cta { position: relative; padding: clamp(100px, 14vw, 160px) 0; overflow: hidden; }
+    .cta-bg { position: absolute; inset: 0; background: url('photos/z6uinrw3vs508lgd843dmut0qu6upcsy.webp') center 35%/cover; }
+    /* Reduced overlays — show the beautiful photo */
+    .cta-ov { position: absolute; inset: 0; background: rgba(43,42,41,0.42); }
+
+    .cta-inner { position: relative; z-index: 3; text-align: center; max-width: 680px; margin: 0 auto; }
+    .cta-orn { margin-bottom: 28px; display: flex; align-items: center; justify-content: center; gap: 18px; }
+    .cta-orn-line { width: 48px; height: 1px; background: rgba(207,171,139,0.3); }
+    .cta-orn-sym { font-family: var(--serif); font-size: 16px; color: var(--br-5); opacity: 0.5; }
+
+    .cta-h { font-family: var(--serif); font-size: clamp(38px, 5vw, 68px); font-weight: 300; color: var(--white); letter-spacing: -0.02em; line-height: 1.08; margin-bottom: 20px; }
+    .cta-p { font-size: 14px; font-weight: 300; color: rgba(254,254,254,0.45); line-height: 1.9; margin-bottom: 48px; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── CONTACTS ─── */
+    .contacts { display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; }
+
+    .contacts-dark {
+      background: var(--black); padding: 120px 72px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .contacts-dark::after {
+      content: 'КОНТАКТЫ';
+      position: absolute; top: 50%; right: -20px; transform: translateY(-50%) rotate(90deg);
+      font-family: var(--serif); font-size: 88px; font-weight: 300;
+      color: rgba(254,254,254,0.02); letter-spacing: 0.1em;
+      white-space: nowrap; pointer-events: none;
+    }
+    .contacts-dark-inner { position: relative; z-index: 3; }
+
+    .contacts-light { background: var(--cream); padding: 120px 72px; display: flex; flex-direction: column; justify-content: center; }
+
+    .contacts-h { font-size: clamp(34px, 3.2vw, 48px); font-weight: 300; color: var(--white); letter-spacing: -0.02em; margin-bottom: 52px; line-height: 1.1; }
+
+    .citem { display: flex; gap: 18px; margin-bottom: 28px; align-items: flex-start; }
+    .cico { width: 40px; height: 40px; border: 1px solid rgba(130,102,81,0.28); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .cico svg { width: 16px; height: 16px; stroke: var(--br-3); fill: none; stroke-width: 1.5; }
+    .clabel { font-size: 8.5px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--br-5); opacity: 0.7; display: block; margin-bottom: 4px; }
+    .cval { font-family: var(--serif); font-size: 19px; font-weight: 400; color: rgba(254,254,254,0.82); line-height: 1.4; }
+    .cval a { color: rgba(254,254,254,0.82); transition: color 0.3s; }
+    .cval a:hover { color: var(--br-5); }
+
+    /* Form */
+    .form-h { font-family: var(--serif); font-size: clamp(26px, 2.6vw, 38px); font-weight: 400; color: var(--black); margin-bottom: 36px; letter-spacing: -0.01em; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .ff { display: flex; flex-direction: column; gap: 6px; }
+    .ff.full { grid-column: span 2; }
+    .ff label { font-size: 8.5px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: var(--br-3); }
+    .ff input, .ff select, .ff textarea {
+      border: none; border-bottom: 1px solid rgba(130,102,81,0.2); background: transparent;
+      padding: 12px 0; font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--black);
+      outline: none; transition: border-color 0.3s; border-radius: 0;
+      -webkit-appearance: none; appearance: none;
+    }
+    .ff input:focus, .ff select:focus, .ff textarea:focus { border-color: var(--br-3); }
+    .ff input:hover, .ff select:hover { border-color: var(--br-4); }
+    .ff textarea { min-height: 96px; resize: vertical; border: 1px solid rgba(130,102,81,0.2); padding: 12px; }
+    .ff textarea:focus { border-color: var(--br-3); }
+
+    /* ── CHEF — dark editorial ─── */
+    .chef { background: var(--br-1); position: relative; overflow: hidden; }
+    .chef::before { content: ''; position: absolute; left: 0; top: 0; width: 44%; height: 100%; background: rgba(0,0,0,0.12); z-index: 0; pointer-events: none; }
+    .chef-layout { display: grid; grid-template-columns: 1fr 1.45fr; gap: clamp(56px, 6vw, 88px); align-items: stretch; max-width: 1280px; margin: 0 auto; padding: 0 0 0 clamp(52px, 5vw, 80px); position: relative; z-index: 1; }
+    .chef-photo-col { position: relative; overflow: hidden; min-height: 480px; }
+    .chef-photo-col::before { content: ''; position: absolute; top: 20px; left: -20px; right: 20px; bottom: -20px; background: rgba(207,171,139,0.08); z-index: 0; }
+    .chef-photo-col img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; position: relative; z-index: 1; transition: transform 1.6s var(--ease); }
+    .chef-photo-col:hover img { transform: scale(1.04); }
+    .chef-content-col { padding: clamp(52px,5.5vw,80px) clamp(52px, 5vw, 80px) clamp(52px,5.5vw,80px) 0; }
+    .chef-photo-col::after { content: 'А З'; font-family: var(--serif); font-size: 160px; font-weight: 300;  color: rgba(207,171,139,0.05); position: absolute; bottom: -40px; right: -20px; z-index: 0; line-height: 1; letter-spacing: -0.05em; pointer-events: none; }
+    .chef-content-col { display: flex; flex-direction: column; justify-content: center; }
+
+    .chef-label { font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: 0.38em; text-transform: uppercase; color: var(--br-5); display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .chef-label::before { content: ''; display: block; width: 32px; height: 1px; background: rgba(207,171,139,0.3); flex-shrink: 0; }
+
+    .chef-quote-big { font-family: var(--serif); font-size: clamp(28px, 2.8vw, 44px); font-weight: 300; line-height: 1.32; color: var(--white); letter-spacing: -0.02em; margin-bottom: 24px; }
+    .chef-quote-big em {  color: var(--br-5); }
+
+    .chef-identity { margin-bottom: 20px; }
+    .chef-name-big { font-family: var(--serif); font-size: clamp(32px, 3.2vw, 48px); font-weight: 400; color: var(--white); letter-spacing: 0.01em; display: block; margin-bottom: 7px; }
+    .chef-role-tag { font-size: 9px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(207,171,139,0.45); }
+
+    .chef-rule { width: 48px; height: 1px; background: rgba(207,171,139,0.2); margin-bottom: 20px; }
+
+    .chef-pillars { display: flex; flex-direction: column; gap: 0; }
+    .chef-pillar { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.07); display: grid; grid-template-columns: 28px 1fr; gap: 18px; align-items: start; }
+    .chef-pillar:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
+    .chef-pillar-num { font-family: var(--serif); font-size: 11px;  color: rgba(207,171,139,0.35); padding-top: 3px; }
+    .chef-pillar-text strong { font-weight: 500; color: var(--white); display: block; margin-bottom: 4px; font-size: 16px; font-family: var(--serif); }
+    .chef-pillar-text span { font-size: 14px; font-weight: 300; color: rgba(254,254,254,0.45); line-height: 1.65; }
+
+    /* ── MENU CAROUSEL — side-by-side layout ─── */
+    .menu-sec { background: var(--cream2); position: relative; overflow: hidden; }
+    .menu-sec::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: rgba(130,102,81,0.12); z-index: 1; }
+    .menu-layout { display: grid; grid-template-columns: 36% 64%; min-height: 560px; position: relative; }
+    .menu-left-col { padding: 88px max(36px, 4vw) 140px max(52px, calc((100vw - 1280px) / 2 + 52px)); display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 3; }
+    .menu-left-col::after { content: ''; position: absolute; right: 0; top: 64px; bottom: 64px; width: 1px; background: rgba(130,102,81,0.12); }
+    .menu-right-col { overflow: hidden; position: relative; z-index: 3; display: flex; align-items: center; }
+    .menu-h { font-size: clamp(36px, 3.6vw, 56px); font-weight: 300; color: var(--black); letter-spacing: -0.02em; }
+    .menu-sub { font-size: 13px; font-weight: 300; color: var(--br-2); max-width: 300px; line-height: 1.85; margin-top: 10px; }
+    .menu-sec .tag { color: var(--br-3); }
+    .menu-sec .tag::before { background: var(--br-4); opacity: 1; }
+    .menu-tabs { display: flex; flex-direction: column; gap: 0; position: relative; z-index: 3; margin-top: 36px; border-left: 1px solid rgba(130,102,81,0.15); }
+    .mtab { padding: 9px 0 9px 20px; border: none; border-left: 2px solid transparent; background: transparent; color: rgba(43,42,41,0.28); font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; cursor: pointer; transition: color 0.3s, border-color 0.3s; margin-left: -1px; text-align: left; }
+    .mtab:hover { color: rgba(43,42,41,0.7); }
+    .mtab.active { color: var(--br-3); border-left-color: var(--br-3); }
+    .menu-nav-row { display: flex; align-items: center; gap: 8px; margin-top: 40px; }
+    .menu-chef-portrait { position: absolute; bottom: 52px; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+    .menu-chef-portrait img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; object-position: top; }
+    .menu-chef-pname { font-family: var(--serif); font-size: 15px; font-weight: 500; color: var(--black); display: block; }
+    .menu-chef-ptitle { font-size: 9px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--br-4); display: block; margin-top: 3px; }
+
+    /* Carousel track */
+    .menu-track-wrap { overflow: hidden; position: relative; z-index: 3; cursor: grab; width: 100%; }
+    .menu-track-wrap:active { cursor: grabbing; }
+    .menu-track {
+      display: flex; gap: 20px;
+      padding-left: 40px; padding-right: 40px;
+      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+      will-change: transform; user-select: none;
+    }
+
+    /* Gallery4-style cards: full photo + gradient overlay + text */
+    .mcard { flex: 0 0 300px; min-height: 27rem; position: relative; overflow: hidden; border-radius: 10px; cursor: pointer; transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease); }
+    .mcard.hidden { display: none; }
+    .mcard:hover { transform: translateY(-8px); box-shadow: 0 32px 80px rgba(0,0,0,0.5); }
+    .mcard-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease); display: block; }
+    .mcard:hover .mcard-img { transform: scale(1.06); }
+    .mcard-grad { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(43,42,41,0) 0%, rgba(43,42,41,0.18) 38%, rgba(43,42,41,0.88) 72%, rgba(43,42,41,0.98) 100%); }
+    .mcard-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px 26px 28px; }
+    .mcard-cat { font-size: 8px; font-weight: 500; letter-spacing: 0.38em; text-transform: uppercase; color: var(--br-5); display: block; margin-bottom: 8px; }
+    .mcard-name { font-family: var(--serif); font-size: 21px; font-weight: 500; color: var(--white); line-height: 1.18; display: block; margin-bottom: 8px; }
+    .mcard-desc { font-size: 12.5px; font-weight: 300; color: rgba(254,254,254,0.58); line-height: 1.65; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+    /* Navigation */
+    .menu-btn { width: 44px; height: 44px; border: 1px solid rgba(130,102,81,0.22); background: transparent; color: var(--br-3); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.3s, border-color 0.3s, color 0.3s; }
+    .menu-btn:hover { background: var(--br-3); border-color: var(--br-3); color: var(--white); }
+    .menu-btn:disabled { opacity: 0.22; pointer-events: none; }
+    .menu-btn:focus-visible { outline: 1px solid var(--br-3); outline-offset: 3px; }
+    .menu-counter { font-family: var(--serif); font-size: 15px;  color: rgba(43,42,41,0.3); padding: 0 6px; min-width: 56px; text-align: center; }
+
+    /* Dot indicators */
+    .menu-dots { display: flex; gap: 6px; margin-top: 20px; position: relative; z-index: 3; }
+    .mdot { width: 7px; height: 7px; border-radius: 50%; background: rgba(130,102,81,0.2); border: none; cursor: pointer; padding: 0; transition: background 0.3s, width 0.3s; }
+    .mdot.active { background: var(--br-3); width: 22px; border-radius: 4px; }
+
+    /* ── FOOTER ─── */
+    footer { background: var(--black); padding: 72px 0 36px; position: relative; overflow: hidden; }
+
+    .footer-motif {
+      text-align: center; margin-bottom: 52px; position: relative; z-index: 3;
+      padding-bottom: 44px; border-bottom: 1px solid rgba(130,102,81,0.1);
+    }
+    .footer-motif-sym {
+      font-family: var(--serif); font-size: 36px; color: var(--br-3); opacity: 0.4;
+      display: block; margin-bottom: 12px; font-style: normal;
+    }
+    .footer-motif-line { display: flex; align-items: center; justify-content: center; gap: 16px; }
+    .footer-motif-rule { width: 64px; height: 1px; background: rgba(130,102,81,0.18); }
+    .footer-motif-text { font-family: var(--serif); font-size: 13px;  color: rgba(254,254,254,0.2); letter-spacing: 0.1em; }
+
+    .footer-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 60px; margin-bottom: 56px; position: relative; z-index: 3; }
+    .footer-logo { height: 44px; filter: brightness(0) invert(1); margin-bottom: 16px; }
+    .footer-tagline { font-family: var(--serif); font-size: 14px;  font-weight: 300; color: rgba(254,254,254,0.35); line-height: 1.75; }
+    .fh { font-size: 8.5px; font-weight: 500; letter-spacing: 0.32em; text-transform: uppercase; color: var(--br-5); opacity: 0.7; margin-bottom: 22px; }
+    .flinks { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .flinks a { font-size: 13px; font-weight: 300; color: rgba(254,254,254,0.45); transition: color 0.3s; }
+    .flinks a:hover { color: var(--br-5); }
+    .flinks .fli { font-size: 13px; font-weight: 300; color: rgba(254,254,254,0.45); }
+
+    .footer-bot { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid rgba(254,254,254,0.06); position: relative; z-index: 3; }
+    .footer-copy { font-size: 10.5px; font-weight: 300; color: rgba(254,254,254,0.28); }
+    .socials { display: flex; gap: 8px; }
+    .socials a { width: 32px; height: 32px; border: 1px solid rgba(254,254,254,0.08); display: flex; align-items: center; justify-content: center; font-size: 9.5px; font-weight: 500; color: rgba(254,254,254,0.25); transition: all 0.3s; }
+    .socials a:hover { border-color: var(--br-3); color: var(--br-5); }
+
+    /* ── LIGHTBOX ─── */
+    .lb { position: fixed; inset: 0; background: rgba(43,42,41,0.97); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .lb.on { opacity: 1; pointer-events: all; }
+    .lb img { max-width: 90vw; max-height: 90vh; object-fit: contain; transform: scale(0.95); transition: transform 0.35s var(--ease); }
+    .lb.on img { transform: scale(1); }
+    .lb-x { position: absolute; top: 28px; right: 36px; width: 42px; height: 42px; border: 1px solid rgba(254,254,254,0.1); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--white); font-size: 14px; transition: all 0.3s; }
+    .lb-x:hover { border-color: var(--br-3); color: var(--br-5); }
+
+    /* ── RESPONSIVE ─── */
+    @media(max-width:1100px) {
+      .container { padding: 0 32px; }
+      .about { grid-template-columns: 1fr; min-height: auto; }
+      .about-img-col { height: 60vw; max-height: 520px; }
+      .about-text-col { padding: 72px 48px; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .stat:nth-child(2) { border-right: none; }
+      .hall-row, .hall-row.hall-row-flip { grid-template-columns: 1fr; height: auto; min-height: 0; overflow: visible; }
+      .hall-row-img { aspect-ratio: 16/9; }
+      .hall-row-img img { height: 100%; }
+      .hall-row-flip .hall-row-img { order: -1; }
+      .hall-row-flip .hall-row-text { order: 1; }
+      .events-top { grid-template-columns: 1fr; gap: 20px; }
+      .events-grid { grid-template-columns: repeat(2,1fr); }
+      .ecard:nth-child(2) { border-right: none; }
+      .ecard:nth-child(3) { border-right: 1px solid rgba(130,102,81,0.12); }
+      .adv-grid { grid-template-columns: 1fr; gap: 56px; }
+      .adv-left { position: static; }
+      .contacts { grid-template-columns: 1fr; }
+      .contacts-dark::after { display: none; }
+      .contacts-dark, .contacts-light { padding: 80px 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .chef-layout { min-height: auto; }
+    }
+    @media(max-width:768px) {
+      .nav-links, .nav-cta { display: none; }
+      .burger { display: flex; }
+      .nav-inner { align-items: center; }
+      .hero-side { display: none; }
+      .hero-scroll { display: none; }
+      .hero-eyebrow { display: flex; }
+      .hero .container { padding-left: 24px; padding-right: 24px; }
+      .hero-body { padding-bottom: clamp(32px, 5vh, 60px); padding-top: clamp(100px, 22vh, 180px); }
+      .hero-title { font-size: clamp(44px, 13vw, 60px); margin-bottom: 32px; margin-top: 20px; }
+      .hero-sep { margin-bottom: 24px; }
+      .hero-text { max-width: 100%; text-align: left; }
+      .hero-sep { justify-content: flex-start; }
+      .hero-sep-line { display: none; }
+      .hero-sep-text { font-size: 17px; line-height: 1.5; }
+      .hero-eyebrow { justify-content: flex-start; margin-bottom: 16px; }
+      .hero-eyebrow-line { display: none; }
+      .hero-eyebrow span { font-size: 9px; letter-spacing: 0.28em; }
+      .hero-title-sub { font-size: 9px; margin-bottom: 20px; }
+      .hero-actions { gap: 12px; flex-direction: column; align-items: flex-start; flex-wrap: nowrap; }
+      .hero-actions .btn { width: auto !important; align-self: flex-start; border-radius: 100px; padding: 14px 28px; }
+      .hero-actions .btn-solid { display: inline-flex; align-items: center; gap: 10px; }
+      .btn-arrow { display: inline; }
+      .hero-actions .btn-ghost { padding: 13px 24px; }
+      .hero-facts { flex-wrap: wrap; gap: 0; padding-top: 20px; margin-top: 28px; border-top: 1px solid rgba(207,171,139,0.18); flex-direction: row; }
+      .hero-fact { flex: none; width: 50%; border-right: none !important; border-bottom: 1px solid rgba(207,171,139,0.12); border-left: none; padding: 12px 0; margin-right: 0 !important; }
+      .hero-fact:nth-child(odd) { padding-right: 12px; }
+      .hero-fact:nth-child(3), .hero-fact:nth-child(4) { border-bottom: none; }
+      .hf-n { font-size: clamp(24px, 7vw, 32px); display: block; margin-right: 0; }
+      .hf-l { font-size: 8px; letter-spacing: 0.15em; display: block; text-transform: uppercase; color: rgba(254,254,254,0.3); margin-top: 4px; }
+      .hf-n { font-size: clamp(24px, 7vw, 32px); }
+      .hf-l { font-size: 8px; letter-spacing: 0.15em; }
+      .about { grid-template-columns: 1fr; }
+      .about-img-col { height: 70vw; max-height: 420px; }
+      .about-text-col { padding: 56px 24px; }
+      .hall-row-text { padding: 52px 24px 52px; justify-content: flex-start; height: auto; min-height: 0; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .stat:nth-child(odd) { border-right: 1px solid rgba(130,102,81,0.1); }
+      .stat:nth-child(3), .stat:nth-child(4) { border-top: 2px solid var(--br-3); }
+      .stat { padding: 32px 16px 28px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 280px 220px 220px; }
+      .gitem:nth-child(1) { grid-row: span 1; grid-column: span 2; }
+      .gitem:nth-child(4) { grid-column: span 2; }
+      .gitem:nth-child(4) img { height: 100%; }
+      .gitem:nth-child(1) img { min-height: 300px; }
+      .gallery-video-row { grid-template-columns: 1fr; }
+      .events-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .ff.full { grid-column: span 1; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bot { flex-direction: column; gap: 16px; text-align: center; }
+      .halls-head-wrap { padding: 40px 0 32px; }
+      .events, .gallery, .adv, .cta, .chef { padding: 72px 0; }
+      .menu-sec { padding: 72px 0; }
+      .menu-layout { grid-template-columns: 1fr; }
+      .menu-left-col { padding: 56px 24px 28px; }
+      .menu-left-col::after { display: none; }
+      .menu-right-col { padding-bottom: 56px; }
+      .menu-tabs { flex-direction: row; flex-wrap: wrap; border-left: none; border-bottom: 1px solid rgba(130,102,81,0.15); margin-top: 24px; }
+      .mtab { padding: 10px 20px 10px 0; border-left: none; border-bottom: 2px solid transparent; margin-left: 0; }
+      .mtab.active { border-left-color: transparent; border-bottom-color: var(--br-3); }
+      .menu-dots { justify-content: flex-start; }
+      .mcard { flex: 0 0 240px; }
+      .adv-photo { display: none; }
+      .chef-layout { grid-template-columns: 1fr; padding: 0 24px; }
+      .chef-photo-col { aspect-ratio: 3/4; max-height: 480px; }
+      .chef-content-col { padding: 0; }
+      .contacts-dark, .contacts-light { padding: 60px 24px; }
+      .cta-btns { flex-direction: column; align-items: center; }
+    }
+    @media(max-width:520px) {
+      .hero-title { font-size: clamp(40px, 12.5vw, 52px); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <img src="brand_assets/лого нов банкетный комплекс.png" alt="Центральный">
+        <div>
+          <span class="nav-logo-name">ЦЕНТРАЛЬНЫЙ</span>
+          <span class="nav-logo-sub">Банкетный комплекс</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">О нас</a></li>
+        <li><a href="#halls">Залы</a></li>
+        <li><a href="#events">Мероприятия</a></li>
+        <li><a href="#menu">Меню</a></li>
+        <li><a href="#gallery">Галерея</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+      <a href="tel:+79915175131" class="nav-cta">8 (991) 517‑51‑31</a>
+      <div class="burger" id="burger" role="button" tabindex="0" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mmenu" id="mmenu">
+  <a href="#about"    onclick="closeMM()">О нас</a>
+  <a href="#halls"    onclick="closeMM()">Залы</a>
+  <a href="#events"   onclick="closeMM()">Мероприятия</a>
+  <a href="#menu"     onclick="closeMM()">Меню</a>
+  <a href="#gallery"  onclick="closeMM()">Галерея</a>
+  <a href="#contacts" onclick="closeMM()">Контакты</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-ov"></div>
+
+  <span class="hero-side">УЛ. ЛЕНИНА 2 · КУРСК · 2026</span>
+
+  <div class="container hero-body">
+    <div class="hero-text">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-line"></span>
+        <span>Банкетный комплекс · Курск</span>
+      </div>
+
+      <h1 class="hero-title">ЦЕНТРАЛЬНЫЙ</h1>
+
+      <div class="hero-sep">
+        <span class="hero-sep-line"></span>
+        <span class="hero-sep-text">Центральное место для ваших важных дат</span>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#contacts" class="btn btn-solid">Оставить заявку <span class="btn-arrow">→</span></a>
+        <a href="#halls"    class="btn btn-ghost">Наши залы</a>
+      </div>
+    </div>
+
+    <div class="hero-facts">
+      <div class="hero-fact">
+        <span class="hf-n">140</span>
+        <span class="hf-l">мест в основном зале</span>
+      </div>
+      <div class="hero-fact">
+        <span class="hf-n">2</span>
+        <span class="hf-l">банкетных зала</span>
+      </div>
+      <div class="hero-fact">
+        <span class="hf-n">1966</span>
+        <span class="hf-l">год основания</span>
+      </div>
+      <div class="hero-fact">
+        <span class="hf-n">1000<span style="font-size:0.5em">+</span></span>
+        <span class="hf-l">счастливых событий</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+    <div class="scroll-tick"></div>
+    <span>Листать</span>
+  </div>
+
+  <!-- MARQUEE inside hero -->
+  <div class="marquee hero-marquee" aria-hidden="true">
+    <div class="marquee-inner">
+      <span class="marquee-item">Центральный · Банкетный комплекс</span>
+      <span class="marquee-item">г. Курск · ул. Ленина, 2</span>
+      <span class="marquee-item">Свадьбы · Юбилеи · Корпоративы</span>
+      <span class="marquee-item">8 (991) 517‑51‑31 · Елена</span>
+      <span class="marquee-item">Центральный · Банкетный комплекс</span>
+      <span class="marquee-item">г. Курск · ул. Ленина, 2 · с 1966 года</span>
+      <span class="marquee-item">Свадьбы · Юбилеи · Корпоративы</span>
+      <span class="marquee-item">8 (991) 517‑51‑31 · Елена</span>
+    </div>
+  </div>
+</section>
+
+<!-- О НАС -->
+<section class="about" id="about">
+  <div class="about-img-col rl">
+    <img src="Банкетный%20комплекс%20Центральный/зал.jpg" alt="Интерьер банкетного зала" class="about-main-img">
+  </div>
+  <div class="about-text-col rr">
+    <span class="tag">О комплексе</span>
+    <div class="about-rule"></div>
+    <h2 class="about-h">Историческое<br>здание —<br>душа комплекса</h2>
+
+    <p class="about-p" style="margin-bottom:10px;font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--br-3);font-weight:500;">Памятник архитектуры XX века · Основан в 1966 году</p>
+
+    <p class="about-p">Банкетный комплекс «Центральный» занимает уникальное историческое пространство в самом сердце Курска — памятник архитектуры, наполненный духом эпохи. Здесь классическая элегантность встречается с аристократическим теплом, создавая неповторимый стиль для ваших торжеств.</p>
+
+    <div class="about-quote">
+      <p>«Хрустальные люстры, золочёные колонны, изящные детали ручной работы — каждый уголок хранит историю и создаёт атмосферу подлинной роскоши»</p>
+    </div>
+
+    <a href="#contacts" class="btn btn-dark">Обсудить мероприятие</a>
+  </div>
+</section>
+
+<!-- СТАТИСТИКА -->
+<!-- ЗАЛЫ -->
+<section class="halls" id="halls">
+  <div class="container halls-head-wrap">
+    <div class="halls-head r">
+      <span class="tag">Пространства</span>
+      <h2 class="halls-h">Наши залы</h2>
+    </div>
+  </div>
+
+  <div class="hall-row rl">
+    <div class="hall-row-img">
+      <img src="Банкетный%20комплекс%20Центральный/зал2.jpg" alt="Основной банкетный зал">
+    </div>
+    <div class="hall-row-text">
+      <span class="tag">Главный зал</span>
+      <h3 class="hall-row-name">Основной<br>банкетный зал</h3>
+      <span class="hall-row-cap">50–140 гостей · Сцена · Люстры</span>
+      <p class="hall-row-desc">Парадный зал с хрустальными люстрами и золочёными колоннами. Профессиональная сцена, многозонный свет и звуковая система для самых масштабных торжеств.</p>
+      <a href="#contacts" class="btn btn-dark">Забронировать</a>
+    </div>
+  </div>
+
+  <div class="hall-row hall-row-flip rr">
+    <div class="hall-row-text">
+      <span class="tag">Особенности зала</span>
+      <h3 class="hall-row-name">Сцена & Свет</h3>
+      <span class="hall-row-cap">Проф. аппаратура · Экран · Звук</span>
+      <p class="hall-row-desc">Профессиональная сценическая техника, многозонное световое оборудование и мощная звуковая система. Всё для живых выступлений, шоу-программ и торжественных церемоний.</p>
+    </div>
+    <div class="hall-row-img">
+      <img src="Банкетный%20комплекс%20Центральный/оборудование.jpg" alt="Сцена и оборудование" style="object-position: center top;">
+    </div>
+  </div>
+
+  <div class="hall-row rl">
+    <div class="hall-row-img">
+      <img src="Банкетный%20комплекс%20Центральный/Рисунок5.png" alt="Малый банкетный зал">
+    </div>
+    <div class="hall-row-text">
+      <span class="tag">Камерный зал</span>
+      <h3 class="hall-row-name">Малый<br>банкетный зал</h3>
+      <span class="hall-row-cap">10–80 гостей · VIP-сервис</span>
+      <p class="hall-row-desc">Камерное пространство для небольших праздников с атмосферой домашней теплоты и вниманием к каждому гостю.</p>
+      <a href="#contacts" class="btn btn-dark">Забронировать</a>
+    </div>
+  </div>
+</section>
+
+<!-- МЕРОПРИЯТИЯ -->
+<section class="events" id="events">
+  <div class="events-bg"></div>
+  <div class="events-ov"></div>
+
+  <div class="container events-inner">
+    <div class="events-top">
+      <div class="rl">
+        <span class="tag">Мероприятия</span>
+        <h2 class="events-h">Каждый<br>праздник —<br>особенный</h2>
+      </div>
+      <p class="events-p rr">Мы специализируемся на организации мероприятий любого масштаба и формата. Наша команда профессионалов позаботится о каждой детали, чтобы ваш праздник прошёл безупречно.</p>
+    </div>
+
+    <div class="events-grid">
+      <div class="ecard r">
+        <div class="ecard-hover-line"></div>
+        <span class="ecard-num">I</span>
+        <div class="ecard-icon">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h3 class="ecard-name">Свадьбы</h3>
+        <p class="ecard-desc">Ваш особенный день в атмосфере роскоши и изящества. Создадим свадьбу вашей мечты от декора до кухни.</p>
+      </div>
+      <div class="ecard r d1">
+        <div class="ecard-hover-line"></div>
+        <span class="ecard-num">II</span>
+        <div class="ecard-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+        </div>
+        <h3 class="ecard-name">Корпоративы</h3>
+        <p class="ecard-desc">Деловые встречи, конференции и корпоративные праздники на высшем уровне с полным техническим оснащением.</p>
+      </div>
+      <div class="ecard r d2">
+        <div class="ecard-hover-line"></div>
+        <span class="ecard-num">III</span>
+        <div class="ecard-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <h3 class="ecard-name">Юбилеи</h3>
+        <p class="ecard-desc">Отметьте важную дату жизни в окружении близких людей в роскошных залах нашего комплекса.</p>
+      </div>
+      <div class="ecard r d3">
+        <div class="ecard-hover-line"></div>
+        <span class="ecard-num">IV</span>
+        <div class="ecard-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <h3 class="ecard-name">Выпускные</h3>
+        <p class="ecard-desc">Незабываемый вечер для выпускников. Специальные условия для школ и университетов.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ГАЛЕРЕЯ -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="gallery-head r">
+      <span class="tag">Атмосфера</span>
+      <h2 class="gallery-h">Галерея</h2>
+    </div>
+
+    <!-- Video row -->
+    <div class="gallery-video-row">
+      <div class="gitem-video r" onclick="openVideoLB('photos/Welcome%20+%20Party.MOV')">
+        <video autoplay muted loop playsinline preload="metadata" src="photos/Welcome%20+%20Party.MOV"></video>
+        <div class="gitem-video-ov"><div class="video-play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+      <div class="gitem-video r" onclick="openVideoLB('photos/Music%20Party.MOV')">
+        <video autoplay muted loop playsinline preload="metadata" src="photos/Music%20Party.MOV"></video>
+        <div class="gitem-video-ov"><div class="video-play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+    </div>
+
+    <div class="gallery-grid" style="margin-top:8px;">
+      <div class="gitem r" onclick="openLB(this)">
+        <img src="Банкетный%20комплекс%20Центральный/зал2.jpg" alt="Колонный зал">
+        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
+      </div>
+      <div class="gitem r d1" onclick="openLB(this)">
+        <img src="photos/nqjwt78w0rpfoszvypey7qf3uoj9203x.webp" alt="Интерьер">
+        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
+      </div>
+      <div class="gitem r d2" onclick="openLB(this)">
+        <img src="Банкетный%20комплекс%20Центральный/люди.png" alt="Свадебный танец">
+        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
+      </div>
+      <div class="gitem r d3" onclick="openLB(this)">
+        <img src="Банкетный%20комплекс%20Центральный/сервировка.jpg" alt="Сервировка">
+        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="gallery-grid" style="margin-top:8px;grid-template-columns:5fr 4fr 5fr;grid-template-rows:280px;">
+      <div class="gitem r" onclick="openLB(this)">
+        <img src="Банкетный%20комплекс%20Центральный/парадная.jpg" alt="Парадный вход">
+        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
+      </div>
+      <div class="gitem r d1" onclick="openLB(this)">
+        <img src="Банкетный%20комплекс%20Центральный/люстра.jpg" alt="Хрустальная люстра">
+        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
+      </div>
+      <div class="gitem r d2" onclick="openLB(this)">
+        <img src="Банкетный%20комплекс%20Центральный/столы.png" alt="Свадебная сервировка">
+        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
+      </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="gallery-grid" style="margin-top:8px;grid-template-columns:4fr 6fr 4fr;grid-template-rows:260px;">
+      <div class="gitem r" onclick="openLB(this)">
+        <img src="Банкетный%20комплекс%20Центральный/официант.jpg" alt="Сервис">
+        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
+      </div>
+      <div class="gitem r d1" onclick="openLB(this)">
+        <img src="Банкетный%20комплекс%20Центральный/оборудование.jpg" alt="Живая музыка">
+        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
+      </div>
+      <div class="gitem r d2" onclick="openLB(this)">
+        <img src="Банкетный%20комплекс%20Центральный/блюдо.jpg" alt="Авторская кухня">
+        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ШЕФ-ПОВАР -->
+<section class="chef">
+  <div class="chef-layout">
+    <div class="chef-photo-col rl">
+      <img src="photos/shef.jpg" alt="Бренд-шеф Андрей Зеликов">
+    </div>
+    <div class="chef-content-col rr">
+      <span class="chef-label">Кухня · Бренд-шеф</span>
+
+      <blockquote class="chef-quote-big">
+        «Вкус должен быть честным, живым —<br>понятным каждому и запоминающимся»
+      </blockquote>
+
+      <div class="chef-identity">
+        <span class="chef-name-big">Андрей Зеликов</span>
+        <span class="chef-role-tag">Бренд-шеф · Банкетный комплекс «Центральный»</span>
+      </div>
+
+      <div class="chef-rule"></div>
+
+      <div class="chef-pillars">
+        <div class="chef-pillar">
+          <span class="chef-pillar-num">I</span>
+          <div class="chef-pillar-text">
+            <strong>Локальный продукт</strong>
+            <span>Работаем только с поставщиками Курска и области — от фермы до тарелки.</span>
+          </div>
+        </div>
+        <div class="chef-pillar">
+          <span class="chef-pillar-num">II</span>
+          <div class="chef-pillar-text">
+            <strong>Собственное производство</strong>
+            <span>Соусы, вяленые деликатесы и заготовки готовим сами — без полуфабрикатов.</span>
+          </div>
+        </div>
+        <div class="chef-pillar">
+          <span class="chef-pillar-num">III</span>
+          <div class="chef-pillar-text">
+            <strong>Русская классика в новом прочтении</strong>
+            <span>Знакомые вкусы в современной подаче. Традиция как язык, не как ограничение.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- МЕНЮ КАРУСЕЛЬ -->
+<section class="menu-sec" id="menu">
+  <div class="menu-layout">
+    <div class="menu-left-col">
+      <span class="tag">Кухня</span>
+      <h2 class="menu-h">Авторское<br>меню</h2>
+      <p class="menu-sub">Фирменные блюда шеф-повара Андрея Зеликова — русская классика в современном прочтении.</p>
+      <div class="menu-tabs" id="menuTabs">
+        <button class="mtab active" data-filter="all">Все блюда</button>
+        <button class="mtab" data-filter="горячее">Горячее</button>
+        <button class="mtab" data-filter="закуски">Закуски</button>
+        <button class="mtab" data-filter="салаты">Салаты</button>
+      </div>
+      <div class="menu-nav-row">
+        <button class="menu-btn" id="menuPrev" aria-label="Назад">←</button>
+        <span class="menu-counter" id="menuCounter">1 / 23</span>
+        <button class="menu-btn" id="menuNext" aria-label="Вперёд">→</button>
+      </div>
+      <div class="menu-dots" id="menuDots"></div>
+    </div>
+    <div class="menu-right-col">
+      <div class="menu-track-wrap" id="menuWrap">
+        <div class="menu-track" id="menuTrack">
+
+      <div class="mcard" data-cat="горячее">
+        <img src="Банкетный%20комплекс%20Центральный/меню/стейк.png" alt="Стейк трай-тип" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Стейк трай-тип с картофельным пюре</span><p class="mcard-desc">Сочная говядина с благородной корочкой, воздушное пюре, тёплые луковые лепестки и укропная вытяжка.</p></div>
+      </div>
+      <div class="mcard" data-cat="горячее">
+        <img src="Банкетный%20комплекс%20Центральный/меню/бифштекс.png" alt="Бифштекс" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Бифштекс с гелем из желтка и картофелем пай</span><p class="mcard-desc">Румяное сочное мясо, деликатная отсылка к бифштексу с яйцом и щедрая горсть хрустящего пай.</p></div>
+      </div>
+      <div class="mcard" data-cat="горячее">
+        <img src="Банкетный%20комплекс%20Центральный/меню/перлото.png" alt="Перлото" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Перлото с томлёными говяжьими щеками</span><p class="mcard-desc">Перлото на курином бульоне со сливками, говяжьи щёчки в демигласе, тёртый пармезан.</p></div>
+      </div>
+      <div class="mcard" data-cat="горячее">
+        <img src="Банкетный%20комплекс%20Центральный/меню/утиная%20грудка.png" alt="Утиная грудка" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Утиная грудка с белыми грибами и тыквенным кремом</span><p class="mcard-desc">Розовая сочная утка, горячий лесной аромат грибов и мягкая сладость тыквы с вишнёвым соусом.</p></div>
+      </div>
+      <div class="mcard" data-cat="горячее">
+        <img src="Банкетный%20комплекс%20Центральный/меню/куриное%20суфле.png" alt="Куриное суфле" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Куриное суфле с пюре и шпинатом</span><p class="mcard-desc">Нежная тающая текстура, внутри — тёплое сливочное масло с петрушкой, пюре по-русски и свежий шпинат.</p></div>
+      </div>
+      <div class="mcard" data-cat="горячее">
+        <img src="Банкетный%20комплекс%20Центральный/меню/форель.png" alt="Форель" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Форель на булгуре со сливочным соусом</span><p class="mcard-desc">Рыба с хрустящей кожей, рассыпчатая крупа и тёплые томаты; бархатный соус подчёркивает сладость форели.</p></div>
+      </div>
+      <div class="mcard" data-cat="горячее">
+        <img src="Банкетный%20комплекс%20Центральный/меню/тунец.png" alt="Тунец" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Тунец с морковным пюре и цитрусовым демигласом</span><p class="mcard-desc">Обожжённый край, сочный розовый центр, сладковатое морковное пюре и свежий цитрусовый соус.</p></div>
+      </div>
+      <div class="mcard" data-cat="горячее">
+        <img src="Банкетный%20комплекс%20Центральный/меню/сибас.png" alt="Сибас" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Сибас на шпинате с икорным соусом</span><p class="mcard-desc">Тонкий хруст кожи, деликатная текстура рыбы и сливочно-икорный соус — ничего лишнего.</p></div>
+      </div>
+      <div class="mcard" data-cat="горячее">
+        <img src="Банкетный%20комплекс%20Центральный/меню/перепелка.png" alt="Перепёлка" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Перепёлка с печёной тыквой</span><p class="mcard-desc">Румяная птица и сладковатая печёная тыква — простое семейное счастье в духе русской печи.</p></div>
+      </div>
+      <div class="mcard" data-cat="горячее">
+        <img src="Банкетный%20комплекс%20Центральный/меню/каре%20ягненка.png" alt="Каре ягнёнка" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Каре ягнёнка с персиково-горчичным соусом</span><p class="mcard-desc">Розовая нежность мяса, тёплый аромат чеснока и розмарина, лёгкая фруктовая сладость.</p></div>
+      </div>
+      <div class="mcard" data-cat="горячее">
+        <img src="Банкетный%20комплекс%20Центральный/меню/свиные%20ребра.png" alt="Свиные рёбра" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Свиные рёбра в глазури из ромовой сливы</span><p class="mcard-desc">Томлёные до мягкости, покрытые блестящей кисло-сладкой глазурью, с ореховой посыпкой.</p></div>
+      </div>
+      <div class="mcard" data-cat="закуски">
+        <img src="Банкетный%20комплекс%20Центральный/меню/камамбер.png" alt="Камамбер" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Камамбер в бамбуковой золе с лаймовым вареньем</span><p class="mcard-desc">Сливочная текучесть сыра и свежая цитрусовая кислинка — любимая связка «сыр и домашнее варенье».</p></div>
+      </div>
+      <div class="mcard" data-cat="закуски">
+        <img src="Банкетный%20комплекс%20Центральный/меню/грибы%20со%20шпинатом.png" alt="Белые грибы" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Белые грибы со шпинатом и муссом из жареного картофеля</span><p class="mcard-desc">Румяная корочка грибов, свежая зелень и знакомый вкус жареной картошки в кремовой форме.</p></div>
+      </div>
+      <div class="mcard" data-cat="закуски">
+        <img src="Банкетный%20комплекс%20Центральный/меню/овощная%20тарелка.png" alt="Овощная тарелка" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Овощная тарелка с базиликовым маслом</span><p class="mcard-desc">Томаты, огурец, сладкий перец и редис — хруст, сочность и щепоть соли.</p></div>
+      </div>
+      <div class="mcard" data-cat="закуски">
+        <img src="Банкетный%20комплекс%20Центральный/меню/сырная%20нарезка.png" alt="Сырная нарезка" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Сырная нарезка</span><p class="mcard-desc">Пармезан, бри, чеддер и горгонзола — мёд, вишнёвый джем, ягоды и орехи.</p></div>
+      </div>
+      <div class="mcard" data-cat="закуски">
+        <img src="Банкетный%20комплекс%20Центральный/меню/буженина.png" alt="Буженина" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Буженина со «сладкой горчицей» и домашними чипсами</span><p class="mcard-desc">Румяная корочка, мягкое мясо и кремовая горчица на сливках — родной вкус праздника.</p></div>
+      </div>
+      <div class="mcard" data-cat="закуски">
+        <img src="Банкетный%20комплекс%20Центральный/меню/эклеры.png" alt="Эклеры" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Эклеры с тремя тар-тарами</span><p class="mcard-desc">Форель, тунец и гребешок на нежном творожном креме — лёгкая праздничная закуска в русском духе.</p></div>
+      </div>
+      <div class="mcard" data-cat="закуски">
+        <img src="Банкетный%20комплекс%20Центральный/меню/плато.png" alt="Плато вяления" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Плато собственного вяления</span><p class="mcard-desc">Бастурма, говядина сухого посола и вяленая утка — ремесленный характер и чистый вкус.</p></div>
+      </div>
+      <div class="mcard" data-cat="закуски">
+        <img src="Банкетный%20комплекс%20Центральный/меню/паштет.png" alt="Паштет" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Паштет из куриной печени в вишнёвой глазури</span><p class="mcard-desc">Бархатная печень, кисло-сладкая ягода и «лесной мох» — традиция в изящной форме.</p></div>
+      </div>
+      <div class="mcard" data-cat="закуски">
+        <img src="Банкетный%20комплекс%20Центральный/меню/эклеры%20с%20икрой.png" alt="Эклеры с икрой" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Эклеры с икрой</span><p class="mcard-desc">Лосось, щука и палтус на дымном сливочном масле — лёгкая, праздничная, русская классика.</p></div>
+      </div>
+      <div class="mcard" data-cat="салаты">
+        <img src="Банкетный%20комплекс%20Центральный/меню/салат%20с%20ростбифом.png" alt="Салат с ростбифом" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Салаты</span><span class="mcard-name">Салат с ростбифом и хрустящими баклажанами</span><p class="mcard-desc">Сочное мясо, вяленые томаты и ореховый соус — про баланс и характер.</p></div>
+      </div>
+      <div class="mcard" data-cat="салаты">
+        <img src="Банкетный%20комплекс%20Центральный/меню/салат%20с%20печеной%20свеклой.png" alt="Салат со свёклой" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Салаты</span><span class="mcard-name">Салат с печёной свёклой, вяленой уткой и муссом из козьего сыра</span><p class="mcard-desc">Три русских акцента: свёкла, утка и воздушный сливочный мусс, объединённые укропной вытяжкой.</p></div>
+      </div>
+      <div class="mcard" data-cat="салаты">
+        <img src="Банкетный%20комплекс%20Центральный/меню/цезарь.png" alt="Цезарь" class="mcard-img">
+        <div class="mcard-grad"></div>
+        <div class="mcard-body"><span class="mcard-cat">Салаты</span><span class="mcard-name">«Цезарь» по-нашему</span><p class="mcard-desc">Хрустящий романо, сухари из бекона и мусс из шпрот на желтке — узнаваемый салат с русским характером.</p></div>
+      </div>
+
+        </div>
+      </div>
+      </div><!-- /.menu-right-col -->
+    </div><!-- /.menu-layout -->
+</section>
+
+<!-- MARQUEE 2 -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-inner" style="animation-direction:reverse">
+    <span class="marquee-item">Основной зал · до 140 гостей</span>
+    <span class="marquee-item">Малый зал · до 80 гостей</span>
+    <span class="marquee-item">Русская авторская кухня</span>
+    <span class="marquee-item">Декор · Флористика · Фотосъёмка</span>
+    <span class="marquee-item">Основной зал · до 140 гостей</span>
+    <span class="marquee-item">Малый зал · до 80 гостей</span>
+    <span class="marquee-item">Русская авторская кухня</span>
+    <span class="marquee-item">Декор · Флористика · Фотосъёмка</span>
+  </div>
+</div>
+
+<!-- ПРЕИМУЩЕСТВА — the ONE dark section -->
+<section class="adv" id="adv">
+  <div class="container">
+    <div class="adv-grid">
+      <div class="adv-left rl">
+        <span class="tag light">Почему мы</span>
+        <h2 class="adv-h">Стандарты<br>совершенства</h2>
+        <p class="adv-p">Более 10 лет мы создаём незабываемые события, неизменно следуя высочайшим стандартам качества и гостеприимства.</p>
+        <a href="#contacts" class="btn btn-solid">Обсудить мероприятие</a>
+      </div>
+
+      <div class="adv-list">
+        <div class="adv-item r">
+          <span class="adv-num">01</span>
+          <div><h3 class="adv-name">Премиальный интерьер</h3><p class="adv-desc">Хрустальные люстры, мраморные полы, золочёные колонны — каждая деталь создаёт атмосферу роскоши и элегантности.</p></div>
+        </div>
+        <div class="adv-item r d1">
+          <span class="adv-num">02</span>
+          <div><h3 class="adv-name">Авторская кухня</h3><p class="adv-desc">Шеф-повара разработают эксклюзивное меню специально для вашего мероприятия с учётом всех пожеланий.</p></div>
+        </div>
+        <div class="adv-item r d2">
+          <span class="adv-num">03</span>
+          <div><h3 class="adv-name">Полный комплекс услуг</h3><p class="adv-desc">Декор, флористика, звук и свет, фотосъёмка — мы организуем всё необходимое для вашего праздника.</p></div>
+        </div>
+        <div class="adv-item r d3">
+          <span class="adv-num">04</span>
+          <div><h3 class="adv-name">Центральное расположение</h3><p class="adv-desc">Исторический центр Курска, улица Ленина — удобная транспортная доступность и парковка для гостей.</p></div>
+        </div>
+        <div class="adv-item r d4">
+          <span class="adv-num">05</span>
+          <div><h3 class="adv-name">Персональный менеджер</h3><p class="adv-desc">Личный координатор ведёт ваш проект от первой встречи до последнего танца гостей.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta">
+  <div class="cta-bg"></div>
+  <div class="cta-ov"></div>
+  <div class="container">
+    <div class="cta-inner r">
+      <div class="cta-orn">
+        <span class="cta-orn-line"></span>
+        <span class="cta-orn-sym">✦</span>
+        <span class="cta-orn-line"></span>
+      </div>
+      <h2 class="cta-h">Готовы создать<br>незабываемое событие?</h2>
+      <p class="cta-p">Свяжитесь с нами — наш менеджер поможет выбрать зал,<br>составить программу и рассчитать стоимость мероприятия.</p>
+      <div class="cta-btns">
+        <a href="#contacts" class="btn btn-solid">Оставить заявку</a>
+        <a href="tel:+79915175131" class="btn btn-ghost">Позвонить нам</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- КОНТАКТЫ -->
+<section class="contacts" id="contacts">
+
+  <div class="contacts-dark">
+    <div class="contacts-dark-inner rl">
+      <span class="tag light" style="margin-bottom:24px;">Контакты</span>
+      <h2 class="contacts-h">Свяжитесь<br>с нами</h2>
+
+      <div class="citem">
+        <div class="cico">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.58a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div>
+          <span class="clabel">Телефон</span>
+          <div class="cval"><a href="tel:+79915175131">8 (991) 517‑51‑31</a></div>
+        </div>
+      </div>
+
+      <div class="citem">
+        <div class="cico">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <span class="clabel">Адрес</span>
+          <div class="cval">г. Курск, ул. Ленина, 2</div>
+        </div>
+      </div>
+
+      <div class="citem">
+        <div class="cico">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <span class="clabel">Часы работы</span>
+          <div class="cval" style="font-size:17px;">Пн–Вс: 10:00 – 23:00</div>
+        </div>
+      </div>
+
+      <div class="citem">
+        <div class="cico">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <span class="clabel">E-mail</span>
+          <div class="cval"><a href="mailto:zakaz@banketkursk.ru">zakaz@banketkursk.ru</a></div>
+        </div>
+      </div>
+
+      <div class="citem" style="margin-top:8px;">
+        <div class="cico">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div>
+          <span class="clabel">Менеджер по мероприятиям</span>
+          <div class="cval">Елена</div>
+        </div>
+      </div>
+
+      <div style="margin-top:36px;background:rgba(254,254,254,0.03);border:1px solid rgba(130,102,81,0.15);height:148px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--br-3)" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span style="font-size:10.5px;color:rgba(254,254,254,0.25);letter-spacing:0.12em;">г. Курск, ул. Ленина, 2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="contacts-light rr">
+    <h3 class="form-h">Оставить заявку</h3>
+    <form id="cform" onsubmit="doSubmit(event)" novalidate>
+      <div class="form-grid">
+        <div class="ff">
+          <label for="fn">Ваше имя *</label>
+          <input type="text" id="fn" name="name" placeholder="Иван Иванов" required>
+        </div>
+        <div class="ff">
+          <label for="fp">Телефон *</label>
+          <input type="tel" id="fp" name="phone" placeholder="+7 (___) ___-__-__" required>
+        </div>
+        <div class="ff">
+          <label for="fe">Тип мероприятия</label>
+          <select id="fe" name="event">
+            <option value="">Выберите...</option>
+            <option>Свадьба</option><option>Корпоратив</option>
+            <option>Юбилей</option><option>День рождения</option>
+            <option>Выпускной</option><option>Другое</option>
+          </select>
+        </div>
+        <div class="ff">
+          <label for="fg">Количество гостей</label>
+          <input type="number" id="fg" name="guests" placeholder="100" min="1">
+        </div>
+        <div class="ff full">
+          <label for="fd">Желаемая дата</label>
+          <input type="date" id="fd" name="date">
+        </div>
+        <div class="ff full">
+          <label for="fm">Дополнительно</label>
+          <textarea id="fm" name="message" placeholder="Расскажите о вашем мероприятии..."></textarea>
+        </div>
+      </div>
+      <div style="margin-top:20px;">
+        <button type="submit" class="btn btn-solid" style="width:100%;justify-content:center;" id="sbtn">
+          Отправить заявку
+        </button>
+      </div>
+    </form>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-motif">
+    <span class="footer-motif-sym">✦</span>
+    <div class="footer-motif-line">
+      <span class="footer-motif-rule"></span>
+      <span class="footer-motif-text">Центральное место для ваших важных дат</span>
+      <span class="footer-motif-rule"></span>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img src="brand_assets/лого нов банкетный комплекс.png" alt="Центральный" class="footer-logo">
+        <p class="footer-tagline">Банкетный комплекс «Центральный»<br>— ваш праздник, наша гордость</p>
+      </div>
+      <div>
+        <p class="fh">Навигация</p>
+        <ul class="flinks">
+          <li><a href="#about">О нас</a></li>
+          <li><a href="#halls">Наши залы</a></li>
+          <li><a href="#events">Мероприятия</a></li>
+          <li><a href="#gallery">Галерея</a></li>
+          <li><a href="#contacts">Контакты</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="fh">Контакты</p>
+        <ul class="flinks">
+          <li><a href="tel:+79915175131">8 (991) 517‑51‑31</a></li>
+          <li><a href="#">г. Курск, ул. Ленина, 2</a></li>
+          <li class="fli">Пн–Вс: 10:00 – 23:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <p class="footer-copy">© 2026 Банкетный комплекс «Центральный». Все права защищены.</p>
+      <div class="socials">
+        <a href="#" aria-label="ВКонтакте">ВК</a>
+        <a href="#" aria-label="Telegram">ТГ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" onclick="closeLB()">
+  <div class="lb-x" onclick="closeLB()">✕</div>
+  <img id="lbImg" src="" alt="">
+</div>
+
+<!-- VIDEO LIGHTBOX -->
+<div class="lb" id="vlb" onclick="closeVideoLB()" style="background:rgba(10,8,7,0.96);">
+  <div class="lb-x" onclick="closeVideoLB()">✕</div>
+  <video id="vlbVideo" src="photos/Welcome%20+%20Party.MOV" controls style="max-width:90vw;max-height:85vh;display:block;margin:auto;"></video>
+</div>
+
+<!-- JS -->
+<script>
+  /* NAV */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('s', scrollY > 60), {passive:true});
+
+  /* Hero parallax */
+  const bg = document.getElementById('heroBg');
+  window.addEventListener('scroll', () => { if(scrollY < innerHeight) bg.style.transform=`translateY(${scrollY*0.3}px)`; }, {passive:true});
+
+  /* Reveal */
+  const revEls = document.querySelectorAll('.r,.rl,.rr');
+  const ro = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('on');ro.unobserve(e.target);} }), {threshold:0.08, rootMargin:'0px 0px -40px 0px'});
+  revEls.forEach(el => ro.observe(el));
+
+  /* Counters */
+  document.querySelectorAll('.counter').forEach(el => {
+    const io = new IntersectionObserver(([entry]) => {
+      if(!entry.isIntersecting) return;
+      const t = +el.dataset.t, dur = 1800, step = t/(dur/16);
+      let c = 0;
+      const tm = setInterval(() => { c = Math.min(c+step,t); el.textContent = Math.floor(c).toLocaleString('ru'); if(c>=t)clearInterval(tm); }, 16);
+      io.disconnect();
+    }, {threshold:0.5});
+    io.observe(el);
+  });
+
+  /* Mobile menu */
+  const burger = document.getElementById('burger');
+  const mmenu  = document.getElementById('mmenu');
+  let isOpen = false;
+  function toggleMM(v) {
+    isOpen = v ?? !isOpen;
+    mmenu.classList.toggle('on', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    const s = burger.querySelectorAll('span');
+    s[0].style.transform = isOpen ? 'rotate(45deg) translate(4.5px,4.5px)' : '';
+    s[1].style.opacity   = isOpen ? '0' : '';
+    s[2].style.transform = isOpen ? 'rotate(-45deg) translate(4.5px,-4.5px)' : '';
+  }
+  burger.addEventListener('click', () => toggleMM());
+  burger.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') toggleMM(); });
+  function closeMM() { toggleMM(false); }
+
+  /* Lightbox */
+  function openLB(el) {
+    document.getElementById('lbImg').src = el.querySelector('img').src;
+    document.getElementById('lb').classList.add('on');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLB() { document.getElementById('lb').classList.remove('on'); document.body.style.overflow = ''; }
+
+  function openVideoLB(src) {
+    const v = document.getElementById('vlbVideo');
+    if (src) v.src = src;
+    document.getElementById('vlb').classList.add('on');
+    document.body.style.overflow = 'hidden';
+    v.currentTime = 0; v.play();
+  }
+  function closeVideoLB() {
+    const v = document.getElementById('vlbVideo');
+    v.pause();
+    document.getElementById('vlb').classList.remove('on');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if(e.key==='Escape') { closeLB(); closeVideoLB(); } });
+
+  /* Form */
+  function doSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('sbtn');
+    btn.textContent = 'Заявка отправлена ✓';
+    btn.style.background = '#4A6B4A';
+    btn.disabled = true;
+    setTimeout(() => { btn.textContent='Отправить заявку'; btn.style.background=''; btn.disabled=false; e.target.reset(); }, 4000);
+  }
+
+  /* Menu carousel — Gallery4 style */
+  (function(){
+    const track   = document.getElementById('menuTrack');
+    if(!track) return;
+    const wrap    = document.getElementById('menuWrap');
+    const counter = document.getElementById('menuCounter');
+    const dotsEl  = document.getElementById('menuDots');
+    const gap = 20;
+    let cur = 0;
+
+    function getVisible() {
+      return [...track.querySelectorAll('.mcard:not(.hidden)')];
+    }
+
+    function buildDots() {
+      if(!dotsEl) return;
+      const v = getVisible();
+      dotsEl.innerHTML = '';
+      v.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'mdot' + (i === cur ? ' active' : '');
+        d.setAttribute('aria-label', `Блюдо ${i + 1}`);
+        d.addEventListener('click', () => goTo(i));
+        dotsEl.appendChild(d);
+      });
+    }
+
+    function updateDots() {
+      if(!dotsEl) return;
+      dotsEl.querySelectorAll('.mdot').forEach((d, i) => d.classList.toggle('active', i === cur));
+    }
+
+    function updateCounter() {
+      const v = getVisible();
+      counter.textContent = v.length ? `${cur + 1} / ${v.length}` : '';
+      updateDots();
+    }
+
+    function goTo(i) {
+      const v = getVisible();
+      if(!v.length) return;
+      cur = ((i % v.length) + v.length) % v.length;
+      const targetCard = v[cur];
+      const allCards = [...track.querySelectorAll('.mcard')];
+      let offset = 0;
+      for(const c of allCards) {
+        if(c === targetCard) break;
+        if(!c.classList.contains('hidden')) offset += c.offsetWidth + gap;
+      }
+      track.style.transform = `translateX(-${offset}px)`;
+      updateCounter();
+    }
+
+    document.getElementById('menuTabs').addEventListener('click', e => {
+      const tab = e.target.closest('.mtab');
+      if(!tab) return;
+      document.querySelectorAll('.mtab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const filter = tab.dataset.filter;
+      track.querySelectorAll('.mcard').forEach(c => {
+        c.classList.toggle('hidden', filter !== 'all' && c.dataset.cat !== filter);
+      });
+      cur = 0;
+      track.style.transition = 'none';
+      track.style.transform = 'translateX(0)';
+      requestAnimationFrame(() => { track.style.transition = ''; buildDots(); updateCounter(); });
+    });
+
+    document.getElementById('menuPrev').addEventListener('click', () => goTo(cur - 1));
+    document.getElementById('menuNext').addEventListener('click', () => goTo(cur + 1));
+
+    let startX = 0, dragging = false, startOffset = 0;
+    wrap.addEventListener('mousedown', e => {
+      startX = e.clientX;
+      const v = getVisible(); if(!v.length) return;
+      let off = 0;
+      const allCards = [...track.querySelectorAll('.mcard')];
+      for(const c of allCards) { if(c === v[cur]) break; if(!c.classList.contains('hidden')) off += c.offsetWidth + gap; }
+      startOffset = off;
+      dragging = true; track.style.transition = 'none';
+    });
+    window.addEventListener('mousemove', e => {
+      if(!dragging) return;
+      track.style.transform = `translateX(${-startOffset + (e.clientX - startX)}px)`;
+    });
+    window.addEventListener('mouseup', e => {
+      if(!dragging) return; dragging = false; track.style.transition = '';
+      const diff = e.clientX - startX;
+      if(Math.abs(diff) > 60) goTo(diff < 0 ? cur+1 : cur-1); else goTo(cur);
+    });
+
+    let tStartX = 0;
+    wrap.addEventListener('touchstart', e => { tStartX = e.touches[0].clientX; }, {passive:true});
+    wrap.addEventListener('touchend', e => {
+      const diff = e.changedTouches[0].clientX - tStartX;
+      if(Math.abs(diff) > 50) goTo(diff < 0 ? cur+1 : cur-1);
+    }, {passive:true});
+
+    buildDots();
+    updateCounter();
+  })();
+
+  /* Active nav link */
+  const secs = document.querySelectorAll('section[id]');
+  const nls  = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    secs.forEach(s => { if(scrollY >= s.offsetTop - 130) cur = s.id; });
+    nls.forEach(l => l.classList.toggle('active', l.getAttribute('href')==='#'+cur));
+  }, {passive:true});
+</script>
+
+</body>
+</html>
