@@ -641,9 +641,9 @@
       .hall-row, .hall-row.hall-row-flip { grid-template-columns: 1fr; height: auto; min-height: 0; overflow: visible; }
       .hall-row-img { aspect-ratio: 4/3; overflow: hidden; }
       .hall-row-img img { height: 100%; }
-      .hall-img-grid { display: flex; flex-direction: row; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; gap: 0; height: 100%; }
+      .hall-img-grid { display: flex; flex-direction: row; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; gap: 8px; height: 100%; padding: 0 10%; box-sizing: border-box; scroll-padding: 0 10%; }
       .hall-img-grid::-webkit-scrollbar { display: none; }
-      .hall-img-grid img { flex: 0 0 100%; height: 100%; scroll-snap-align: start; }
+      .hall-img-grid img { flex: 0 0 80%; height: 100%; scroll-snap-align: start; border-radius: 6px; }
       .hall-img-grid img:first-child { grid-row: unset; }
       .hall-row-flip .hall-row-img { order: -1; }
       .hall-row-flip .hall-row-text { order: 1; }
