@@ -607,8 +607,7 @@
     /* ── LIGHTBOX ─── */
     .lb { position: fixed; inset: 0; background: rgba(43,42,41,0.97); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
     .lb.on { opacity: 1; pointer-events: all; }
-    .lb img { max-width: 90vw; max-height: 90vh; object-fit: contain; transform: scale(0.95); transition: transform 0.35s var(--ease); }
-    .lb.on img { transform: scale(1); }
+    #lbImg { max-width: 90vw; max-height: 90vh; object-fit: contain; display: block; will-change: transform, opacity; }
     .lb-x { position: absolute; top: 28px; right: 36px; width: 42px; height: 42px; border: 1px solid rgba(254,254,254,0.1); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--white); font-size: 14px; transition: all 0.3s; }
     .lb-x:hover { border-color: var(--br-3); color: var(--br-5); }
     .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 52px; height: 52px; border: 1px solid rgba(254,254,254,0.12); background: rgba(30,22,14,0.55); backdrop-filter: blur(6px); color: #fff; font-size: 26px; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: border-color 0.25s, background 0.25s; user-select: none; -webkit-user-select: none; }
@@ -1483,17 +1482,78 @@
     });
   }
 
-  function openGalleryAt(idx) {
+  let lbAnimating = false;
+
+  function openGalleryAt(idx, dir) {
+    const img = document.getElementById('lbImg');
+    const lb  = document.getElementById('lb');
+    const isOpen = lb.classList.contains('on');
+
+    function setImgState(tx, op, animated) {
+      img.style.transition = animated
+        ? 'transform 0.28s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.26s ease'
+        : 'none';
+      img.style.transform = tx ? 'translateX(' + tx + 'px)' : '';
+      img.style.opacity   = op == null ? '' : op;
+    }
+
+    if (isOpen && dir !== undefined && !lbAnimating) {
+      lbAnimating = true;
+      const outX = dir > 0 ? -70 : 70;
+      const inX  = dir > 0 ?  70 : -70;
+
+      // Slide out current
+      setImgState(outX, 0, true);
+
+      setTimeout(() => {
+        // Swap src, position off-screen on opposite side instantly
+        img.src = decodeURIComponent(galleryItems[idx].dataset.src);
+        setImgState(inX, 0, false);
+
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          // Slide in
+          setImgState(0, 1, true);
+          lbAnimating = false;
+        }));
+      }, 240);
+    } else {
+      // Initial open — simple fade+scale
+      img.style.transition = 'none';
+      img.style.transform  = 'scale(0.94)';
+      img.style.opacity    = '0';
+      img.src = decodeURIComponent(galleryItems[idx].dataset.src);
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        img.style.transition = 'transform 0.32s var(--ease), opacity 0.28s ease';
+        img.style.transform  = '';
+        img.style.opacity    = '1';
+      }));
+    }
+
     currentLBIdx = idx;
-    const src = galleryItems[idx].dataset.src;
-    document.getElementById('lbImg').src = decodeURIComponent(src);
     document.getElementById('lb-counter').textContent = (idx + 1) + ' / ' + galleryItems.length;
-    document.getElementById('lb').classList.add('on');
+    lb.classList.add('on');
     document.body.style.overflow = 'hidden';
   }
 
-  function galleryPrev() { openGalleryAt((currentLBIdx - 1 + galleryItems.length) % galleryItems.length); }
-  function galleryNext() { openGalleryAt((currentLBIdx + 1) % galleryItems.length); }
+  function galleryPrev() { openGalleryAt((currentLBIdx - 1 + galleryItems.length) % galleryItems.length, -1); }
+  function galleryNext() { openGalleryAt((currentLBIdx + 1) % galleryItems.length,  1); }
+
+  /* Touch swipe */
+  (function() {
+    const lb = document.getElementById('lb');
+    let tx = 0, ty = 0;
+    lb.addEventListener('touchstart', e => {
+      tx = e.touches[0].clientX;
+      ty = e.touches[0].clientY;
+    }, { passive: true });
+    lb.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - tx;
+      const dy = e.changedTouches[0].clientY - ty;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 44) {
+        dx < 0 ? galleryNext() : galleryPrev();
+      }
+    }, { passive: true });
+  })();
 
   function openLB(el) {
     document.getElementById('lbImg').src = el.querySelector('img').src;
