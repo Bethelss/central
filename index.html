@@ -90,10 +90,10 @@
     .d1{transition-delay:.12s} .d2{transition-delay:.24s} .d3{transition-delay:.36s} .d4{transition-delay:.48s} .d5{transition-delay:.6s}
 
     /* ── MARQUEE ─── */
-    .hero-marquee { position: absolute; bottom: 0; left: 0; right: 0; z-index: 3; }
+    .hero-marquee { position: relative; z-index: 10; margin-top: -24px; margin-bottom: -24px; }
 
     .marquee {
-      background: rgba(130,102,81,0.45); padding: 14px 0; overflow: hidden; backdrop-filter: blur(4px);
+      background: rgba(30,20,12,0.45); padding: 14px 0; overflow: hidden; backdrop-filter: blur(12px);
     }
     .marquee-inner {
       display: flex; gap: 0; width: max-content;
@@ -171,7 +171,7 @@
     .hero { position: relative; height: 100vh; min-height: 700px; display: flex; flex-direction: column; justify-content: flex-start; overflow: hidden; }
     .hero-bg {
       position: absolute; inset: 0;
-      background: url('photos/ChatGPT Image 16 мар. 2026 г., 12_33_33.png') center/cover no-repeat;
+      background: url('Банкетный%20комплекс%20Центральный/hero.webp') center/cover no-repeat;
       will-change: transform;
     }
     .hero-ov { position: absolute; inset: 0; background: linear-gradient(170deg, rgba(20,14,8,0.88) 0%, rgba(20,14,8,0.68) 45%, rgba(20,14,8,0.90) 100%); }
@@ -393,7 +393,9 @@
     .zoom-btn { width: 44px; height: 44px; border: 1px solid rgba(254,254,254,0.7); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 20px; font-weight: 300; }
 
     /* ── ADV — the ONE dark section ─── */
-    .adv { background: var(--br-1); padding: clamp(72px, 8vw, 110px) 0; position: relative; overflow: hidden; }
+    .adv { background: #0e0e0e; padding: clamp(72px, 8vw, 110px) 0; position: relative; overflow: hidden; }
+    .adv-bg { position: absolute; inset: 0; background: url('Банкетный%20комплекс%20Центральный/потолок%20с%20люстрой.jpg') center/cover no-repeat; opacity: 0.55; }
+    .adv-bg::after { content: ''; position: absolute; inset: 0; background: rgba(10,8,6,0.35); }
     .adv-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start; position: relative; z-index: 3; max-width: 960px; }
     .adv-left { position: static; }
     .adv-h { font-size: clamp(36px, 3.8vw, 54px); font-weight: 300; color: var(--white); letter-spacing: -0.02em; margin-bottom: 24px; line-height: 1.1; }
@@ -418,9 +420,9 @@
 
     /* ── CTA BANNER ─── */
     .cta { position: relative; padding: clamp(100px, 14vw, 160px) 0; overflow: hidden; }
-    .cta-bg { position: absolute; inset: 0; background: url('photos/z6uinrw3vs508lgd843dmut0qu6upcsy.webp') center 35%/cover; }
+    .cta-bg { position: absolute; inset: 0; background: url('Банкетный%20комплекс%20Центральный/IMG_8378_resized.jpg') center 35%/cover; }
     /* Reduced overlays — show the beautiful photo */
-    .cta-ov { position: absolute; inset: 0; background: rgba(43,42,41,0.42); }
+    .cta-ov { position: absolute; inset: 0; background: rgba(20,14,8,0.68); }
 
     .cta-inner { position: relative; z-index: 3; text-align: center; max-width: 680px; margin: 0 auto; }
     .cta-orn { margin-bottom: 28px; display: flex; align-items: center; justify-content: center; gap: 18px; }
@@ -554,7 +556,7 @@
     /* Navigation */
     .menu-btn { width: 44px; height: 44px; border: 1px solid rgba(130,102,81,0.22); background: transparent; color: var(--br-3); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.3s, border-color 0.3s, color 0.3s; }
     .menu-btn:hover { background: var(--br-3); border-color: var(--br-3); color: var(--white); }
-    .menu-btn:disabled { opacity: 0.22; pointer-events: none; }
+    .menu-btn:disabled { opacity: 0.55; pointer-events: none; }
     .menu-btn:focus-visible { outline: 1px solid var(--br-3); outline-offset: 3px; }
     .menu-counter { font-family: var(--serif); font-size: 15px;  color: rgba(43,42,41,0.3); padding: 0 6px; min-width: 56px; text-align: center; }
 
@@ -792,19 +794,6 @@
     <span>Листать</span>
   </div>
 
-  <!-- MARQUEE inside hero -->
-  <div class="marquee hero-marquee" aria-hidden="true">
-    <div class="marquee-inner">
-      <span class="marquee-item">Центральный · Банкетный комплекс</span>
-      <span class="marquee-item">г. Курск · ул. Ленина, 2</span>
-      <span class="marquee-item">Свадьбы · Юбилеи · Корпоративы</span>
-      <span class="marquee-item">8 (991) 517‑51‑31 · Елена</span>
-      <span class="marquee-item">Центральный · Банкетный комплекс</span>
-      <span class="marquee-item">г. Курск · ул. Ленина, 2 · с 1966 года</span>
-      <span class="marquee-item">Свадьбы · Юбилеи · Корпоративы</span>
-      <span class="marquee-item">8 (991) 517‑51‑31 · Елена</span>
-    </div>
-  </div>
 </section>
 
 <!-- О НАС -->
@@ -841,7 +830,7 @@
 
   <div class="hall-row rl">
     <div class="hall-row-img">
-      <img src="Банкетный%20комплекс%20Центральный/зал2.jpg" alt="Основной банкетный зал">
+      <img src="Банкетный%20комплекс%20Центральный/Элегантный%20банкетный%20зал%20с%20угощениями.png" alt="Основной банкетный зал">
     </div>
     <div class="hall-row-text">
       <span class="tag">Главный зал</span>
@@ -866,7 +855,7 @@
 
   <div class="hall-row rl">
     <div class="hall-row-img">
-      <img src="Банкетный%20комплекс%20Центральный/Рисунок5.png" alt="Малый банкетный зал">
+      <img src="Банкетный%20комплекс%20Центральный/Рисунок5.webp" alt="Малый банкетный зал">
     </div>
     <div class="hall-row-text">
       <span class="tag">Камерный зал</span>
@@ -955,7 +944,7 @@
 
     <div class="gallery-grid" style="margin-top:8px;">
       <div class="gitem r" onclick="openLB(this)">
-        <img src="Банкетный%20комплекс%20Центральный/зал2.jpg" alt="Колонный зал">
+        <img src="Банкетный%20комплекс%20Центральный/Элегантный%20банкетный%20зал%20с%20угощениями.png" alt="Колонный зал">
         <div class="gitem-ov"><div class="zoom-btn">+</div></div>
       </div>
       <div class="gitem r d1" onclick="openLB(this)">
@@ -963,7 +952,7 @@
         <div class="gitem-ov"><div class="zoom-btn">+</div></div>
       </div>
       <div class="gitem r d2" onclick="openLB(this)">
-        <img src="Банкетный%20комплекс%20Центральный/люди.png" alt="Свадебный танец">
+        <img src="Банкетный%20комплекс%20Центральный/люди.webp" alt="Свадебный танец">
         <div class="gitem-ov"><div class="zoom-btn">+</div></div>
       </div>
       <div class="gitem r d3" onclick="openLB(this)">
@@ -983,7 +972,7 @@
         <div class="gitem-ov"><div class="zoom-btn">+</div></div>
       </div>
       <div class="gitem r d2" onclick="openLB(this)">
-        <img src="Банкетный%20комплекс%20Центральный/столы.png" alt="Свадебная сервировка">
+        <img src="Банкетный%20комплекс%20Центральный/столы.webp" alt="Свадебная сервировка">
         <div class="gitem-ov"><div class="zoom-btn">+</div></div>
       </div>
     </div>
@@ -1080,117 +1069,117 @@
         <div class="menu-track" id="menuTrack">
 
       <div class="mcard" data-cat="горячее">
-        <img src="Банкетный%20комплекс%20Центральный/меню/стейк.png" alt="Стейк трай-тип" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/стейк.webp" alt="Стейк трай-тип" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Стейк трай-тип с картофельным пюре</span><p class="mcard-desc">Сочная говядина с благородной корочкой, воздушное пюре, тёплые луковые лепестки и укропная вытяжка.</p></div>
       </div>
       <div class="mcard" data-cat="горячее">
-        <img src="Банкетный%20комплекс%20Центральный/меню/бифштекс.png" alt="Бифштекс" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/бифштекс.webp" alt="Бифштекс" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Бифштекс с гелем из желтка и картофелем пай</span><p class="mcard-desc">Румяное сочное мясо, деликатная отсылка к бифштексу с яйцом и щедрая горсть хрустящего пай.</p></div>
       </div>
       <div class="mcard" data-cat="горячее">
-        <img src="Банкетный%20комплекс%20Центральный/меню/перлото.png" alt="Перлото" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/перлото.webp" alt="Перлото" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Перлото с томлёными говяжьими щеками</span><p class="mcard-desc">Перлото на курином бульоне со сливками, говяжьи щёчки в демигласе, тёртый пармезан.</p></div>
       </div>
       <div class="mcard" data-cat="горячее">
-        <img src="Банкетный%20комплекс%20Центральный/меню/утиная%20грудка.png" alt="Утиная грудка" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/утиная%20грудка.webp" alt="Утиная грудка" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Утиная грудка с белыми грибами и тыквенным кремом</span><p class="mcard-desc">Розовая сочная утка, горячий лесной аромат грибов и мягкая сладость тыквы с вишнёвым соусом.</p></div>
       </div>
       <div class="mcard" data-cat="горячее">
-        <img src="Банкетный%20комплекс%20Центральный/меню/куриное%20суфле.png" alt="Куриное суфле" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/куриное%20суфле.webp" alt="Куриное суфле" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Куриное суфле с пюре и шпинатом</span><p class="mcard-desc">Нежная тающая текстура, внутри — тёплое сливочное масло с петрушкой, пюре по-русски и свежий шпинат.</p></div>
       </div>
       <div class="mcard" data-cat="горячее">
-        <img src="Банкетный%20комплекс%20Центральный/меню/форель.png" alt="Форель" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/форель.webp" alt="Форель" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Форель на булгуре со сливочным соусом</span><p class="mcard-desc">Рыба с хрустящей кожей, рассыпчатая крупа и тёплые томаты; бархатный соус подчёркивает сладость форели.</p></div>
       </div>
       <div class="mcard" data-cat="горячее">
-        <img src="Банкетный%20комплекс%20Центральный/меню/тунец.png" alt="Тунец" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/тунец.webp" alt="Тунец" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Тунец с морковным пюре и цитрусовым демигласом</span><p class="mcard-desc">Обожжённый край, сочный розовый центр, сладковатое морковное пюре и свежий цитрусовый соус.</p></div>
       </div>
       <div class="mcard" data-cat="горячее">
-        <img src="Банкетный%20комплекс%20Центральный/меню/сибас.png" alt="Сибас" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/сибас.webp" alt="Сибас" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Сибас на шпинате с икорным соусом</span><p class="mcard-desc">Тонкий хруст кожи, деликатная текстура рыбы и сливочно-икорный соус — ничего лишнего.</p></div>
       </div>
       <div class="mcard" data-cat="горячее">
-        <img src="Банкетный%20комплекс%20Центральный/меню/перепелка.png" alt="Перепёлка" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/перепелка.webp" alt="Перепёлка" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Перепёлка с печёной тыквой</span><p class="mcard-desc">Румяная птица и сладковатая печёная тыква — простое семейное счастье в духе русской печи.</p></div>
       </div>
       <div class="mcard" data-cat="горячее">
-        <img src="Банкетный%20комплекс%20Центральный/меню/каре%20ягненка.png" alt="Каре ягнёнка" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/каре%20ягненка.webp" alt="Каре ягнёнка" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Каре ягнёнка с персиково-горчичным соусом</span><p class="mcard-desc">Розовая нежность мяса, тёплый аромат чеснока и розмарина, лёгкая фруктовая сладость.</p></div>
       </div>
       <div class="mcard" data-cat="горячее">
-        <img src="Банкетный%20комплекс%20Центральный/меню/свиные%20ребра.png" alt="Свиные рёбра" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/свиные%20ребра.webp" alt="Свиные рёбра" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Свиные рёбра в глазури из ромовой сливы</span><p class="mcard-desc">Томлёные до мягкости, покрытые блестящей кисло-сладкой глазурью, с ореховой посыпкой.</p></div>
       </div>
       <div class="mcard" data-cat="закуски">
-        <img src="Банкетный%20комплекс%20Центральный/меню/камамбер.png" alt="Камамбер" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/камамбер.webp" alt="Камамбер" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Камамбер в бамбуковой золе с лаймовым вареньем</span><p class="mcard-desc">Сливочная текучесть сыра и свежая цитрусовая кислинка — любимая связка «сыр и домашнее варенье».</p></div>
       </div>
       <div class="mcard" data-cat="закуски">
-        <img src="Банкетный%20комплекс%20Центральный/меню/грибы%20со%20шпинатом.png" alt="Белые грибы" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/грибы%20со%20шпинатом.webp" alt="Белые грибы" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Белые грибы со шпинатом и муссом из жареного картофеля</span><p class="mcard-desc">Румяная корочка грибов, свежая зелень и знакомый вкус жареной картошки в кремовой форме.</p></div>
       </div>
       <div class="mcard" data-cat="закуски">
-        <img src="Банкетный%20комплекс%20Центральный/меню/овощная%20тарелка.png" alt="Овощная тарелка" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/овощная%20тарелка.webp" alt="Овощная тарелка" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Овощная тарелка с базиликовым маслом</span><p class="mcard-desc">Томаты, огурец, сладкий перец и редис — хруст, сочность и щепоть соли.</p></div>
       </div>
       <div class="mcard" data-cat="закуски">
-        <img src="Банкетный%20комплекс%20Центральный/меню/сырная%20нарезка.png" alt="Сырная нарезка" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/сырная%20нарезка.webp" alt="Сырная нарезка" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Сырная нарезка</span><p class="mcard-desc">Пармезан, бри, чеддер и горгонзола — мёд, вишнёвый джем, ягоды и орехи.</p></div>
       </div>
       <div class="mcard" data-cat="закуски">
-        <img src="Банкетный%20комплекс%20Центральный/меню/буженина.png" alt="Буженина" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/буженина.webp" alt="Буженина" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Буженина со «сладкой горчицей» и домашними чипсами</span><p class="mcard-desc">Румяная корочка, мягкое мясо и кремовая горчица на сливках — родной вкус праздника.</p></div>
       </div>
       <div class="mcard" data-cat="закуски">
-        <img src="Банкетный%20комплекс%20Центральный/меню/эклеры.png" alt="Эклеры" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/эклеры.webp" alt="Эклеры" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Эклеры с тремя тар-тарами</span><p class="mcard-desc">Форель, тунец и гребешок на нежном творожном креме — лёгкая праздничная закуска в русском духе.</p></div>
       </div>
       <div class="mcard" data-cat="закуски">
-        <img src="Банкетный%20комплекс%20Центральный/меню/плато.png" alt="Плато вяления" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/плато.webp" alt="Плато вяления" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Плато собственного вяления</span><p class="mcard-desc">Бастурма, говядина сухого посола и вяленая утка — ремесленный характер и чистый вкус.</p></div>
       </div>
       <div class="mcard" data-cat="закуски">
-        <img src="Банкетный%20комплекс%20Центральный/меню/паштет.png" alt="Паштет" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/паштет.webp" alt="Паштет" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Паштет из куриной печени в вишнёвой глазури</span><p class="mcard-desc">Бархатная печень, кисло-сладкая ягода и «лесной мох» — традиция в изящной форме.</p></div>
       </div>
       <div class="mcard" data-cat="закуски">
-        <img src="Банкетный%20комплекс%20Центральный/меню/эклеры%20с%20икрой.png" alt="Эклеры с икрой" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/эклеры%20с%20икрой.webp" alt="Эклеры с икрой" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Эклеры с икрой</span><p class="mcard-desc">Лосось, щука и палтус на дымном сливочном масле — лёгкая, праздничная, русская классика.</p></div>
       </div>
       <div class="mcard" data-cat="салаты">
-        <img src="Банкетный%20комплекс%20Центральный/меню/салат%20с%20ростбифом.png" alt="Салат с ростбифом" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/салат%20с%20ростбифом.webp" alt="Салат с ростбифом" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Салаты</span><span class="mcard-name">Салат с ростбифом и хрустящими баклажанами</span><p class="mcard-desc">Сочное мясо, вяленые томаты и ореховый соус — про баланс и характер.</p></div>
       </div>
       <div class="mcard" data-cat="салаты">
-        <img src="Банкетный%20комплекс%20Центральный/меню/салат%20с%20печеной%20свеклой.png" alt="Салат со свёклой" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/салат%20с%20печеной%20свеклой.webp" alt="Салат со свёклой" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Салаты</span><span class="mcard-name">Салат с печёной свёклой, вяленой уткой и муссом из козьего сыра</span><p class="mcard-desc">Три русских акцента: свёкла, утка и воздушный сливочный мусс, объединённые укропной вытяжкой.</p></div>
       </div>
       <div class="mcard" data-cat="салаты">
-        <img src="Банкетный%20комплекс%20Центральный/меню/цезарь.png" alt="Цезарь" class="mcard-img">
+        <img src="Банкетный%20комплекс%20Центральный/меню/цезарь.webp" alt="Цезарь" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Салаты</span><span class="mcard-name">«Цезарь» по-нашему</span><p class="mcard-desc">Хрустящий романо, сухари из бекона и мусс из шпрот на желтке — узнаваемый салат с русским характером.</p></div>
       </div>
@@ -1201,22 +1190,10 @@
     </div><!-- /.menu-layout -->
 </section>
 
-<!-- MARQUEE 2 -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-inner" style="animation-direction:reverse">
-    <span class="marquee-item">Основной зал · до 140 гостей</span>
-    <span class="marquee-item">Малый зал · до 80 гостей</span>
-    <span class="marquee-item">Русская авторская кухня</span>
-    <span class="marquee-item">Декор · Флористика · Фотосъёмка</span>
-    <span class="marquee-item">Основной зал · до 140 гостей</span>
-    <span class="marquee-item">Малый зал · до 80 гостей</span>
-    <span class="marquee-item">Русская авторская кухня</span>
-    <span class="marquee-item">Декор · Флористика · Фотосъёмка</span>
-  </div>
-</div>
 
 <!-- ПРЕИМУЩЕСТВА — the ONE dark section -->
 <section class="adv" id="adv">
+  <div class="adv-bg"></div>
   <div class="container">
     <div class="adv-grid">
       <div class="adv-left rl">
@@ -1251,6 +1228,20 @@
     </div>
   </div>
 </section>
+
+<!-- MARQUEE separator -->
+<div class="marquee hero-marquee" aria-hidden="true">
+  <div class="marquee-inner">
+    <span class="marquee-item">Центральный · Банкетный комплекс</span>
+    <span class="marquee-item">г. Курск · ул. Ленина, 2</span>
+    <span class="marquee-item">Свадьбы · Юбилеи · Корпоративы</span>
+    <span class="marquee-item">8 (991) 517‑51‑31 · Елена</span>
+    <span class="marquee-item">Центральный · Банкетный комплекс</span>
+    <span class="marquee-item">г. Курск · ул. Ленина, 2 · с 1966 года</span>
+    <span class="marquee-item">Свадьбы · Юбилеи · Корпоративы</span>
+    <span class="marquee-item">8 (991) 517‑51‑31 · Елена</span>
+  </div>
+</div>
 
 <!-- CTA BANNER -->
 <section class="cta">
