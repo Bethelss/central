@@ -317,9 +317,15 @@
     .hall-row-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.4s var(--ease); }
     .hall-row-img:hover img { transform: scale(1.04); }
     .hall-img-grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; height: 100%; gap: 3px; }
-    .hall-img-grid img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.4s var(--ease); }
+    .hall-img-grid img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.4s var(--ease); cursor: zoom-in; }
     .hall-img-grid img:first-child { grid-row: span 2; }
     .hall-img-grid img:hover { transform: scale(1.04); }
+    .hall-slider-dots { display: none; }
+    @media (max-width: 768px) {
+      .hall-slider-dots { display: flex; justify-content: center; gap: 7px; position: absolute; bottom: 10px; left: 0; right: 0; pointer-events: none; }
+      .hall-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.4); transition: background 0.3s, transform 0.3s; }
+      .hall-dot.hall-dot-on { background: rgba(255,255,255,0.92); transform: scale(1.25); }
+    }
     .hall-row:hover .hall-row-img img { transform: scale(1.04); }
 
     .hall-row-text {
@@ -885,11 +891,16 @@
   </div>
 
   <div class="hall-row rl">
-    <div class="hall-row-img">
-      <div class="hall-img-grid">
-        <img src="Банкетный%20комплекс%20Центральный/малый%20зал.jpg" alt="Малый банкетный зал">
-        <img src="Банкетный%20комплекс%20Центральный/малый%20зал2.jpg" alt="Малый зал — вид 2">
-        <img src="Банкетный%20комплекс%20Центральный/Рисунок5.webp" alt="Малый зал — интерьер">
+    <div class="hall-row-img" style="position:relative;">
+      <div class="hall-img-grid" id="hallSlider">
+        <img src="Банкетный%20комплекс%20Центральный/малый%20зал.jpg" alt="Малый банкетный зал" onclick="openImgLB(this)">
+        <img src="Банкетный%20комплекс%20Центральный/малый%20зал2.jpg" alt="Малый зал — вид 2" onclick="openImgLB(this)">
+        <img src="Банкетный%20комплекс%20Центральный/Рисунок5.webp" alt="Малый зал — интерьер" onclick="openImgLB(this)">
+      </div>
+      <div class="hall-slider-dots">
+        <span class="hall-dot hall-dot-on"></span>
+        <span class="hall-dot"></span>
+        <span class="hall-dot"></span>
       </div>
     </div>
     <div class="hall-row-text">
@@ -1625,6 +1636,24 @@ function openGalleryAt(idx, dir) {
         }
       }
       dx = 0; isHoriz = null; adjIdx = -1;
+    }, { passive: true });
+  })();
+
+  function openImgLB(img) {
+    document.getElementById('lbImg').src = img.src;
+    document.getElementById('lb-counter').textContent = '';
+    document.getElementById('lb').classList.add('on');
+    document.body.style.overflow = 'hidden';
+  }
+
+  /* Hall slider dots */
+  (function() {
+    const slider = document.getElementById('hallSlider');
+    const dots   = document.querySelectorAll('.hall-dot');
+    if (!slider || !dots.length) return;
+    slider.addEventListener('scroll', () => {
+      const idx = Math.round(slider.scrollLeft / slider.offsetWidth);
+      dots.forEach((d, i) => d.classList.toggle('hall-dot-on', i === idx));
     }, { passive: true });
   })();
 
