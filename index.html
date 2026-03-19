@@ -382,19 +382,13 @@
     .gitem-ov { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; background: rgba(43,42,41,0.12); }
     .gitem:hover .gitem-ov { opacity: 1; }
 
-    /* Gallery auto-slider */
-    @keyframes gslide-left  { from { transform: translateX(0) } to { transform: translateX(-50%) } }
-    @keyframes gslide-right { from { transform: translateX(-50%) } to { transform: translateX(0) } }
-    .gslider-wrap { overflow: hidden; mask: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%); -webkit-mask: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%); }
-    .gslider { width: 100%; }
-    .gslider-inner { display: flex; gap: 10px; width: max-content; }
-    .gslider-left  .gslider-inner { animation: gslide-left  34s linear infinite; }
-    .gslider-right .gslider-inner { animation: gslide-right 28s linear infinite; }
-    .gslider-wrap:hover .gslider-inner { animation-play-state: paused; }
-    .gslide { flex-shrink: 0; width: 300px; height: 220px; border-radius: 10px; overflow: hidden; cursor: zoom-in; position: relative; }
-    .gslide img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease, filter 0.4s ease; }
-    .gslide:hover img { transform: scale(1.06); filter: brightness(1.08); }
-    @media (max-width: 768px) { .gslide { width: 220px; height: 160px; } }
+    /* Gallery masonry grid */
+    .img-gallery { columns: 3; column-gap: 16px; margin-top: 8px; }
+    .img-gallery-item { break-inside: avoid; margin-bottom: 16px; border-radius: 10px; overflow: hidden; border: 1px solid var(--br-1); cursor: zoom-in; }
+    .img-gallery-item img { width: 100%; height: auto; display: block; opacity: 0; transition: opacity 1s ease-in-out, transform 0.6s var(--ease); }
+    .img-gallery-item img.img-visible { opacity: 1; }
+    .img-gallery-item:hover img { transform: scale(1.04); }
+    @media (max-width: 768px) { .img-gallery { columns: 2; column-gap: 8px; } .img-gallery-item { margin-bottom: 8px; } }
 
     .gallery-video-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
     .gitem-video { overflow: hidden; position: relative; cursor: pointer; aspect-ratio: 9/16; }
@@ -617,6 +611,12 @@
     .lb.on img { transform: scale(1); }
     .lb-x { position: absolute; top: 28px; right: 36px; width: 42px; height: 42px; border: 1px solid rgba(254,254,254,0.1); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--white); font-size: 14px; transition: all 0.3s; }
     .lb-x:hover { border-color: var(--br-3); color: var(--br-5); }
+    .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 52px; height: 52px; border: 1px solid rgba(254,254,254,0.12); background: rgba(30,22,14,0.55); backdrop-filter: blur(6px); color: #fff; font-size: 26px; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: border-color 0.25s, background 0.25s; user-select: none; -webkit-user-select: none; }
+    .lb-nav:hover { border-color: rgba(254,254,254,0.35); background: rgba(30,22,14,0.8); }
+    .lb-prev { left: 20px; }
+    .lb-next { right: 20px; }
+    .lb-counter { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); color: rgba(254,254,254,0.4); font-size: 12px; letter-spacing: 0.12em; pointer-events: none; }
+    @media (max-width: 640px) { .lb-nav { width: 40px; height: 40px; font-size: 20px; } .lb-prev { left: 8px; } .lb-next { right: 8px; } }
 
     /* ── RESPONSIVE ─── */
     @media(max-width:1100px) {
@@ -965,58 +965,26 @@
       </div>
     </div>
 
-    <!-- Auto-slider row 1 (left) -->
-    <div class="gslider-wrap" style="margin-top:8px;">
-      <div class="gslider gslider-left">
-        <div class="gslider-inner">
-          <div class="gslide" onclick="openSliderLB('photos/0H4A2256.JPG','Интерьер зала')"><img src="photos/0H4A2256.JPG" alt="Интерьер зала"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/потолок%20с%20люстрой.jpg','Интерьер')"><img src="Банкетный%20комплекс%20Центральный/потолок%20с%20люстрой.jpg" alt="Интерьер"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/люди.webp','Свадебный танец')"><img src="Банкетный%20комплекс%20Центральный/люди.webp" alt="Свадебный танец"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/сервировка.jpg','Сервировка')"><img src="Банкетный%20комплекс%20Центральный/сервировка.jpg" alt="Сервировка"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/парадная.jpg','Парадный вход')"><img src="Банкетный%20комплекс%20Центральный/парадная.jpg" alt="Парадный вход"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/люстра.jpg','Хрустальная люстра')"><img src="Банкетный%20комплекс%20Центральный/люстра.jpg" alt="Хрустальная люстра"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-01.jpg','Атмосфера')"><img src="Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-01.jpg" alt="Атмосфера"></div>
-          <!-- duplicate for seamless loop -->
-          <div class="gslide" onclick="openSliderLB('photos/0H4A2256.JPG','Интерьер зала')"><img src="photos/0H4A2256.JPG" alt="Интерьер зала"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/потолок%20с%20люстрой.jpg','Интерьер')"><img src="Банкетный%20комплекс%20Центральный/потолок%20с%20люстрой.jpg" alt="Интерьер"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/люди.webp','Свадебный танец')"><img src="Банкетный%20комплекс%20Центральный/люди.webp" alt="Свадебный танец"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/сервировка.jpg','Сервировка')"><img src="Банкетный%20комплекс%20Центральный/сервировка.jpg" alt="Сервировка"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/парадная.jpg','Парадный вход')"><img src="Банкетный%20комплекс%20Центральный/парадная.jpg" alt="Парадный вход"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/люстра.jpg','Хрустальная люстра')"><img src="Банкетный%20комплекс%20Центральный/люстра.jpg" alt="Хрустальная люстра"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-01.jpg','Атмосфера')"><img src="Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-01.jpg" alt="Атмосфера"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Auto-slider row 2 (right) -->
-    <div class="gslider-wrap" style="margin-top:8px;">
-      <div class="gslider gslider-right">
-        <div class="gslider-inner">
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/свеча.jpg','Детали декора')"><img src="Банкетный%20комплекс%20Центральный/свеча.jpg" alt="Детали декора"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/изысканный%20фуршет.jpg','Фуршет')"><img src="Банкетный%20комплекс%20Центральный/изысканный%20фуршет.jpg" alt="Фуршет"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/стол1.jpg','Сервировка стола')"><img src="Банкетный%20комплекс%20Центральный/стол1.jpg" alt="Сервировка стола"></div>
-          <div class="gslide" onclick="openSliderLB('photos/0H4A2340.JPG','Банкетный зал')"><img src="photos/0H4A2340.JPG" alt="Банкетный зал"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/блюдо.jpg','Авторская кухня')"><img src="Банкетный%20комплекс%20Центральный/блюдо.jpg" alt="Авторская кухня"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/блюдо2.jpg','Авторская кухня')"><img src="Банкетный%20комплекс%20Центральный/блюдо2.jpg" alt="Авторская кухня"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-58.jpg','Атмосфера вечера')"><img src="Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-58.jpg" alt="Атмосфера вечера"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/официант.jpg','Сервис')"><img src="Банкетный%20комплекс%20Центральный/официант.jpg" alt="Сервис"></div>
-          <div class="gslide" onclick="openSliderLB('photos/160326-17_resized.jpg','Банкетный зал')"><img src="photos/160326-17_resized.jpg" alt="Банкетный зал"></div>
-          <div class="gslide" onclick="openSliderLB('photos/160326-71_resized.jpg','Торжество')"><img src="photos/160326-71_resized.jpg" alt="Торжество"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/столы.webp','Свадебная сервировка')"><img src="Банкетный%20комплекс%20Центральный/столы.webp" alt="Свадебная сервировка"></div>
-          <!-- duplicate for seamless loop -->
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/свеча.jpg','Детали декора')"><img src="Банкетный%20комплекс%20Центральный/свеча.jpg" alt="Детали декора"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/изысканный%20фуршет.jpg','Фуршет')"><img src="Банкетный%20комплекс%20Центральный/изысканный%20фуршет.jpg" alt="Фуршет"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/стол1.jpg','Сервировка стола')"><img src="Банкетный%20комплекс%20Центральный/стол1.jpg" alt="Сервировка стола"></div>
-          <div class="gslide" onclick="openSliderLB('photos/0H4A2340.JPG','Банкетный зал')"><img src="photos/0H4A2340.JPG" alt="Банкетный зал"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/блюдо.jpg','Авторская кухня')"><img src="Банкетный%20комплекс%20Центральный/блюдо.jpg" alt="Авторская кухня"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/блюдо2.jpg','Авторская кухня')"><img src="Банкетный%20комплекс%20Центральный/блюдо2.jpg" alt="Авторская кухня"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-58.jpg','Атмосфера вечера')"><img src="Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-58.jpg" alt="Атмосфера вечера"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/официант.jpg','Сервис')"><img src="Банкетный%20комплекс%20Центральный/официант.jpg" alt="Сервис"></div>
-          <div class="gslide" onclick="openSliderLB('photos/160326-17_resized.jpg','Банкетный зал')"><img src="photos/160326-17_resized.jpg" alt="Банкетный зал"></div>
-          <div class="gslide" onclick="openSliderLB('photos/160326-71_resized.jpg','Торжество')"><img src="photos/160326-71_resized.jpg" alt="Торжество"></div>
-          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/столы.webp','Свадебная сервировка')"><img src="Банкетный%20комплекс%20Центральный/столы.webp" alt="Свадебная сервировка"></div>
-        </div>
-      </div>
+    <!-- 3-column masonry gallery (CSS columns — reflows to 2 on mobile) -->
+    <div class="img-gallery">
+      <div class="img-gallery-item" data-src="photos/0H4A2256.JPG"><img src="photos/0H4A2256.JPG" alt="Интерьер зала" loading="lazy"></div>
+      <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/потолок%20с%20люстрой.jpg"><img src="Банкетный%20комплекс%20Центральный/потолок%20с%20люстрой.jpg" alt="Интерьер" loading="lazy"></div>
+      <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/люстра.jpg"><img src="Банкетный%20комплекс%20Центральный/люстра.jpg" alt="Хрустальная люстра" loading="lazy"></div>
+      <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/люди.webp"><img src="Банкетный%20комплекс%20Центральный/люди.webp" alt="Свадебный танец" loading="lazy"></div>
+      <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/свеча.jpg"><img src="Банкетный%20комплекс%20Центральный/свеча.jpg" alt="Детали декора" loading="lazy"></div>
+      <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/люди2.jpg"><img src="Банкетный%20комплекс%20Центральный/люди2.jpg" alt="Атмосфера праздника" loading="lazy"></div>
+      <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/парадная.jpg"><img src="Банкетный%20комплекс%20Центральный/парадная.jpg" alt="Парадный вход" loading="lazy"></div>
+      <div class="img-gallery-item" data-src="photos/0H4A2340.JPG"><img src="photos/0H4A2340.JPG" alt="Банкетный зал" loading="lazy"></div>
+      <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/оборудование.jpg"><img src="Банкетный%20комплекс%20Центральный/оборудование.jpg" alt="Профессиональное оснащение" loading="lazy"></div>
+      <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-01.jpg"><img src="Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-01.jpg" alt="Атмосфера" loading="lazy"></div>
+      <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/блюдо.jpg"><img src="Банкетный%20комплекс%20Центральный/блюдо.jpg" alt="Авторская кухня" loading="lazy"></div>
+      <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/блюдо2.jpg"><img src="Банкетный%20комплекс%20Центральный/блюдо2.jpg" alt="Авторская кухня" loading="lazy"></div>
+      <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/стол1.jpg"><img src="Банкетный%20комплекс%20Центральный/стол1.jpg" alt="Сервировка стола" loading="lazy"></div>
+      <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/официант.jpg"><img src="Банкетный%20комплекс%20Центральный/официант.jpg" alt="Сервис" loading="lazy"></div>
+      <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-58.jpg"><img src="Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-58.jpg" alt="Атмосфера вечера" loading="lazy"></div>
+      <div class="img-gallery-item" data-src="photos/160326-17_resized.jpg"><img src="photos/160326-17_resized.jpg" alt="Банкетный зал" loading="lazy"></div>
+      <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/столы.webp"><img src="Банкетный%20комплекс%20Центральный/столы.webp" alt="Свадебная сервировка" loading="lazy"></div>
+      <div class="img-gallery-item" data-src="photos/160326-71_resized.jpg"><img src="photos/160326-71_resized.jpg" alt="Торжество" loading="lazy"></div>
     </div>
 
   </div>
@@ -1448,7 +1416,10 @@
 <!-- LIGHTBOX -->
 <div class="lb" id="lb" onclick="closeLB()">
   <div class="lb-x" onclick="closeLB()">✕</div>
-  <img id="lbImg" src="" alt="">
+  <button class="lb-nav lb-prev" onclick="event.stopPropagation();galleryPrev()">&#8249;</button>
+  <img id="lbImg" src="" alt="" onclick="event.stopPropagation()">
+  <button class="lb-nav lb-next" onclick="event.stopPropagation();galleryNext()">&#8250;</button>
+  <span class="lb-counter" id="lb-counter"></span>
 </div>
 
 <!-- VIDEO LIGHTBOX -->
@@ -1501,18 +1472,38 @@
   burger.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') toggleMM(); });
   function closeMM() { toggleMM(false); }
 
-  /* Lightbox */
-  function openSliderLB(src) {
+  /* Gallery lightbox with navigation */
+  const galleryItems = [];
+  let currentLBIdx = 0;
+
+  function initGalleryLB() {
+    document.querySelectorAll('.img-gallery-item[data-src]').forEach((item, i) => {
+      galleryItems.push(item);
+      item.addEventListener('click', () => openGalleryAt(i));
+    });
+  }
+
+  function openGalleryAt(idx) {
+    currentLBIdx = idx;
+    const src = galleryItems[idx].dataset.src;
     document.getElementById('lbImg').src = decodeURIComponent(src);
+    document.getElementById('lb-counter').textContent = (idx + 1) + ' / ' + galleryItems.length;
     document.getElementById('lb').classList.add('on');
     document.body.style.overflow = 'hidden';
   }
+
+  function galleryPrev() { openGalleryAt((currentLBIdx - 1 + galleryItems.length) % galleryItems.length); }
+  function galleryNext() { openGalleryAt((currentLBIdx + 1) % galleryItems.length); }
+
   function openLB(el) {
     document.getElementById('lbImg').src = el.querySelector('img').src;
+    document.getElementById('lb-counter').textContent = '';
     document.getElementById('lb').classList.add('on');
     document.body.style.overflow = 'hidden';
   }
   function closeLB() { document.getElementById('lb').classList.remove('on'); document.body.style.overflow = ''; }
+
+  initGalleryLB();
 
   function openVideoLB(src) {
     const v = document.getElementById('vlbVideo');
@@ -1527,7 +1518,31 @@
     document.getElementById('vlb').classList.remove('on');
     document.body.style.overflow = '';
   }
-  document.addEventListener('keydown', e => { if(e.key==='Escape') { closeLB(); closeVideoLB(); } });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeLB(); closeVideoLB(); }
+    const lbOpen = document.getElementById('lb').classList.contains('on');
+    if (lbOpen && galleryItems.length) {
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); galleryPrev(); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); galleryNext(); }
+    }
+  });
+
+  /* Gallery fade-in on scroll */
+  (function() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const img = entry.target.querySelector('img');
+        entry.target.dataset.inView = '1';
+        if (img) {
+          if (img.complete) { img.classList.add('img-visible'); }
+          else { img.addEventListener('load', () => img.classList.add('img-visible'), { once: true }); }
+        }
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.img-gallery-item').forEach(item => observer.observe(item));
+  })();
 
   /* Form */
   function doSubmit(e) {
