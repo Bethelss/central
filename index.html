@@ -1484,13 +1484,7 @@
     });
   }
 
-  /* pos: instant-position both imgs on a virtual strip; center=0, right=VW, left=-VW */
-  function lbPlace(el, x, instant) {
-    el.style.transition = instant ? 'none' : 'transform 0.26s cubic-bezier(0.4,0,0.2,1)';
-    el.style.transform  = x === 0 ? 'translate(-50%,-50%)' : 'translate(calc(-50% + ' + x + 'px),-50%)';
-  }
-
-  function openGalleryAt(idx, dir, fromX) {
+function openGalleryAt(idx, dir) {
     const img = document.getElementById('lbImg');
     const alt = document.getElementById('lbImgAlt');
     const lb  = document.getElementById('lb');
@@ -1499,28 +1493,31 @@
 
     if (lb.classList.contains('on') && dir !== undefined && !lbAnimating) {
       lbAnimating = true;
-      const exitX  = dir > 0 ? -VW : VW;
-      const enterX = dir > 0 ?  VW : -VW;
-
+      // alt starts off-screen on the incoming side
       alt.src = src;
-      alt.style.display = 'block';
-      lbPlace(alt, fromX !== undefined ? fromX + enterX / Math.abs(enterX) * (VW - Math.abs(fromX)) : enterX, true);
+      alt.style.transition = 'none';
+      alt.style.transform  = 'translate(calc(-50% + ' + (dir > 0 ? VW : -VW) + 'px),-50%)';
+      alt.style.display    = 'block';
 
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        lbPlace(img, exitX, false);
-        lbPlace(alt, 0,     false);
+        const T = 'transform 0.26s cubic-bezier(0.4,0,0.2,1)';
+        img.style.transition = T;
+        img.style.transform  = 'translate(calc(-50% + ' + (dir > 0 ? -VW : VW) + 'px),-50%)';
+        alt.style.transition = T;
+        alt.style.transform  = 'translate(-50%,-50%)';
         setTimeout(() => {
           img.src = src;
-          lbPlace(img, 0, true);
-          alt.style.display = 'none';
+          img.style.transition = 'none';
+          img.style.transform  = 'translate(-50%,-50%)';
+          alt.style.display    = 'none';
           lbAnimating = false;
         }, 280);
       }));
     } else if (!lb.classList.contains('on')) {
-      alt.style.display = 'none';
+      alt.style.display    = 'none';
       img.style.transition = 'none';
-      img.style.opacity = '0';
-      img.style.transform = 'translate(-50%,-50%) scale(0.94)';
+      img.style.opacity    = '0';
+      img.style.transform  = 'translate(-50%,-50%) scale(0.94)';
       img.src = src;
       requestAnimationFrame(() => requestAnimationFrame(() => {
         img.style.transition = 'transform 0.3s var(--ease), opacity 0.25s ease';
@@ -1538,7 +1535,7 @@
   function galleryPrev() { if (!lbAnimating) openGalleryAt((currentLBIdx - 1 + galleryItems.length) % galleryItems.length, -1); }
   function galleryNext() { if (!lbAnimating) openGalleryAt((currentLBIdx + 1) % galleryItems.length,  1); }
 
-  /* Touch: drag-follow both images, snap on release */
+  /* Touch: drag-follow swipe */
   (function() {
     const lb = document.getElementById('lb');
     let startX = 0, startY = 0, dx = 0, isHoriz = null, adjIdx = -1;
@@ -1560,52 +1557,58 @@
       if (!isHoriz) return;
       dx = cx;
 
-      const img = document.getElementById('lbImg');
-      const alt = document.getElementById('lbImgAlt');
-      const VW  = window.innerWidth;
-      const dir = dx < 0 ? 1 : -1;
+      const img    = document.getElementById('lbImg');
+      const alt    = document.getElementById('lbImgAlt');
+      const VW     = window.innerWidth;
+      const dir    = dx < 0 ? 1 : -1;
       const newAdj = (currentLBIdx + dir + galleryItems.length) % galleryItems.length;
 
-      lbPlace(img, dx, true);
+      img.style.transition = 'none';
+      img.style.transform  = 'translate(calc(-50% + ' + dx + 'px),-50%)';
 
       if (adjIdx !== newAdj) {
         adjIdx = newAdj;
         alt.src = decodeURIComponent(galleryItems[newAdj].dataset.src);
         alt.style.display = 'block';
       }
-      lbPlace(alt, dx + dir * -VW, true);
+      // alt is always one VW away from img in the drag direction
+      alt.style.transition = 'none';
+      alt.style.transform  = 'translate(calc(-50% + ' + (dx + dir * VW) + 'px),-50%)';
     }, { passive: true });
 
     lb.addEventListener('touchend', () => {
       if (!isHoriz || lbAnimating) { dx = 0; return; }
-      const img = document.getElementById('lbImg');
-      const alt = document.getElementById('lbImgAlt');
-      const VW  = window.innerWidth;
+      const img          = document.getElementById('lbImg');
+      const alt          = document.getElementById('lbImgAlt');
+      const VW           = window.innerWidth;
+      const capturedAdj  = adjIdx; // capture BEFORE reset below
+      const T            = 'transform 0.22s ease-out';
 
-      if (Math.abs(dx) > 60 && adjIdx !== -1) {
+      if (Math.abs(dx) > 60 && capturedAdj !== -1) {
         const dir = dx < 0 ? 1 : -1;
         lbAnimating = true;
-        const T = 'transform 0.2s ease-out';
-        img.style.transition = T; alt.style.transition = T;
-        lbPlace(img, dir < 0 ?  VW : -VW, true); img.style.transition = T;
-        lbPlace(alt, 0, true);                    alt.style.transition = T;
-        img.style.transform = 'translate(calc(-50% + ' + (dir < 0 ? VW : -VW) + 'px),-50%)';
-        alt.style.transform = 'translate(-50%,-50%)';
+        img.style.transition = T;
+        img.style.transform  = 'translate(calc(-50% + ' + (dir > 0 ? -VW : VW) + 'px),-50%)';
+        alt.style.transition = T;
+        alt.style.transform  = 'translate(-50%,-50%)';
         setTimeout(() => {
-          img.src = alt.src;
-          lbPlace(img, 0, true);
-          alt.style.display = 'none';
-          currentLBIdx = adjIdx;
-          document.getElementById('lb-counter').textContent = (adjIdx + 1) + ' / ' + galleryItems.length;
+          img.src              = alt.src;
+          img.style.transition = 'none';
+          img.style.transform  = 'translate(-50%,-50%)';
+          alt.style.display    = 'none';
+          currentLBIdx         = capturedAdj;
+          document.getElementById('lb-counter').textContent = (capturedAdj + 1) + ' / ' + galleryItems.length;
           lbAnimating = false;
-        }, 220);
+        }, 240);
       } else {
-        const T = 'transform 0.22s ease-out';
-        img.style.transition = T; img.style.transform = 'translate(-50%,-50%)';
-        if (adjIdx !== -1) {
+        // Snap back
+        img.style.transition = T;
+        img.style.transform  = 'translate(-50%,-50%)';
+        if (capturedAdj !== -1) {
+          const dir = dx < 0 ? 1 : -1;
           alt.style.transition = T;
-          alt.style.transform = 'translate(calc(-50% + ' + ((dx < 0 ? 1 : -1) * -VW) + 'px),-50%)';
-          setTimeout(() => { alt.style.display = 'none'; }, 230);
+          alt.style.transform  = 'translate(calc(-50% + ' + (dir * VW) + 'px),-50%)';
+          setTimeout(() => { alt.style.display = 'none'; }, 240);
         }
       }
       dx = 0; isHoriz = null; adjIdx = -1;
