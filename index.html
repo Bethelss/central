@@ -315,6 +315,11 @@
 
     .hall-row-img { overflow: hidden; position: relative; }
     .hall-row-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.4s var(--ease); }
+    .hall-row-img:hover img { transform: scale(1.04); }
+    .hall-img-grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; height: 100%; gap: 3px; }
+    .hall-img-grid img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.4s var(--ease); }
+    .hall-img-grid img:first-child { grid-row: span 2; }
+    .hall-img-grid img:hover { transform: scale(1.04); }
     .hall-row:hover .hall-row-img img { transform: scale(1.04); }
 
     .hall-row-text {
@@ -877,7 +882,11 @@
 
   <div class="hall-row rl">
     <div class="hall-row-img">
-      <img src="Банкетный%20комплекс%20Центральный/Рисунок5.webp" alt="Малый банкетный зал">
+      <div class="hall-img-grid">
+        <img src="Банкетный%20комплекс%20Центральный/малый%20зал.jpg" alt="Малый банкетный зал">
+        <img src="Банкетный%20комплекс%20Центральный/малый%20зал2.jpg" alt="Малый зал — вид 2">
+        <img src="Банкетный%20комплекс%20Центральный/Рисунок5.webp" alt="Малый зал — интерьер">
+      </div>
     </div>
     <div class="hall-row-text">
       <span class="tag">Камерный зал</span>
