@@ -261,9 +261,10 @@
     /* ── ABOUT — Full-bleed editorial split ─── */
     .about { display: grid; grid-template-columns: 1fr 1fr; min-height: 60vh; background: var(--cream); overflow: hidden; }
 
-    .about-img-col { position: relative; overflow: hidden; }
+    .about-img-col { position: relative; overflow: hidden; display: flex; gap: 8px; }
+    .about-img-item { flex: 1; overflow: hidden; position: relative; }
     .about-img-col .about-main-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.6s var(--ease); }
-    .about-img-col:hover .about-main-img { transform: scale(1.04); }
+    .about-img-item:hover .about-main-img { transform: scale(1.04); }
 
     .about-text-col {
       padding: clamp(80px, 9vw, 130px) clamp(52px, 7vw, 100px);
@@ -329,7 +330,7 @@
 
     /* ── EVENTS — dark photo background ─── */
     .events { background: var(--black); padding: var(--sec-pad) 0; position: relative; overflow: hidden; }
-    .events-bg { position: absolute; inset: 0; background: url('Банкетный%20комплекс%20Центральный/люди2.jpg') center/cover; }
+    .events-bg { position: absolute; inset: -20px; background: url('Банкетный%20комплекс%20Центральный/люди2.jpg') center/cover; filter: blur(3px); }
     .events-ov { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(10,8,6,0.68) 0%, rgba(10,8,6,0.52) 100%); }
     .events-rule { display: none; }
 
@@ -380,6 +381,20 @@
     /* Clean zoom — no tint overlays */
     .gitem-ov { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; background: rgba(43,42,41,0.12); }
     .gitem:hover .gitem-ov { opacity: 1; }
+
+    /* Gallery auto-slider */
+    @keyframes gslide-left  { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+    @keyframes gslide-right { from { transform: translateX(-50%) } to { transform: translateX(0) } }
+    .gslider-wrap { overflow: hidden; mask: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%); -webkit-mask: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%); }
+    .gslider { width: 100%; }
+    .gslider-inner { display: flex; gap: 10px; width: max-content; }
+    .gslider-left  .gslider-inner { animation: gslide-left  34s linear infinite; }
+    .gslider-right .gslider-inner { animation: gslide-right 28s linear infinite; }
+    .gslider-wrap:hover .gslider-inner { animation-play-state: paused; }
+    .gslide { flex-shrink: 0; width: 300px; height: 220px; border-radius: 10px; overflow: hidden; cursor: zoom-in; position: relative; }
+    .gslide img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease, filter 0.4s ease; }
+    .gslide:hover img { transform: scale(1.06); filter: brightness(1.08); }
+    @media (max-width: 768px) { .gslide { width: 220px; height: 160px; } }
 
     .gallery-video-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
     .gitem-video { overflow: hidden; position: relative; cursor: pointer; aspect-ratio: 9/16; }
@@ -607,7 +622,9 @@
     @media(max-width:1100px) {
       .container { padding: 0 32px; }
       .about { grid-template-columns: 1fr; min-height: auto; }
-      .about-img-col { height: 60vw; max-height: 520px; }
+      .about-img-col { height: 120vw; max-height: 680px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; gap: 4px; }
+      .about-img-col::-webkit-scrollbar { display: none; }
+      .about-img-item { flex: 0 0 90%; scroll-snap-align: start; }
       .about-text-col { padding: 72px 48px; }
       .stats-grid { grid-template-columns: repeat(2,1fr); }
       .stat:nth-child(2) { border-right: none; }
@@ -661,7 +678,8 @@
       .hf-n { font-size: clamp(24px, 7vw, 32px); }
       .hf-l { font-size: 8px; letter-spacing: 0.15em; }
       .about { grid-template-columns: 1fr; }
-      .about-img-col { height: 70vw; max-height: 420px; }
+      .about-img-col { height: 120vw; max-height: 600px; }
+      .about-img-item { flex: 0 0 88%; }
       .about-text-col { padding: 56px 24px; }
       .hall-row-text { padding: 52px 24px 52px; justify-content: flex-start; height: auto; min-height: 0; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
@@ -798,8 +816,13 @@
 
 <!-- О НАС -->
 <section class="about" id="about">
-  <div class="about-img-col rl">
-    <img src="Банкетный%20комплекс%20Центральный/зал.jpg" alt="Интерьер банкетного зала" class="about-main-img">
+  <div class="about-img-col rl about-img-carousel">
+    <div class="about-img-item">
+      <img src="photos/tulx85hu8fwafregu8hhqyi2d27n1suk.jpg" alt="Интерьер банкетного зала" class="about-main-img">
+    </div>
+    <div class="about-img-item">
+      <img src="Банкетный%20комплекс%20Центральный/вход.jpg" alt="Парадный вход" class="about-main-img">
+    </div>
   </div>
   <div class="about-text-col rr">
     <span class="tag">О комплексе</span>
@@ -942,54 +965,57 @@
       </div>
     </div>
 
-    <div class="gallery-grid" style="margin-top:8px;">
-      <div class="gitem r" onclick="openLB(this)">
-        <img src="Банкетный%20комплекс%20Центральный/Элегантный%20банкетный%20зал%20с%20угощениями.png" alt="Колонный зал">
-        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
-      </div>
-      <div class="gitem r d1" onclick="openLB(this)">
-        <img src="photos/nqjwt78w0rpfoszvypey7qf3uoj9203x.webp" alt="Интерьер">
-        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
-      </div>
-      <div class="gitem r d2" onclick="openLB(this)">
-        <img src="Банкетный%20комплекс%20Центральный/люди.webp" alt="Свадебный танец">
-        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
-      </div>
-      <div class="gitem r d3" onclick="openLB(this)">
-        <img src="Банкетный%20комплекс%20Центральный/сервировка.jpg" alt="Сервировка">
-        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
-      </div>
-    </div>
-
-    <!-- Row 2 -->
-    <div class="gallery-grid" style="margin-top:8px;grid-template-columns:5fr 4fr 5fr;grid-template-rows:280px;">
-      <div class="gitem r" onclick="openLB(this)">
-        <img src="Банкетный%20комплекс%20Центральный/парадная.jpg" alt="Парадный вход">
-        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
-      </div>
-      <div class="gitem r d1" onclick="openLB(this)">
-        <img src="Банкетный%20комплекс%20Центральный/люстра.jpg" alt="Хрустальная люстра">
-        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
-      </div>
-      <div class="gitem r d2" onclick="openLB(this)">
-        <img src="Банкетный%20комплекс%20Центральный/столы.webp" alt="Свадебная сервировка">
-        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
+    <!-- Auto-slider row 1 (left) -->
+    <div class="gslider-wrap" style="margin-top:8px;">
+      <div class="gslider gslider-left">
+        <div class="gslider-inner">
+          <div class="gslide" onclick="openSliderLB('photos/0H4A2256.JPG','Интерьер зала')"><img src="photos/0H4A2256.JPG" alt="Интерьер зала"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/потолок%20с%20люстрой.jpg','Интерьер')"><img src="Банкетный%20комплекс%20Центральный/потолок%20с%20люстрой.jpg" alt="Интерьер"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/люди.webp','Свадебный танец')"><img src="Банкетный%20комплекс%20Центральный/люди.webp" alt="Свадебный танец"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/сервировка.jpg','Сервировка')"><img src="Банкетный%20комплекс%20Центральный/сервировка.jpg" alt="Сервировка"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/парадная.jpg','Парадный вход')"><img src="Банкетный%20комплекс%20Центральный/парадная.jpg" alt="Парадный вход"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/люстра.jpg','Хрустальная люстра')"><img src="Банкетный%20комплекс%20Центральный/люстра.jpg" alt="Хрустальная люстра"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-01.jpg','Атмосфера')"><img src="Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-01.jpg" alt="Атмосфера"></div>
+          <!-- duplicate for seamless loop -->
+          <div class="gslide" onclick="openSliderLB('photos/0H4A2256.JPG','Интерьер зала')"><img src="photos/0H4A2256.JPG" alt="Интерьер зала"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/потолок%20с%20люстрой.jpg','Интерьер')"><img src="Банкетный%20комплекс%20Центральный/потолок%20с%20люстрой.jpg" alt="Интерьер"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/люди.webp','Свадебный танец')"><img src="Банкетный%20комплекс%20Центральный/люди.webp" alt="Свадебный танец"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/сервировка.jpg','Сервировка')"><img src="Банкетный%20комплекс%20Центральный/сервировка.jpg" alt="Сервировка"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/парадная.jpg','Парадный вход')"><img src="Банкетный%20комплекс%20Центральный/парадная.jpg" alt="Парадный вход"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/люстра.jpg','Хрустальная люстра')"><img src="Банкетный%20комплекс%20Центральный/люстра.jpg" alt="Хрустальная люстра"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-01.jpg','Атмосфера')"><img src="Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-01.jpg" alt="Атмосфера"></div>
+        </div>
       </div>
     </div>
 
-    <!-- Row 3 -->
-    <div class="gallery-grid" style="margin-top:8px;grid-template-columns:4fr 6fr 4fr;grid-template-rows:260px;">
-      <div class="gitem r" onclick="openLB(this)">
-        <img src="Банкетный%20комплекс%20Центральный/официант.jpg" alt="Сервис">
-        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
-      </div>
-      <div class="gitem r d1" onclick="openLB(this)">
-        <img src="Банкетный%20комплекс%20Центральный/оборудование.jpg" alt="Живая музыка">
-        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
-      </div>
-      <div class="gitem r d2" onclick="openLB(this)">
-        <img src="Банкетный%20комплекс%20Центральный/блюдо.jpg" alt="Авторская кухня">
-        <div class="gitem-ov"><div class="zoom-btn">+</div></div>
+    <!-- Auto-slider row 2 (right) -->
+    <div class="gslider-wrap" style="margin-top:8px;">
+      <div class="gslider gslider-right">
+        <div class="gslider-inner">
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/свеча.jpg','Детали декора')"><img src="Банкетный%20комплекс%20Центральный/свеча.jpg" alt="Детали декора"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/изысканный%20фуршет.jpg','Фуршет')"><img src="Банкетный%20комплекс%20Центральный/изысканный%20фуршет.jpg" alt="Фуршет"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/стол1.jpg','Сервировка стола')"><img src="Банкетный%20комплекс%20Центральный/стол1.jpg" alt="Сервировка стола"></div>
+          <div class="gslide" onclick="openSliderLB('photos/0H4A2340.JPG','Банкетный зал')"><img src="photos/0H4A2340.JPG" alt="Банкетный зал"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/блюдо.jpg','Авторская кухня')"><img src="Банкетный%20комплекс%20Центральный/блюдо.jpg" alt="Авторская кухня"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/блюдо2.jpg','Авторская кухня')"><img src="Банкетный%20комплекс%20Центральный/блюдо2.jpg" alt="Авторская кухня"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-58.jpg','Атмосфера вечера')"><img src="Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-58.jpg" alt="Атмосфера вечера"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/официант.jpg','Сервис')"><img src="Банкетный%20комплекс%20Центральный/официант.jpg" alt="Сервис"></div>
+          <div class="gslide" onclick="openSliderLB('photos/160326-17_resized.jpg','Банкетный зал')"><img src="photos/160326-17_resized.jpg" alt="Банкетный зал"></div>
+          <div class="gslide" onclick="openSliderLB('photos/160326-71_resized.jpg','Торжество')"><img src="photos/160326-71_resized.jpg" alt="Торжество"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/столы.webp','Свадебная сервировка')"><img src="Банкетный%20комплекс%20Центральный/столы.webp" alt="Свадебная сервировка"></div>
+          <!-- duplicate for seamless loop -->
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/свеча.jpg','Детали декора')"><img src="Банкетный%20комплекс%20Центральный/свеча.jpg" alt="Детали декора"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/изысканный%20фуршет.jpg','Фуршет')"><img src="Банкетный%20комплекс%20Центральный/изысканный%20фуршет.jpg" alt="Фуршет"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/стол1.jpg','Сервировка стола')"><img src="Банкетный%20комплекс%20Центральный/стол1.jpg" alt="Сервировка стола"></div>
+          <div class="gslide" onclick="openSliderLB('photos/0H4A2340.JPG','Банкетный зал')"><img src="photos/0H4A2340.JPG" alt="Банкетный зал"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/блюдо.jpg','Авторская кухня')"><img src="Банкетный%20комплекс%20Центральный/блюдо.jpg" alt="Авторская кухня"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/блюдо2.jpg','Авторская кухня')"><img src="Банкетный%20комплекс%20Центральный/блюдо2.jpg" alt="Авторская кухня"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-58.jpg','Атмосфера вечера')"><img src="Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-58.jpg" alt="Атмосфера вечера"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/официант.jpg','Сервис')"><img src="Банкетный%20комплекс%20Центральный/официант.jpg" alt="Сервис"></div>
+          <div class="gslide" onclick="openSliderLB('photos/160326-17_resized.jpg','Банкетный зал')"><img src="photos/160326-17_resized.jpg" alt="Банкетный зал"></div>
+          <div class="gslide" onclick="openSliderLB('photos/160326-71_resized.jpg','Торжество')"><img src="photos/160326-71_resized.jpg" alt="Торжество"></div>
+          <div class="gslide" onclick="openSliderLB('Банкетный%20комплекс%20Центральный/столы.webp','Свадебная сервировка')"><img src="Банкетный%20комплекс%20Центральный/столы.webp" alt="Свадебная сервировка"></div>
+        </div>
       </div>
     </div>
 
@@ -1199,7 +1225,7 @@
       <div class="adv-left rl">
         <span class="tag light">Почему мы</span>
         <h2 class="adv-h">Стандарты<br>совершенства</h2>
-        <p class="adv-p">Более 10 лет мы создаём незабываемые события, неизменно следуя высочайшим стандартам качества и гостеприимства.</p>
+        <p class="adv-p">Мы создаём незабываемые события, неизменно следуя высочайшим стандартам качества и гостеприимства.</p>
         <a href="#contacts" class="btn btn-solid">Обсудить мероприятие</a>
       </div>
 
@@ -1476,6 +1502,11 @@
   function closeMM() { toggleMM(false); }
 
   /* Lightbox */
+  function openSliderLB(src) {
+    document.getElementById('lbImg').src = decodeURIComponent(src);
+    document.getElementById('lb').classList.add('on');
+    document.body.style.overflow = 'hidden';
+  }
   function openLB(el) {
     document.getElementById('lbImg').src = el.querySelector('img').src;
     document.getElementById('lb').classList.add('on');
