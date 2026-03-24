@@ -170,9 +170,10 @@
     /* ── HERO ─── */
     .hero { position: relative; height: 100vh; min-height: 700px; display: flex; flex-direction: column; justify-content: flex-start; overflow: hidden; }
     .hero-bg {
-      position: absolute; inset: 0;
+      position: absolute; inset: -6px;
       background: url('Банкетный%20комплекс%20Центральный/hero.webp') center/cover no-repeat;
       will-change: transform;
+      filter: blur(2px);
     }
     .hero-ov { position: absolute; inset: 0; background: linear-gradient(170deg, rgba(20,14,8,0.68) 0%, rgba(20,14,8,0.45) 45%, rgba(20,14,8,0.72) 100%); }
 
@@ -503,7 +504,7 @@
 
     .contacts-dark {
       background: var(--black); padding: 120px 72px;
-      display: flex; flex-direction: column; justify-content: center;
+      display: flex; flex-direction: column; justify-content: flex-start;
       position: relative; overflow: hidden;
     }
     .contacts-dark::after {
@@ -515,7 +516,7 @@
     }
     .contacts-dark-inner { position: relative; z-index: 3; }
 
-    .contacts-light { background: var(--cream); padding: 120px 72px; display: flex; flex-direction: column; justify-content: center; }
+    .contacts-light { background: var(--cream); padding: 120px 72px; display: flex; flex-direction: column; justify-content: flex-start; }
 
     .contacts-h { font-size: clamp(34px, 3.2vw, 48px); font-weight: 300; color: var(--white); letter-spacing: -0.02em; margin-bottom: 52px; line-height: 1.1; }
 
@@ -528,7 +529,7 @@
     .cval a:hover { color: var(--br-5); }
 
     /* Form */
-    .form-h { font-family: var(--serif); font-size: clamp(26px, 2.6vw, 38px); font-weight: 400; color: var(--black); margin-bottom: 36px; letter-spacing: -0.01em; }
+    .form-h { font-family: var(--serif); font-size: clamp(26px, 2.6vw, 38px); font-weight: 400; color: var(--black); margin-bottom: 36px; letter-spacing: -0.01em; margin-top: 44px; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .ff { display: flex; flex-direction: column; gap: 6px; }
     .ff.full { grid-column: span 2; }
@@ -596,6 +597,24 @@
     .menu-chef-pname { font-family: var(--serif); font-size: 15px; font-weight: 500; color: var(--black); display: block; }
     .menu-chef-ptitle { font-size: 9px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--br-4); display: block; margin-top: 3px; }
 
+    /* Carousel overlay arrows (desktop) */
+    .menu-overlay-btn {
+      display: none;
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(43,42,41,0.65); backdrop-filter: blur(6px);
+      border: 1px solid rgba(207,171,139,0.2); color: #fff; font-size: 28px; line-height: 1;
+      cursor: pointer; align-items: center; justify-content: center;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .menu-overlay-btn:hover { background: rgba(130,102,81,0.8); border-color: rgba(207,171,139,0.5); }
+    .menu-overlay-btn:disabled { opacity: 0.3; pointer-events: none; }
+    .menu-overlay-prev { left: 8px; }
+    .menu-overlay-next { right: 8px; }
+    @media (min-width: 769px) {
+      .menu-overlay-btn { display: flex; }
+    }
+
     /* Carousel track */
     .menu-track-wrap { overflow: hidden; position: relative; z-index: 3; cursor: grab; width: 100%; }
     .menu-track-wrap:active { cursor: grabbing; }
@@ -612,11 +631,30 @@
     .mcard:hover { transform: translateY(-8px); box-shadow: 0 32px 80px rgba(0,0,0,0.5); }
     .mcard-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease); display: block; }
     .mcard:hover .mcard-img { transform: scale(1.06); }
-    .mcard-grad { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(43,42,41,0) 0%, rgba(43,42,41,0.18) 38%, rgba(43,42,41,0.88) 72%, rgba(43,42,41,0.98) 100%); }
+    .mcard-grad { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(43,42,41,0) 0%, rgba(43,42,41,0.18) 50%, rgba(43,42,41,0.88) 78%, rgba(43,42,41,0.98) 100%); }
     .mcard-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px 26px 28px; }
     .mcard-cat { font-size: 8px; font-weight: 500; letter-spacing: 0.38em; text-transform: uppercase; color: var(--br-5); display: block; margin-bottom: 8px; }
     .mcard-name { font-family: var(--serif); font-size: 21px; font-weight: 500; color: var(--white); line-height: 1.18; display: block; margin-bottom: 8px; }
-    .mcard-desc { font-size: 12.5px; font-weight: 300; color: rgba(254,254,254,0.58); line-height: 1.65; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .mcard-desc { font-size: 12.5px; font-weight: 300; color: rgba(254,254,254,0.58); line-height: 1.65; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* Dish modal */
+    .dish-modal { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .dish-modal.on { opacity: 1; pointer-events: all; }
+    .dish-modal-bg { position: absolute; inset: 0; background: rgba(20,14,8,0.88); backdrop-filter: blur(6px); }
+    .dish-modal-box {
+      position: relative; z-index: 1; background: #2B2A29; border-radius: 12px; overflow: hidden;
+      width: min(520px, 92vw); max-height: 90vh; display: flex; flex-direction: column;
+      transform: translateY(16px); transition: transform 0.35s var(--ease);
+      box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+    }
+    .dish-modal.on .dish-modal-box { transform: translateY(0); }
+    .dish-modal-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; flex-shrink: 0; }
+    .dish-modal-body { padding: 28px 32px 36px; overflow-y: auto; }
+    .dish-modal-cat { font-size: 8px; font-weight: 500; letter-spacing: 0.38em; text-transform: uppercase; color: var(--br-5); display: block; margin-bottom: 10px; }
+    .dish-modal-name { font-family: var(--serif); font-size: clamp(22px, 3vw, 28px); font-weight: 500; color: var(--white); line-height: 1.15; margin-bottom: 16px; }
+    .dish-modal-desc { font-size: 14px; font-weight: 300; color: rgba(254,254,254,0.62); line-height: 1.75; }
+    .dish-modal-close { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.5); border: none; color: #fff; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 2; transition: background 0.2s; }
+    .dish-modal-close:hover { background: rgba(0,0,0,0.75); }
 
     /* Navigation */
     .menu-btn { width: 44px; height: 44px; border: 1px solid rgba(130,102,81,0.22); background: transparent; color: var(--br-3); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.3s, border-color 0.3s, color 0.3s; }
@@ -629,6 +667,11 @@
     .menu-dots { display: flex; gap: 6px; margin-top: 20px; position: relative; z-index: 3; }
     .mdot { width: 7px; height: 7px; border-radius: 50%; background: rgba(130,102,81,0.2); border: none; cursor: pointer; padding: 0; transition: background 0.3s, width 0.3s; }
     .mdot.active { background: var(--br-3); width: 22px; border-radius: 4px; }
+
+    /* ── MAP ─── */
+    .map-section { width: 100%; height: 480px; position: relative; }
+    .map-iframe { width: 100%; height: 100%; border: none; display: block; }
+    @media (max-width: 768px) { .map-section { height: 320px; } }
 
     /* ── FOOTER ─── */
     footer { background: var(--black); padding: 72px 0 36px; position: relative; overflow: hidden; }
@@ -712,7 +755,7 @@
       .hero-scroll { display: none; }
       .hero-eyebrow { display: flex; }
       .hero .container { padding-left: 24px; padding-right: 24px; }
-      .hero-body { padding-bottom: clamp(32px, 5vh, 60px); padding-top: clamp(100px, 22vh, 180px); }
+      .hero-body { padding-bottom: clamp(32px, 5vh, 60px); padding-top: clamp(160px, 35vh, 240px); justify-content: flex-start; }
       .hero-title { font-size: clamp(44px, 13vw, 60px); margin-bottom: 32px; margin-top: 20px; }
       .hero-sep { margin-bottom: 24px; }
       .hero-text { max-width: 100%; text-align: left; }
@@ -728,7 +771,7 @@
       .hero-actions .btn-solid { display: inline-flex; align-items: center; gap: 10px; }
       .btn-arrow { display: inline; }
       .hero-actions .btn-ghost { padding: 13px 24px; }
-      .hero-facts { flex-wrap: wrap; gap: 0; padding-top: 20px; margin-top: 28px; border-top: 1px solid rgba(207,171,139,0.18); flex-direction: row; }
+      .hero-facts { flex-wrap: wrap; gap: 0; padding-top: 24px; margin-top: auto; padding-bottom: 24px; border-top: 1px solid rgba(207,171,139,0.18); flex-direction: row; }
       .hero-fact { flex: none; width: 50%; border-right: none !important; border-bottom: 1px solid rgba(207,171,139,0.12); border-left: none; padding: 12px 0; margin-right: 0 !important; }
       .hero-fact:nth-child(odd) { padding-right: 12px; }
       .hero-fact:nth-child(3), .hero-fact:nth-child(4) { border-bottom: none; }
@@ -744,7 +787,10 @@
       .stats-grid { grid-template-columns: 1fr 1fr; }
       .stat:nth-child(odd) { border-right: 1px solid rgba(130,102,81,0.1); }
       .stat:nth-child(3), .stat:nth-child(4) { border-top: 2px solid var(--br-3); }
+
       .stat { padding: 32px 16px 28px; }
+      .stat-n { color: var(--br-5) !important; }
+      .stat-l { color: rgba(207,171,139,0.75); }
       .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 280px 220px 220px; }
       .gitem:nth-child(1) { grid-row: span 1; grid-column: span 2; }
       .gitem:nth-child(4) { grid-column: span 2; }
@@ -758,9 +804,11 @@
       .footer-bot { flex-direction: column; gap: 16px; text-align: center; }
       .halls-head-wrap { padding: 40px 0 32px; }
       .events, .gallery, .adv, .cta, .chef { padding: 72px 0; }
-      .menu-sec { padding: 72px 0; }
+      .menu-sec { padding: 40px 0 72px; }
       .menu-layout { grid-template-columns: 1fr; }
-      .menu-left-col { padding: 56px 24px 28px; }
+      .menu-left-col { padding: 40px 24px 16px; }
+      .menu-nav-row { margin-top: 20px; }
+      .menu-dots { margin-top: 10px; }
       .menu-left-col::after { display: none; }
       .menu-right-col { padding-bottom: 56px; }
       .menu-tabs { flex-direction: row; flex-wrap: wrap; border-left: none; border-bottom: 1px solid rgba(130,102,81,0.15); margin-top: 24px; }
@@ -1116,7 +1164,6 @@
     <div class="menu-left-col">
       <span class="tag">Кухня</span>
       <h2 class="menu-h">Авторское<br>меню</h2>
-      <p class="menu-sub">Фирменные блюда шеф-повара Андрея Зеликова — русская классика в современном прочтении.</p>
       <div class="menu-tabs" id="menuTabs">
         <button class="mtab active" data-filter="all">Все блюда</button>
         <button class="mtab" data-filter="горячее">Горячее</button>
@@ -1131,120 +1178,122 @@
       <div class="menu-dots" id="menuDots"></div>
     </div>
     <div class="menu-right-col">
+      <button class="menu-overlay-btn menu-overlay-prev" id="menuOverlayPrev" aria-label="Назад">&#8249;</button>
+      <button class="menu-overlay-btn menu-overlay-next" id="menuOverlayNext" aria-label="Вперёд">&#8250;</button>
       <div class="menu-track-wrap" id="menuWrap">
         <div class="menu-track" id="menuTrack">
 
-      <div class="mcard" data-cat="горячее">
+      <div class="mcard" onclick="openDish(this)" data-cat="горячее">
         <img src="Банкетный%20комплекс%20Центральный/меню/стейк.webp" alt="Стейк трай-тип" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Стейк трай-тип с картофельным пюре</span><p class="mcard-desc">Сочная говядина с благородной корочкой, воздушное пюре, тёплые луковые лепестки и укропная вытяжка.</p></div>
       </div>
-      <div class="mcard" data-cat="горячее">
+      <div class="mcard" onclick="openDish(this)" data-cat="горячее">
         <img src="Банкетный%20комплекс%20Центральный/меню/бифштекс.webp" alt="Бифштекс" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Бифштекс с гелем из желтка и картофелем пай</span><p class="mcard-desc">Румяное сочное мясо, деликатная отсылка к бифштексу с яйцом и щедрая горсть хрустящего пай.</p></div>
       </div>
-      <div class="mcard" data-cat="горячее">
+      <div class="mcard" onclick="openDish(this)" data-cat="горячее">
         <img src="Банкетный%20комплекс%20Центральный/меню/перлото.webp" alt="Перлото" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Перлото с томлёными говяжьими щеками</span><p class="mcard-desc">Перлото на курином бульоне со сливками, говяжьи щёчки в демигласе, тёртый пармезан.</p></div>
       </div>
-      <div class="mcard" data-cat="горячее">
+      <div class="mcard" onclick="openDish(this)" data-cat="горячее">
         <img src="Банкетный%20комплекс%20Центральный/меню/утиная%20грудка.webp" alt="Утиная грудка" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Утиная грудка с белыми грибами и тыквенным кремом</span><p class="mcard-desc">Розовая сочная утка, горячий лесной аромат грибов и мягкая сладость тыквы с вишнёвым соусом.</p></div>
       </div>
-      <div class="mcard" data-cat="горячее">
+      <div class="mcard" onclick="openDish(this)" data-cat="горячее">
         <img src="Банкетный%20комплекс%20Центральный/меню/куриное%20суфле.webp" alt="Куриное суфле" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Куриное суфле с пюре и шпинатом</span><p class="mcard-desc">Нежная тающая текстура, внутри — тёплое сливочное масло с петрушкой, пюре по-русски и свежий шпинат.</p></div>
       </div>
-      <div class="mcard" data-cat="горячее">
+      <div class="mcard" onclick="openDish(this)" data-cat="горячее">
         <img src="Банкетный%20комплекс%20Центральный/меню/форель.webp" alt="Форель" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Форель на булгуре со сливочным соусом</span><p class="mcard-desc">Рыба с хрустящей кожей, рассыпчатая крупа и тёплые томаты; бархатный соус подчёркивает сладость форели.</p></div>
       </div>
-      <div class="mcard" data-cat="горячее">
+      <div class="mcard" onclick="openDish(this)" data-cat="горячее">
         <img src="Банкетный%20комплекс%20Центральный/меню/тунец.webp" alt="Тунец" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Тунец с морковным пюре и цитрусовым демигласом</span><p class="mcard-desc">Обожжённый край, сочный розовый центр, сладковатое морковное пюре и свежий цитрусовый соус.</p></div>
       </div>
-      <div class="mcard" data-cat="горячее">
+      <div class="mcard" onclick="openDish(this)" data-cat="горячее">
         <img src="Банкетный%20комплекс%20Центральный/меню/сибас.webp" alt="Сибас" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Сибас на шпинате с икорным соусом</span><p class="mcard-desc">Тонкий хруст кожи, деликатная текстура рыбы и сливочно-икорный соус — ничего лишнего.</p></div>
       </div>
-      <div class="mcard" data-cat="горячее">
+      <div class="mcard" onclick="openDish(this)" data-cat="горячее">
         <img src="Банкетный%20комплекс%20Центральный/меню/перепелка.webp" alt="Перепёлка" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Перепёлка с печёной тыквой</span><p class="mcard-desc">Румяная птица и сладковатая печёная тыква — простое семейное счастье в духе русской печи.</p></div>
       </div>
-      <div class="mcard" data-cat="горячее">
+      <div class="mcard" onclick="openDish(this)" data-cat="горячее">
         <img src="Банкетный%20комплекс%20Центральный/меню/каре%20ягненка.webp" alt="Каре ягнёнка" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Каре ягнёнка с персиково-горчичным соусом</span><p class="mcard-desc">Розовая нежность мяса, тёплый аромат чеснока и розмарина, лёгкая фруктовая сладость.</p></div>
       </div>
-      <div class="mcard" data-cat="горячее">
+      <div class="mcard" onclick="openDish(this)" data-cat="горячее">
         <img src="Банкетный%20комплекс%20Центральный/меню/свиные%20ребра.webp" alt="Свиные рёбра" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Свиные рёбра в глазури из ромовой сливы</span><p class="mcard-desc">Томлёные до мягкости, покрытые блестящей кисло-сладкой глазурью, с ореховой посыпкой.</p></div>
       </div>
-      <div class="mcard" data-cat="закуски">
+      <div class="mcard" onclick="openDish(this)" data-cat="закуски">
         <img src="Банкетный%20комплекс%20Центральный/меню/камамбер.webp" alt="Камамбер" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Камамбер в бамбуковой золе с лаймовым вареньем</span><p class="mcard-desc">Сливочная текучесть сыра и свежая цитрусовая кислинка — любимая связка «сыр и домашнее варенье».</p></div>
       </div>
-      <div class="mcard" data-cat="закуски">
+      <div class="mcard" onclick="openDish(this)" data-cat="закуски">
         <img src="Банкетный%20комплекс%20Центральный/меню/грибы%20со%20шпинатом.webp" alt="Белые грибы" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Белые грибы со шпинатом и муссом из жареного картофеля</span><p class="mcard-desc">Румяная корочка грибов, свежая зелень и знакомый вкус жареной картошки в кремовой форме.</p></div>
       </div>
-      <div class="mcard" data-cat="закуски">
+      <div class="mcard" onclick="openDish(this)" data-cat="закуски">
         <img src="Банкетный%20комплекс%20Центральный/меню/овощная%20тарелка.webp" alt="Овощная тарелка" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Овощная тарелка с базиликовым маслом</span><p class="mcard-desc">Томаты, огурец, сладкий перец и редис — хруст, сочность и щепоть соли.</p></div>
       </div>
-      <div class="mcard" data-cat="закуски">
+      <div class="mcard" onclick="openDish(this)" data-cat="закуски">
         <img src="Банкетный%20комплекс%20Центральный/меню/сырная%20нарезка.webp" alt="Сырная нарезка" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Сырная нарезка</span><p class="mcard-desc">Пармезан, бри, чеддер и горгонзола — мёд, вишнёвый джем, ягоды и орехи.</p></div>
       </div>
-      <div class="mcard" data-cat="закуски">
+      <div class="mcard" onclick="openDish(this)" data-cat="закуски">
         <img src="Банкетный%20комплекс%20Центральный/меню/буженина.webp" alt="Буженина" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Буженина со «сладкой горчицей» и домашними чипсами</span><p class="mcard-desc">Румяная корочка, мягкое мясо и кремовая горчица на сливках — родной вкус праздника.</p></div>
       </div>
-      <div class="mcard" data-cat="закуски">
+      <div class="mcard" onclick="openDish(this)" data-cat="закуски">
         <img src="Банкетный%20комплекс%20Центральный/меню/эклеры.webp" alt="Эклеры" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Эклеры с тремя тар-тарами</span><p class="mcard-desc">Форель, тунец и гребешок на нежном творожном креме — лёгкая праздничная закуска в русском духе.</p></div>
       </div>
-      <div class="mcard" data-cat="закуски">
+      <div class="mcard" onclick="openDish(this)" data-cat="закуски">
         <img src="Банкетный%20комплекс%20Центральный/меню/плато.webp" alt="Плато вяления" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Плато собственного вяления</span><p class="mcard-desc">Бастурма, говядина сухого посола и вяленая утка — ремесленный характер и чистый вкус.</p></div>
       </div>
-      <div class="mcard" data-cat="закуски">
+      <div class="mcard" onclick="openDish(this)" data-cat="закуски">
         <img src="Банкетный%20комплекс%20Центральный/меню/паштет.webp" alt="Паштет" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Паштет из куриной печени в вишнёвой глазури</span><p class="mcard-desc">Бархатная печень, кисло-сладкая ягода и «лесной мох» — традиция в изящной форме.</p></div>
       </div>
-      <div class="mcard" data-cat="закуски">
+      <div class="mcard" onclick="openDish(this)" data-cat="закуски">
         <img src="Банкетный%20комплекс%20Центральный/меню/эклеры%20с%20икрой.webp" alt="Эклеры с икрой" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Эклеры с икрой</span><p class="mcard-desc">Лосось, щука и палтус на дымном сливочном масле — лёгкая, праздничная, русская классика.</p></div>
       </div>
-      <div class="mcard" data-cat="салаты">
+      <div class="mcard" onclick="openDish(this)" data-cat="салаты">
         <img src="Банкетный%20комплекс%20Центральный/меню/салат%20с%20ростбифом.webp" alt="Салат с ростбифом" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Салаты</span><span class="mcard-name">Салат с ростбифом и хрустящими баклажанами</span><p class="mcard-desc">Сочное мясо, вяленые томаты и ореховый соус — про баланс и характер.</p></div>
       </div>
-      <div class="mcard" data-cat="салаты">
+      <div class="mcard" onclick="openDish(this)" data-cat="салаты">
         <img src="Банкетный%20комплекс%20Центральный/меню/салат%20с%20печеной%20свеклой.webp" alt="Салат со свёклой" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Салаты</span><span class="mcard-name">Салат с печёной свёклой, вяленой уткой и муссом из козьего сыра</span><p class="mcard-desc">Три русских акцента: свёкла, утка и воздушный сливочный мусс, объединённые укропной вытяжкой.</p></div>
       </div>
-      <div class="mcard" data-cat="салаты">
+      <div class="mcard" onclick="openDish(this)" data-cat="салаты">
         <img src="Банкетный%20комплекс%20Центральный/меню/цезарь.webp" alt="Цезарь" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Салаты</span><span class="mcard-name">«Цезарь» по-нашему</span><p class="mcard-desc">Хрустящий романо, сухари из бекона и мусс из шпрот на желтке — узнаваемый салат с русским характером.</p></div>
@@ -1476,10 +1525,6 @@
         </div>
       </div>
 
-      <div style="margin-top:36px;background:rgba(254,254,254,0.03);border:1px solid rgba(130,102,81,0.15);height:148px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--br-3)" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span style="font-size:10.5px;color:rgba(254,254,254,0.25);letter-spacing:0.12em;">г. Курск, ул. Ленина, 2</span>
-      </div>
     </div>
   </div>
 
@@ -1526,6 +1571,18 @@
   </div>
 
 </section>
+
+<!-- КАРТА -->
+<div class="map-section">
+  <iframe
+    src="https://yandex.ru/map-widget/v1/-/CPR-iRZ6"
+    class="map-iframe"
+    allowfullscreen
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    title="Банкетный комплекс Центральный на карте">
+  </iframe>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -1818,6 +1875,27 @@ function openGalleryAt(idx, dir) {
   }
   function closeLB() { document.getElementById('lb').classList.remove('on'); document.body.style.overflow = ''; hallMode = false; }
 
+  /* Dish modal */
+  function openDish(el) {
+    if(window.menuDragged) { window.menuDragged = false; return; }
+    const img  = el.querySelector('.mcard-img');
+    const cat  = el.querySelector('.mcard-cat').textContent;
+    const name = el.querySelector('.mcard-name').textContent;
+    const desc = el.querySelector('.mcard-desc').textContent;
+    const m = document.getElementById('dishModal');
+    m.querySelector('.dish-modal-img').src = img.src;
+    m.querySelector('.dish-modal-img').alt = img.alt;
+    m.querySelector('.dish-modal-cat').textContent = cat;
+    m.querySelector('.dish-modal-name').textContent = name;
+    m.querySelector('.dish-modal-desc').textContent = desc;
+    m.classList.add('on');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDish() {
+    document.getElementById('dishModal').classList.remove('on');
+    document.body.style.overflow = '';
+  }
+
   /* FAQ accordion */
   function toggleFaq(btn) {
     const item   = btn.closest('.faq-item');
@@ -1851,7 +1929,7 @@ function openGalleryAt(idx, dir) {
     document.body.style.overflow = '';
   }
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closeLB(); closeVideoLB(); }
+    if (e.key === 'Escape') { closeLB(); closeVideoLB(); closeDish(); }
     const lbOpen = document.getElementById('lb').classList.contains('on');
     if (lbOpen && galleryItems.length) {
       if (e.key === 'ArrowLeft')  { e.preventDefault(); galleryPrev(); }
@@ -1956,10 +2034,13 @@ function openGalleryAt(idx, dir) {
 
     document.getElementById('menuPrev').addEventListener('click', () => goTo(cur - 1));
     document.getElementById('menuNext').addEventListener('click', () => goTo(cur + 1));
+    document.getElementById('menuOverlayPrev').addEventListener('click', () => goTo(cur - 1));
+    document.getElementById('menuOverlayNext').addEventListener('click', () => goTo(cur + 1));
 
     let startX = 0, dragging = false, startOffset = 0;
+    window.menuDragged = false;
     wrap.addEventListener('mousedown', e => {
-      startX = e.clientX;
+      startX = e.clientX; window.menuDragged = false;
       const v = getVisible(); if(!v.length) return;
       let off = 0;
       const allCards = [...track.querySelectorAll('.mcard')];
@@ -1969,6 +2050,7 @@ function openGalleryAt(idx, dir) {
     });
     window.addEventListener('mousemove', e => {
       if(!dragging) return;
+      if(Math.abs(e.clientX - startX) > 6) window.menuDragged = true;
       track.style.transform = `translateX(${-startOffset + (e.clientX - startX)}px)`;
     });
     window.addEventListener('mouseup', e => {
@@ -1997,6 +2079,20 @@ function openGalleryAt(idx, dir) {
     nls.forEach(l => l.classList.toggle('active', l.getAttribute('href')==='#'+cur));
   }, {passive:true});
 </script>
+
+<!-- DISH MODAL -->
+<div class="dish-modal" id="dishModal" onclick="if(event.target===this)closeDish()">
+  <div class="dish-modal-bg" onclick="closeDish()"></div>
+  <div class="dish-modal-box">
+    <button class="dish-modal-close" onclick="closeDish()">✕</button>
+    <img class="dish-modal-img" src="" alt="">
+    <div class="dish-modal-body">
+      <span class="dish-modal-cat"></span>
+      <div class="dish-modal-name"></div>
+      <p class="dish-modal-desc"></p>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
