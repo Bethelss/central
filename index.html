@@ -271,7 +271,22 @@
       padding: clamp(80px, 9vw, 130px) clamp(52px, 7vw, 100px);
       display: flex; flex-direction: column; justify-content: center;
     }
-    .about-rule { width: 36px; height: 1px; background: var(--br-4); margin-bottom: 32px; }
+    .btn-about {
+      display: inline-flex; align-items: center; gap: 0;
+      font-family: var(--sans); font-size: 9.5px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--white); text-decoration: none; overflow: hidden; position: relative;
+    }
+    .btn-about-text {
+      background: var(--br-2); padding: 16px 32px;
+      transition: background 0.35s var(--ease);
+    }
+    .btn-about-arr {
+      background: var(--br-3); padding: 16px 20px; font-size: 18px; letter-spacing: 0;
+      transition: background 0.35s var(--ease), transform 0.35s var(--ease);
+    }
+    .btn-about:hover .btn-about-text { background: var(--br-1); }
+    .btn-about:hover .btn-about-arr { background: var(--br-2); transform: translateX(4px); }
+    .btn-about:focus-visible { outline: 1px solid var(--br-3); outline-offset: 3px; }
     .about-h { font-size: clamp(36px, 3.6vw, 52px); font-weight: 300; color: var(--black); margin-bottom: 32px; letter-spacing: -0.02em; line-height: 1.05; }
     .about-p { font-family: var(--sans); font-size: 14px; font-weight: 300; color: #6B5B4E; line-height: 1.9; margin-bottom: 20px; }
 
@@ -937,7 +952,6 @@
   </div>
   <div class="about-text-col rr">
     <span class="tag">О комплексе</span>
-    <div class="about-rule"></div>
     <h2 class="about-h">Историческое<br>здание —<br>душа комплекса</h2>
 
     <p class="about-p" style="margin-bottom:10px;font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--br-3);font-weight:500;">Памятник архитектуры XX века · Основан в 1966 году</p>
@@ -948,7 +962,10 @@
       <p>«Хрустальные люстры, золочёные колонны, изящные детали ручной работы — каждый уголок хранит историю и создаёт атмосферу подлинной роскоши»</p>
     </div>
 
-    <a href="#contacts" class="btn btn-dark">Обсудить мероприятие</a>
+    <a href="#contacts" class="btn btn-about">
+      <span class="btn-about-text">Обсудить мероприятие</span>
+      <span class="btn-about-arr">→</span>
+    </a>
   </div>
 </section>
 
