@@ -546,10 +546,10 @@
     .ff textarea:focus { border-color: var(--br-3); }
 
     /* ── CHEF — dark editorial ─── */
-    .chef { background: var(--br-1); position: relative; overflow: hidden; }
+    .chef { background: #D9CDBC; position: relative; overflow: hidden; }
     .chef::before { content: ''; position: absolute; left: 0; top: 0; width: 44%; height: 100%; background: rgba(0,0,0,0.12); z-index: 0; pointer-events: none; }
-    .chef-layout { display: grid; grid-template-columns: 1fr 1.45fr; gap: clamp(56px, 6vw, 88px); align-items: stretch; max-width: 1280px; margin: 0 auto; padding: 0 0 0 clamp(52px, 5vw, 80px); position: relative; z-index: 1; }
-    .chef-photo-col { position: relative; overflow: hidden; min-height: 480px; }
+    .chef-layout { display: grid; grid-template-columns: 1.1fr 1.3fr; gap: clamp(56px, 6vw, 88px); align-items: stretch; max-width: 1280px; margin: 0 auto; padding: 0 0 0 clamp(52px, 5vw, 80px); position: relative; z-index: 1; }
+    .chef-photo-col { position: relative; overflow: hidden; min-height: 420px; max-height: 580px; }
     .chef-photo-col::before { content: ''; position: absolute; top: 20px; left: -20px; right: 20px; bottom: -20px; background: rgba(207,171,139,0.08); z-index: 0; }
     .chef-photo-col img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; position: relative; z-index: 1; transition: transform 1.6s var(--ease); }
     .chef-photo-col:hover img { transform: scale(1.04); }
@@ -557,24 +557,24 @@
     .chef-photo-col::after { content: 'А З'; font-family: var(--serif); font-size: 160px; font-weight: 300;  color: rgba(207,171,139,0.05); position: absolute; bottom: -40px; right: -20px; z-index: 0; line-height: 1; letter-spacing: -0.05em; pointer-events: none; }
     .chef-content-col { display: flex; flex-direction: column; justify-content: center; }
 
-    .chef-label { font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: 0.38em; text-transform: uppercase; color: var(--br-5); display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
-    .chef-label::before { content: ''; display: block; width: 32px; height: 1px; background: rgba(207,171,139,0.3); flex-shrink: 0; }
+    .chef-label { font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: 0.38em; text-transform: uppercase; color: var(--br-3); display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .chef-label::before { content: ''; display: block; width: 32px; height: 1px; background: rgba(74,61,53,0.25); flex-shrink: 0; }
 
-    .chef-quote-big { font-family: var(--serif); font-size: clamp(28px, 2.8vw, 44px); font-weight: 300; line-height: 1.32; color: var(--white); letter-spacing: -0.02em; margin-bottom: 24px; }
-    .chef-quote-big em {  color: var(--br-5); }
+    .chef-quote-big { font-family: var(--serif); font-size: clamp(28px, 2.8vw, 44px); font-weight: 300; line-height: 1.32; color: var(--black); letter-spacing: -0.02em; margin-bottom: 24px; }
+    .chef-quote-big em { color: var(--br-3); }
 
     .chef-identity { margin-bottom: 20px; }
-    .chef-name-big { font-family: var(--serif); font-size: clamp(32px, 3.2vw, 48px); font-weight: 400; color: var(--white); letter-spacing: 0.01em; display: block; margin-bottom: 7px; }
-    .chef-role-tag { font-size: 9px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(207,171,139,0.45); }
+    .chef-name-big { font-family: var(--serif); font-size: clamp(32px, 3.2vw, 48px); font-weight: 400; color: var(--black); letter-spacing: 0.01em; display: block; margin-bottom: 7px; }
+    .chef-role-tag { font-size: 9px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--br-4); }
 
-    .chef-rule { width: 48px; height: 1px; background: rgba(207,171,139,0.2); margin-bottom: 20px; }
+    .chef-rule { width: 48px; height: 1px; background: rgba(74,61,53,0.18); margin-bottom: 20px; }
 
     .chef-pillars { display: flex; flex-direction: column; gap: 0; }
-    .chef-pillar { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.07); display: grid; grid-template-columns: 28px 1fr; gap: 18px; align-items: start; }
-    .chef-pillar:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
-    .chef-pillar-num { font-family: var(--serif); font-size: 11px;  color: rgba(207,171,139,0.35); padding-top: 3px; }
-    .chef-pillar-text strong { font-weight: 500; color: var(--white); display: block; margin-bottom: 4px; font-size: 16px; font-family: var(--serif); }
-    .chef-pillar-text span { font-size: 14px; font-weight: 300; color: rgba(254,254,254,0.45); line-height: 1.65; }
+    .chef-pillar { padding: 16px 0; border-bottom: 1px solid rgba(74,61,53,0.1); display: grid; grid-template-columns: 28px 1fr; gap: 18px; align-items: start; }
+    .chef-pillar:first-child { border-top: 1px solid rgba(74,61,53,0.1); }
+    .chef-pillar-num { font-family: var(--serif); font-size: 11px; color: var(--br-4); padding-top: 3px; }
+    .chef-pillar-text strong { font-weight: 500; color: var(--black); display: block; margin-bottom: 4px; font-size: 16px; font-family: var(--serif); }
+    .chef-pillar-text span { font-size: 14px; font-weight: 300; color: rgba(43,42,41,0.55); line-height: 1.65; }
 
     /* ── MENU CAROUSEL — side-by-side layout ─── */
     .menu-sec { background: var(--cream2); position: relative; overflow: hidden; }
