@@ -546,15 +546,35 @@
     .ff textarea:focus { border-color: var(--br-3); }
 
     /* ── CHEF — dark editorial ─── */
-    .chef { background: #D9CDBC; position: relative; overflow: hidden; }
-    .chef::before { content: ''; position: absolute; left: 0; top: 0; width: 44%; height: 100%; background: rgba(0,0,0,0.12); z-index: 0; pointer-events: none; }
+    .chef {
+      background: linear-gradient(135deg, #C8BAA4 0%, #D6C9B4 35%, #E2D5C2 65%, #DDD0BC 100%);
+      position: relative; overflow: hidden;
+    }
+    .chef::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 60%, rgba(130,102,81,0.12) 0%, transparent 65%),
+                  radial-gradient(ellipse at 80% 20%, rgba(207,171,139,0.10) 0%, transparent 55%);
+      pointer-events: none; z-index: 0;
+    }
     .chef-layout { display: grid; grid-template-columns: 1.1fr 1.3fr; gap: clamp(56px, 6vw, 88px); align-items: center; max-width: 1280px; margin: 0 auto; padding: 0 0 0 clamp(52px, 5vw, 80px); position: relative; z-index: 1; }
-    .chef-photo-col { position: relative; overflow: hidden; aspect-ratio: 3/4; max-height: 620px; }
-    .chef-photo-col::before { content: ''; position: absolute; top: 20px; left: -20px; right: 20px; bottom: -20px; background: rgba(207,171,139,0.08); z-index: 0; }
-    .chef-photo-col img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; position: relative; z-index: 1; transition: transform 1.6s var(--ease); }
+    .chef-photo-col {
+      position: relative; aspect-ratio: 3/4; max-height: 620px;
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 32px 72px rgba(74,61,53,0.28), 0 8px 24px rgba(74,61,53,0.14);
+    }
+    .chef-photo-col::before {
+      content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background: linear-gradient(180deg, rgba(74,61,53,0) 55%, rgba(74,61,53,0.32) 100%),
+                  linear-gradient(to right, rgba(130,102,81,0.08) 0%, transparent 60%);
+      mix-blend-mode: multiply;
+    }
+    .chef-photo-col img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; position: relative; z-index: 1; transition: transform 1.6s var(--ease); filter: contrast(1.04) saturate(0.92); }
     .chef-photo-col:hover img { transform: scale(1.04); }
+    .chef-photo-col::after {
+      content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none; border-radius: 12px;
+      box-shadow: inset 0 0 0 1px rgba(207,171,139,0.25);
+    }
     .chef-content-col { padding: clamp(36px,4vw,56px) clamp(52px, 5vw, 80px) clamp(36px,4vw,56px) 0; }
-    .chef-photo-col::after { content: 'А З'; font-family: var(--serif); font-size: 160px; font-weight: 300;  color: rgba(207,171,139,0.05); position: absolute; bottom: -40px; right: -20px; z-index: 0; line-height: 1; letter-spacing: -0.05em; pointer-events: none; }
     .chef-content-col { display: flex; flex-direction: column; justify-content: center; }
 
     .chef-label { font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: 0.38em; text-transform: uppercase; color: var(--br-3); display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
