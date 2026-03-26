@@ -717,11 +717,39 @@
     .flinks a:hover { color: var(--br-5); }
     .flinks .fli { font-size: 13px; font-weight: 300; color: rgba(254,254,254,0.45); }
 
+    .footer-requisites { border-top: 1px solid rgba(130,102,81,0.1); padding-top: 32px; margin-bottom: 28px; position: relative; z-index: 3; }
+    .footer-req-title { font-size: 8px; font-weight: 500; letter-spacing: 0.32em; text-transform: uppercase; color: var(--br-5); opacity: 0.5; margin-bottom: 14px; }
+    .footer-req-grid { display: flex; flex-wrap: wrap; gap: 6px 32px; }
+    .footer-req-item { font-size: 12px; font-weight: 300; color: rgba(254,254,254,0.22); line-height: 1.6; }
+    .footer-req-item b { font-weight: 400; color: rgba(254,254,254,0.32); }
+
     .footer-bot { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid rgba(254,254,254,0.06); position: relative; z-index: 3; }
     .footer-copy { font-size: 10.5px; font-weight: 300; color: rgba(254,254,254,0.28); }
+    .footer-copy a { color: rgba(207,171,139,0.45); text-decoration: none; transition: color 0.3s; }
+    .footer-copy a:hover { color: var(--br-5); }
     .socials { display: flex; gap: 8px; }
     .socials a { width: 32px; height: 32px; border: 1px solid rgba(254,254,254,0.08); display: flex; align-items: center; justify-content: center; font-size: 9.5px; font-weight: 500; color: rgba(254,254,254,0.25); transition: all 0.3s; }
     .socials a:hover { border-color: var(--br-3); color: var(--br-5); }
+
+    /* ── CONSENT CHECKBOX ─── */
+    .consent-row { display: flex; align-items: flex-start; gap: 10px; margin-top: 20px; }
+    .consent-row input[type="checkbox"] {
+      appearance: none; -webkit-appearance: none;
+      width: 16px; height: 16px; min-width: 16px;
+      border: 1px solid rgba(130,102,81,0.4); background: transparent;
+      cursor: pointer; margin-top: 2px; position: relative;
+      transition: border-color 0.25s;
+    }
+    .consent-row input[type="checkbox"]:checked { border-color: var(--br-5); background: var(--br-3); }
+    .consent-row input[type="checkbox"]:checked::after {
+      content: ''; position: absolute; left: 4px; top: 1px;
+      width: 5px; height: 9px; border: 1.5px solid #fff;
+      border-top: none; border-left: none; transform: rotate(42deg);
+    }
+    .consent-row input[type="checkbox"].error { border-color: #c0392b; }
+    .consent-row label { font-family: var(--sans); font-size: 12px; font-weight: 400; color: rgba(43,42,41,0.55); line-height: 1.6; cursor: pointer; }
+    .consent-row label a { color: var(--br-3); text-decoration: none; border-bottom: 1px solid rgba(130,102,81,0.3); transition: color 0.25s; }
+    .consent-row label a:hover { color: var(--black); }
 
     /* ── LIGHTBOX ─── */
     .lb { position: fixed; inset: 0; background: rgba(43,42,41,0.97); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; overflow: hidden; }
@@ -1581,7 +1609,11 @@
           <textarea id="fm" name="message" placeholder="Расскажите о вашем мероприятии..."></textarea>
         </div>
       </div>
-      <div style="margin-top:20px;">
+      <div class="consent-row">
+        <input type="checkbox" id="fconsent" name="consent">
+        <label for="fconsent">Я согласен(а) на <a href="privacy.html" target="_blank">обработку персональных данных</a> в соответствии с&nbsp;152-ФЗ</label>
+      </div>
+      <div style="margin-top:16px;">
         <button type="submit" class="btn btn-solid" style="width:100%;justify-content:center;" id="sbtn">
           Отправить заявку
         </button>
@@ -1639,8 +1671,19 @@
         </ul>
       </div>
     </div>
+    <div class="footer-requisites">
+      <p class="footer-req-title">Реквизиты</p>
+      <div class="footer-req-grid">
+        <span class="footer-req-item"><b>ООО «МИДИЙНОЕ МЕСТО КУРСК»</b></span>
+        <span class="footer-req-item"><b>ОГРН:</b> 1224600008313</span>
+        <span class="footer-req-item"><b>ИНН:</b> 4632294190</span>
+        <span class="footer-req-item"><b>КПП:</b> 463201001</span>
+        <span class="footer-req-item"><b>Юр. адрес:</b> 305016, Курская обл., г. Курск, ул. Павлуновского, зд. 73</span>
+      </div>
+    </div>
+
     <div class="footer-bot">
-      <p class="footer-copy">© 2026 Банкетный комплекс «Центральный». Все права защищены.</p>
+      <p class="footer-copy">© 2026 Банкетный комплекс «Центральный». Все права защищены. &nbsp;·&nbsp; <a href="privacy.html">Политика конфиденциальности</a></p>
       <div class="socials">
         <a href="#" aria-label="ВКонтакте">ВК</a>
         <a href="#" aria-label="Telegram">ТГ</a>
@@ -1976,6 +2019,12 @@ function openGalleryAt(idx, dir) {
   /* Form */
   function doSubmit(e) {
     e.preventDefault();
+    const consent = document.getElementById('fconsent');
+    if (!consent.checked) {
+      consent.classList.add('error');
+      consent.addEventListener('change', () => consent.classList.remove('error'), { once: true });
+      return;
+    }
     const btn = document.getElementById('sbtn');
     btn.textContent = 'Заявка отправлена ✓';
     btn.style.background = '#4A6B4A';

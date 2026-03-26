@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Политика конфиденциальности — Центральный</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:  #2B2A29;
+      --white:  #FEFEFE;
+      --br-3:   #826651;
+      --br-4:   #A08977;
+      --br-5:   #CFAB8B;
+      --cream:  #FAF6EF;
+      --cream2: #F0EAE0;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'Raleway', sans-serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--cream);
+      color: var(--black);
+      font-size: 15px;
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    /* NAV */
+    .top-bar {
+      background: var(--black);
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .top-bar-logo {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--br-5);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+    }
+    .top-bar-back {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(254,254,254,0.35);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .top-bar-back:hover { color: var(--br-5); }
+
+    /* HERO */
+    .privacy-hero {
+      background: var(--black);
+      padding: 64px 40px 56px;
+      text-align: center;
+      border-bottom: 1px solid rgba(130,102,81,0.15);
+    }
+    .privacy-eyebrow {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--br-5);
+      opacity: 0.7;
+      display: block;
+      margin-bottom: 18px;
+    }
+    .privacy-title {
+      font-family: var(--serif);
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .privacy-meta {
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(254,254,254,0.3);
+      letter-spacing: 0.04em;
+    }
+
+    /* CONTENT */
+    .privacy-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 72px 40px 96px;
+    }
+
+    .privacy-section { margin-bottom: 52px; }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--black);
+      letter-spacing: 0.01em;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(130,102,81,0.18);
+    }
+
+    h3 {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--br-3);
+      margin: 28px 0 12px;
+    }
+
+    p { margin-bottom: 14px; color: #3d3a37; }
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      padding-left: 20px;
+      margin-bottom: 14px;
+      color: #3d3a37;
+    }
+    ul li, ol li { margin-bottom: 6px; }
+
+    .requisites-block {
+      background: var(--cream2);
+      border: 1px solid rgba(130,102,81,0.15);
+      padding: 28px 32px;
+      margin: 24px 0;
+    }
+    .req-row { display: flex; gap: 12px; margin-bottom: 8px; font-size: 13.5px; }
+    .req-row:last-child { margin-bottom: 0; }
+    .req-label { font-weight: 500; color: var(--br-3); min-width: 160px; }
+    .req-val { color: var(--black); font-weight: 300; }
+
+    .highlight-box {
+      border-left: 2px solid var(--br-5);
+      padding: 16px 24px;
+      background: rgba(207,171,139,0.06);
+      margin: 20px 0;
+      font-size: 13.5px;
+      color: #3d3a37;
+    }
+
+    a { color: var(--br-3); }
+    a:hover { color: var(--black); }
+
+    /* FOOTER */
+    .privacy-footer {
+      background: var(--black);
+      padding: 32px 40px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 300;
+      color: rgba(254,254,254,0.25);
+      letter-spacing: 0.03em;
+    }
+    .privacy-footer a { color: rgba(207,171,139,0.4); text-decoration: none; }
+    .privacy-footer a:hover { color: var(--br-5); }
+
+    @media (max-width: 600px) {
+      .top-bar { padding: 14px 20px; }
+      .privacy-hero { padding: 44px 20px 40px; }
+      .privacy-wrap { padding: 48px 20px 64px; }
+      .req-row { flex-direction: column; gap: 2px; }
+      .req-label { min-width: unset; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<nav class="top-bar">
+  <a href="index.html" class="top-bar-logo">Центральный</a>
+  <a href="index.html" class="top-bar-back">← На главную</a>
+</nav>
+
+<!-- HERO -->
+<div class="privacy-hero">
+  <span class="privacy-eyebrow">Юридический документ</span>
+  <h1 class="privacy-title">Политика конфиденциальности</h1>
+  <p class="privacy-meta">Редакция от 26 марта 2026 г.</p>
+</div>
+
+<!-- CONTENT -->
+<div class="privacy-wrap">
+
+  <div class="privacy-section">
+    <h2>1. Оператор персональных данных</h2>
+    <p>Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных физических лиц, пользующихся сайтом банкетного комплекса «Центральный».</p>
+    <div class="requisites-block">
+      <div class="req-row"><span class="req-label">Полное наименование:</span><span class="req-val">Общество с ограниченной ответственностью «МИДИЙНОЕ МЕСТО КУРСК»</span></div>
+      <div class="req-row"><span class="req-label">Сокращённое:</span><span class="req-val">ООО «МИДИЙНОЕ МЕСТО КУРСК»</span></div>
+      <div class="req-row"><span class="req-label">ОГРН:</span><span class="req-val">1224600008313</span></div>
+      <div class="req-row"><span class="req-label">ИНН / КПП:</span><span class="req-val">4632294190 / 463201001</span></div>
+      <div class="req-row"><span class="req-label">Юридический адрес:</span><span class="req-val">305016, Курская область, г. Курск, ул. Павлуновского, зд. 73</span></div>
+      <div class="req-row"><span class="req-label">Телефон:</span><span class="req-val"><a href="tel:+79915175131">8 (991) 517-51-31</a></span></div>
+    </div>
+    <p>Обработка персональных данных осуществляется в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».</p>
+  </div>
+
+  <div class="privacy-section">
+    <h2>2. Какие данные мы собираем</h2>
+    <p>При заполнении формы заявки на сайте мы можем получать следующие персональные данные:</p>
+    <ul>
+      <li>Имя и фамилия</li>
+      <li>Номер телефона</li>
+      <li>Тип мероприятия, количество гостей, желаемая дата</li>
+      <li>Произвольное сообщение (при заполнении поля «Дополнительно»)</li>
+    </ul>
+    <p>Сайт не собирает биометрические данные, данные документов, финансовые или медицинские сведения.</p>
+    <div class="highlight-box">
+      IP-адрес и технические данные о браузере могут фиксироваться системой аналитики Яндекс.Метрика в соответствии с её пользовательским соглашением.
+    </div>
+  </div>
+
+  <div class="privacy-section">
+    <h2>3. Цели обработки данных</h2>
+    <p>Персональные данные обрабатываются исключительно в следующих целях:</p>
+    <ul>
+      <li>Обработка заявок на проведение мероприятий и банкетов</li>
+      <li>Связь с потенциальным клиентом для уточнения деталей заказа</li>
+      <li>Заключение и исполнение договора на оказание услуг</li>
+    </ul>
+  </div>
+
+  <div class="privacy-section">
+    <h2>4. Правовое основание и срок обработки</h2>
+    <p>Обработка персональных данных осуществляется на основании свободного, информированного и однозначного согласия субъекта персональных данных, выражаемого при отправке формы заявки (ст. 9 Федерального закона № 152-ФЗ).</p>
+    <p>Данные хранятся до момента отзыва согласия субъектом или до истечения трёх лет с даты последнего взаимодействия, если иное не предусмотрено законодательством.</p>
+  </div>
+
+  <div class="privacy-section">
+    <h2>5. Передача данных третьим лицам</h2>
+    <p>Персональные данные не передаются третьим лицам за исключением случаев, предусмотренных законодательством Российской Федерации.</p>
+    <p>Для аналитики посещаемости сайта используется сервис Яндекс.Метрика (ООО «Яндекс», Россия). Данный сервис обрабатывает обезличенные технические данные в соответствии с собственной политикой конфиденциальности.</p>
+    <p>Персональные данные обрабатываются на серверах, расположенных на территории Российской Федерации, в соответствии с требованиями ч. 5 ст. 18 Федерального закона № 152-ФЗ.</p>
+  </div>
+
+  <div class="privacy-section">
+    <h2>6. Права субъекта персональных данных</h2>
+    <p>В соответствии с Федеральным законом № 152-ФЗ вы вправе:</p>
+    <ul>
+      <li>Получить информацию об обработке ваших персональных данных</li>
+      <li>Потребовать уточнения, блокирования или уничтожения данных, если они неполны, устарели или обрабатываются незаконно</li>
+      <li>Отозвать согласие на обработку персональных данных в любой момент</li>
+      <li>Обжаловать действия оператора в Роскомнадзор или суд</li>
+    </ul>
+    <p>Для реализации своих прав обратитесь к нам по телефону <a href="tel:+79915175131">8 (991) 517-51-31</a>.</p>
+  </div>
+
+  <div class="privacy-section">
+    <h2>7. Меры защиты данных</h2>
+    <p>Оператор принимает необходимые организационные и технические меры для защиты персональных данных от несанкционированного доступа, изменения, раскрытия или уничтожения, в том числе:</p>
+    <ul>
+      <li>Передача данных по защищённому соединению (HTTPS / TLS)</li>
+      <li>Ограничение доступа к данным для сотрудников, не связанных с их обработкой</li>
+      <li>Регулярное обновление программного обеспечения</li>
+    </ul>
+  </div>
+
+  <div class="privacy-section">
+    <h2>8. Использование файлов Cookie</h2>
+    <p>Сайт может использовать файлы cookie для обеспечения корректной работы сервисов аналитики. Cookie не содержат персональных данных в явном виде. Вы можете отключить их в настройках браузера, однако это может повлиять на работу отдельных функций сайта.</p>
+  </div>
+
+  <div class="privacy-section">
+    <h2>9. Изменения Политики</h2>
+    <p>Оператор вправе вносить изменения в настоящую Политику. Актуальная редакция всегда доступна по адресу <a href="https://centralny-kursk.ru/privacy.html">centralny-kursk.ru/privacy.html</a>. Продолжение использования сайта после публикации изменений означает согласие с новой редакцией.</p>
+  </div>
+
+  <div class="privacy-section">
+    <h2>10. Контактная информация</h2>
+    <p>По вопросам, связанным с обработкой персональных данных, обращайтесь:</p>
+    <div class="requisites-block">
+      <div class="req-row"><span class="req-label">Организация:</span><span class="req-val">ООО «МИДИЙНОЕ МЕСТО КУРСК»</span></div>
+      <div class="req-row"><span class="req-label">Адрес:</span><span class="req-val">305016, г. Курск, ул. Павлуновского, зд. 73</span></div>
+      <div class="req-row"><span class="req-label">Телефон:</span><span class="req-val"><a href="tel:+79915175131">8 (991) 517-51-31</a></span></div>
+    </div>
+    <p>Надзорный орган в сфере персональных данных: Федеральная служба по надзору в сфере связи, информационных технологий и массовых коммуникаций (Роскомнадзор) — <a href="https://rkn.gov.ru" target="_blank">rkn.gov.ru</a>.</p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="privacy-footer">
+  <p>© 2026 ООО «МИДИЙНОЕ МЕСТО КУРСК» · ОГРН 1224600008313 · ИНН 4632294190</p>
+  <p style="margin-top:6px;"><a href="index.html">Вернуться на главную</a></p>
+</footer>
+
+</body>
+</html>
