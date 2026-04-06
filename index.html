@@ -607,6 +607,13 @@
     .menu-sub { font-size: 13px; font-weight: 300; color: var(--br-2); max-width: 300px; line-height: 1.85; margin-top: 10px; }
     .menu-sec .tag { color: var(--br-3); }
     .menu-sec .tag::before { background: var(--br-4); opacity: 1; }
+    .menu-pdf-bar { display: flex; align-items: center; justify-content: center; gap: 28px; padding: 28px 40px; border-top: 1px solid rgba(130,102,81,0.13); background: rgba(250,246,239,0.6); }
+    .menu-pdf-text { display: flex; flex-direction: column; gap: 3px; }
+    .menu-pdf-label { font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--br-4); }
+    .menu-pdf-title { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--black); letter-spacing: -0.01em; }
+    .menu-pdf-link { display: inline-flex; align-items: center; gap: 9px; padding: 11px 26px; border: 1px solid rgba(130,102,81,0.35); color: var(--br-3); font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; text-decoration: none; transition: background 0.25s, color 0.25s, border-color 0.25s; background: transparent; white-space: nowrap; }
+    .menu-pdf-link:hover { background: var(--br-3); color: var(--white); border-color: var(--br-3); }
+    .menu-pdf-link svg { flex-shrink: 0; }
     .menu-tabs { display: flex; flex-direction: column; gap: 0; position: relative; z-index: 3; margin-top: 36px; border-left: 1px solid rgba(130,102,81,0.15); }
     .mtab { padding: 9px 0 9px 20px; border: none; border-left: 2px solid transparent; background: transparent; color: rgba(43,42,41,0.28); font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; cursor: pointer; transition: color 0.3s, border-color 0.3s; margin-left: -1px; text-align: left; }
     .mtab:hover { color: rgba(43,42,41,0.7); }
@@ -852,7 +859,8 @@
       .footer-bot { flex-direction: column; gap: 16px; text-align: center; }
       .halls-head-wrap { padding: 40px 0 32px; }
       .events, .gallery, .adv, .cta, .chef { padding: 72px 0; }
-      .menu-sec { padding: 40px 0 72px; }
+      .menu-sec { padding: 40px 0 0; }
+      .menu-pdf-bar { flex-direction: column; gap: 16px; padding: 24px 20px; text-align: center; }
       .menu-layout { grid-template-columns: 1fr; }
       .menu-left-col { padding: 40px 24px 16px; }
       .menu-nav-row { margin-top: 20px; }
@@ -1306,6 +1314,19 @@
       </div>
       </div><!-- /.menu-right-col -->
     </div><!-- /.menu-layout -->
+
+  <div class="menu-pdf-bar">
+    <div class="menu-pdf-text">
+      <span class="menu-pdf-label">Полное меню</span>
+      <span class="menu-pdf-title">Все блюда и цены — в одном файле</span>
+    </div>
+    <a href="Банкетный%20комплекс%20Центральный/меню/Банкетный%20комплекс%20МЕНЮ%20(2)%20(1).pdf" target="_blank" class="menu-pdf-link">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Скачать меню (PDF)
+    </a>
+  </div>
 </section>
 
 
