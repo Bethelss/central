@@ -402,7 +402,7 @@
     .img-gallery-item:hover img { transform: scale(1.04); }
     @media (max-width: 768px) { .img-gallery { columns: 2; column-gap: 8px; } .img-gallery-item { margin-bottom: 8px; } }
 
-    .gallery-video-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+    .gallery-video-row { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 8px; max-width: 560px; }
     .gitem-video { overflow: hidden; position: relative; cursor: pointer; aspect-ratio: 9/16; }
     .gitem-video video { width: 100%; height: 100%; object-fit: contain; background: #000; display: block; transition: transform 0.85s var(--ease); }
     .gitem-video:hover video { transform: scale(1.03); }
@@ -599,8 +599,8 @@
     /* ── MENU CAROUSEL — side-by-side layout ─── */
     .menu-sec { background: var(--cream2); position: relative; overflow: hidden; }
     .menu-sec::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: rgba(130,102,81,0.12); z-index: 1; }
-    .menu-layout { display: grid; grid-template-columns: 36% 64%; min-height: 560px; position: relative; }
-    .menu-left-col { padding: 88px max(36px, 4vw) 140px max(52px, calc((100vw - 1280px) / 2 + 52px)); display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 3; }
+    .menu-layout { display: grid; grid-template-columns: calc(36% - 60px) calc(64% + 60px); min-height: 560px; position: relative; }
+    .menu-left-col { padding: 88px max(36px, 4vw) 140px 200px; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 3; }
     .menu-left-col::after { content: ''; position: absolute; right: 0; top: 64px; bottom: 64px; width: 1px; background: rgba(130,102,81,0.12); }
     .menu-right-col { overflow: hidden; position: relative; z-index: 3; display: flex; align-items: center; }
     .menu-h { font-size: clamp(36px, 3.6vw, 56px); font-weight: 300; color: var(--black); letter-spacing: -0.02em; }
@@ -652,10 +652,10 @@
     .mcard-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease); display: block; }
     .mcard:hover .mcard-img { transform: scale(1.06); }
     .mcard-grad { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(43,42,41,0) 0%, rgba(43,42,41,0.18) 50%, rgba(43,42,41,0.88) 78%, rgba(43,42,41,0.98) 100%); }
-    .mcard-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px 26px 28px; }
+    .mcard-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px 26px 8px; }
     .mcard-cat { font-size: 8px; font-weight: 500; letter-spacing: 0.38em; text-transform: uppercase; color: var(--br-5); display: block; margin-bottom: 8px; }
     .mcard-name { font-family: var(--serif); font-size: 21px; font-weight: 500; color: var(--white); line-height: 1.18; display: block; margin-bottom: 8px; }
-    .mcard-desc { font-size: 12.5px; font-weight: 300; color: rgba(254,254,254,0.58); line-height: 1.65; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .mcard-desc { font-size: 12.5px; font-weight: 300; color: rgba(254,254,254,0.58); line-height: 1.65; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
     /* Dish modal */
     .dish-modal { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
@@ -863,7 +863,8 @@
       .mtab { padding: 10px 20px 10px 0; border-left: none; border-bottom: 2px solid transparent; margin-left: 0; }
       .mtab.active { border-left-color: transparent; border-bottom-color: var(--br-3); }
       .menu-dots { justify-content: flex-start; }
-      .mcard { flex: 0 0 240px; }
+      .mcard { flex: 0 0 min(240px, calc(100vw - 80px)); }
+      .menu-track { padding-left: 20px; padding-right: 20px; }
       .adv-photo { display: none; }
       .chef-layout { grid-template-columns: 1fr; padding: 0 24px; }
       .chef-photo-col { width: 100%; aspect-ratio: 3/4; max-height: 480px; }
@@ -1236,39 +1237,9 @@
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Стейк трай-тип с картофельным пюре</span><p class="mcard-desc">Сочная говядина с благородной корочкой, воздушное пюре, тёплые луковые лепестки и укропная вытяжка.</p></div>
       </div>
       <div class="mcard" onclick="openDish(this)" data-cat="горячее">
-        <img src="Банкетный%20комплекс%20Центральный/меню/бифштекс.webp" alt="Бифштекс" class="mcard-img">
-        <div class="mcard-grad"></div>
-        <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Бифштекс с гелем из желтка и картофелем пай</span><p class="mcard-desc">Румяное сочное мясо, деликатная отсылка к бифштексу с яйцом и щедрая горсть хрустящего пай.</p></div>
-      </div>
-      <div class="mcard" onclick="openDish(this)" data-cat="горячее">
-        <img src="Банкетный%20комплекс%20Центральный/меню/перлото.webp" alt="Перлото" class="mcard-img">
-        <div class="mcard-grad"></div>
-        <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Перлото с томлёными говяжьими щеками</span><p class="mcard-desc">Перлото на курином бульоне со сливками, говяжьи щёчки в демигласе, тёртый пармезан.</p></div>
-      </div>
-      <div class="mcard" onclick="openDish(this)" data-cat="горячее">
-        <img src="Банкетный%20комплекс%20Центральный/меню/утиная%20грудка.webp" alt="Утиная грудка" class="mcard-img">
-        <div class="mcard-grad"></div>
-        <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Утиная грудка с белыми грибами и тыквенным кремом</span><p class="mcard-desc">Розовая сочная утка, горячий лесной аромат грибов и мягкая сладость тыквы с вишнёвым соусом.</p></div>
-      </div>
-      <div class="mcard" onclick="openDish(this)" data-cat="горячее">
         <img src="Банкетный%20комплекс%20Центральный/меню/куриное%20суфле.webp" alt="Куриное суфле" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Куриное суфле с пюре и шпинатом</span><p class="mcard-desc">Нежная тающая текстура, внутри — тёплое сливочное масло с петрушкой, пюре по-русски и свежий шпинат.</p></div>
-      </div>
-      <div class="mcard" onclick="openDish(this)" data-cat="горячее">
-        <img src="Банкетный%20комплекс%20Центральный/меню/форель.webp" alt="Форель" class="mcard-img">
-        <div class="mcard-grad"></div>
-        <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Форель на булгуре со сливочным соусом</span><p class="mcard-desc">Рыба с хрустящей кожей, рассыпчатая крупа и тёплые томаты; бархатный соус подчёркивает сладость форели.</p></div>
-      </div>
-      <div class="mcard" onclick="openDish(this)" data-cat="горячее">
-        <img src="Банкетный%20комплекс%20Центральный/меню/тунец.webp" alt="Тунец" class="mcard-img">
-        <div class="mcard-grad"></div>
-        <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Тунец с морковным пюре и цитрусовым демигласом</span><p class="mcard-desc">Обожжённый край, сочный розовый центр, сладковатое морковное пюре и свежий цитрусовый соус.</p></div>
-      </div>
-      <div class="mcard" onclick="openDish(this)" data-cat="горячее">
-        <img src="Банкетный%20комплекс%20Центральный/меню/сибас.webp" alt="Сибас" class="mcard-img">
-        <div class="mcard-grad"></div>
-        <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Сибас на шпинате с икорным соусом</span><p class="mcard-desc">Тонкий хруст кожи, деликатная текстура рыбы и сливочно-икорный соус — ничего лишнего.</p></div>
       </div>
       <div class="mcard" onclick="openDish(this)" data-cat="горячее">
         <img src="Банкетный%20комплекс%20Центральный/меню/перепелка.webp" alt="Перепёлка" class="mcard-img">
@@ -1286,16 +1257,6 @@
         <div class="mcard-body"><span class="mcard-cat">Горячее</span><span class="mcard-name">Свиные рёбра в глазури из ромовой сливы</span><p class="mcard-desc">Томлёные до мягкости, покрытые блестящей кисло-сладкой глазурью, с ореховой посыпкой.</p></div>
       </div>
       <div class="mcard" onclick="openDish(this)" data-cat="закуски">
-        <img src="Банкетный%20комплекс%20Центральный/меню/камамбер.webp" alt="Камамбер" class="mcard-img">
-        <div class="mcard-grad"></div>
-        <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Камамбер в бамбуковой золе с лаймовым вареньем</span><p class="mcard-desc">Сливочная текучесть сыра и свежая цитрусовая кислинка — любимая связка «сыр и домашнее варенье».</p></div>
-      </div>
-      <div class="mcard" onclick="openDish(this)" data-cat="закуски">
-        <img src="Банкетный%20комплекс%20Центральный/меню/грибы%20со%20шпинатом.webp" alt="Белые грибы" class="mcard-img">
-        <div class="mcard-grad"></div>
-        <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Белые грибы со шпинатом и муссом из жареного картофеля</span><p class="mcard-desc">Румяная корочка грибов, свежая зелень и знакомый вкус жареной картошки в кремовой форме.</p></div>
-      </div>
-      <div class="mcard" onclick="openDish(this)" data-cat="закуски">
         <img src="Банкетный%20комплекс%20Центральный/меню/овощная%20тарелка.webp" alt="Овощная тарелка" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Овощная тарелка с базиликовым маслом</span><p class="mcard-desc">Томаты, огурец, сладкий перец и редис — хруст, сочность и щепоть соли.</p></div>
@@ -1304,11 +1265,6 @@
         <img src="Банкетный%20комплекс%20Центральный/меню/сырная%20нарезка.webp" alt="Сырная нарезка" class="mcard-img">
         <div class="mcard-grad"></div>
         <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Сырная нарезка</span><p class="mcard-desc">Пармезан, бри, чеддер и горгонзола — мёд, вишнёвый джем, ягоды и орехи.</p></div>
-      </div>
-      <div class="mcard" onclick="openDish(this)" data-cat="закуски">
-        <img src="Банкетный%20комплекс%20Центральный/меню/буженина.webp" alt="Буженина" class="mcard-img">
-        <div class="mcard-grad"></div>
-        <div class="mcard-body"><span class="mcard-cat">Закуски</span><span class="mcard-name">Буженина со «сладкой горчицей» и домашними чипсами</span><p class="mcard-desc">Румяная корочка, мягкое мясо и кремовая горчица на сливках — родной вкус праздника.</p></div>
       </div>
       <div class="mcard" onclick="openDish(this)" data-cat="закуски">
         <img src="Банкетный%20комплекс%20Центральный/меню/эклеры.webp" alt="Эклеры" class="mcard-img">
@@ -2032,59 +1988,106 @@ function openGalleryAt(idx, dir) {
     setTimeout(() => { btn.textContent='Отправить заявку'; btn.style.background=''; btn.disabled=false; e.target.reset(); }, 4000);
   }
 
-  /* Menu carousel — Gallery4 style */
+  /* Menu carousel — snap-to-center */
   (function(){
-    const track   = document.getElementById('menuTrack');
+    const track  = document.getElementById('menuTrack');
     if(!track) return;
-    const wrap    = document.getElementById('menuWrap');
-    const counter = document.getElementById('menuCounter');
-    const dotsEl  = document.getElementById('menuDots');
+    const wrap   = document.getElementById('menuWrap');
+    const counter= document.getElementById('menuCounter');
+    const dotsEl = document.getElementById('menuDots');
     const gap = 20;
-    let cur = 0;
+    let offset = 0, rafId = null;
 
     function getVisible() {
       return [...track.querySelectorAll('.mcard:not(.hidden)')];
     }
 
+    function getPL() { return parseFloat(getComputedStyle(track).paddingLeft) || 0; }
+
+    /* Snap point: card centre aligns to wrap centre, accounting for track padding */
+    function snapPoint(cardLeftEdge, cardWidth) {
+      return Math.max(0, Math.min(
+        getPL() + cardLeftEdge + cardWidth / 2 - wrap.offsetWidth / 2,
+        getMaxOffset()
+      ));
+    }
+
+    function getMaxOffset() {
+      const v = getVisible();
+      if(!v.length) return 0;
+      const total = v.reduce((s, c) => s + c.offsetWidth + gap, 0) - gap;
+      return Math.max(0, getPL() + total - wrap.offsetWidth);
+    }
+
+    /* Returns {index, snapOffset} of the card closest to current offset */
+    function findNearest(fromOffset) {
+      const allCards = [...track.querySelectorAll('.mcard')];
+      let cardLeft = 0, idx = 0, best = 0, bestSnap = 0, bestDist = Infinity;
+      for(const c of allCards) {
+        if(c.classList.contains('hidden')) { cardLeft += c.offsetWidth + gap; continue; }
+        const sp   = snapPoint(cardLeft, c.offsetWidth);
+        const dist = Math.abs(sp - fromOffset);
+        if(dist < bestDist) { bestDist = dist; best = idx; bestSnap = sp; }
+        cardLeft += c.offsetWidth + gap;
+        idx++;
+      }
+      return { index: best, snapOffset: bestSnap };
+    }
+
+    function updateUI() {
+      const v   = getVisible();
+      const cur = findNearest(offset).index;
+      if(counter) counter.textContent = v.length ? `${cur + 1} / ${v.length}` : '';
+      if(dotsEl) dotsEl.querySelectorAll('.mdot').forEach((d,i) => d.classList.toggle('active', i === cur));
+      const prevBtn = document.getElementById('menuPrev');
+      const nextBtn = document.getElementById('menuNext');
+      if(prevBtn) prevBtn.disabled = offset <= 0;
+      if(nextBtn) nextBtn.disabled = offset >= getMaxOffset();
+    }
+
     function buildDots() {
       if(!dotsEl) return;
-      const v = getVisible();
+      const v   = getVisible();
+      const cur = findNearest(offset).index;
       dotsEl.innerHTML = '';
       v.forEach((_, i) => {
         const d = document.createElement('button');
         d.className = 'mdot' + (i === cur ? ' active' : '');
-        d.setAttribute('aria-label', `Блюдо ${i + 1}`);
-        d.addEventListener('click', () => goTo(i));
+        d.setAttribute('aria-label', `Блюдо ${i+1}`);
+        d.addEventListener('click', () => goToIndex(i));
         dotsEl.appendChild(d);
       });
     }
 
-    function updateDots() {
-      if(!dotsEl) return;
-      dotsEl.querySelectorAll('.mdot').forEach((d, i) => d.classList.toggle('active', i === cur));
+    function setOffset(val, animated) {
+      if(rafId) { cancelAnimationFrame(rafId); rafId = null; }
+      offset = Math.max(0, Math.min(val, getMaxOffset()));
+      track.style.transition = animated ? 'transform 0.38s cubic-bezier(0.25,0.46,0.45,0.94)' : 'none';
+      track.style.transform  = `translateX(-${offset}px)`;
+      updateUI();
     }
 
-    function updateCounter() {
-      const v = getVisible();
-      counter.textContent = v.length ? `${cur + 1} / ${v.length}` : '';
-      updateDots();
+    function snapNearest() {
+      setOffset(findNearest(offset).snapOffset, true);
     }
 
-    function goTo(i) {
-      const v = getVisible();
-      if(!v.length) return;
-      cur = ((i % v.length) + v.length) % v.length;
-      const targetCard = v[cur];
+    function goToIndex(i) {
       const allCards = [...track.querySelectorAll('.mcard')];
-      let offset = 0;
+      let cardLeft = 0, idx = 0;
       for(const c of allCards) {
-        if(c === targetCard) break;
-        if(!c.classList.contains('hidden')) offset += c.offsetWidth + gap;
+        if(c.classList.contains('hidden')) { cardLeft += c.offsetWidth + gap; continue; }
+        if(idx === i) { setOffset(snapPoint(cardLeft, c.offsetWidth), true); return; }
+        cardLeft += c.offsetWidth + gap;
+        idx++;
       }
-      track.style.transform = `translateX(-${offset}px)`;
-      updateCounter();
     }
 
+    function scrollByOne(dir) {
+      const cur = findNearest(offset).index;
+      goToIndex(cur + dir);
+    }
+
+    /* Tabs */
     document.getElementById('menuTabs').addEventListener('click', e => {
       const tab = e.target.closest('.mtab');
       if(!tab) return;
@@ -2094,48 +2097,76 @@ function openGalleryAt(idx, dir) {
       track.querySelectorAll('.mcard').forEach(c => {
         c.classList.toggle('hidden', filter !== 'all' && c.dataset.cat !== filter);
       });
-      cur = 0;
+      offset = 0;
       track.style.transition = 'none';
-      track.style.transform = 'translateX(0)';
-      requestAnimationFrame(() => { track.style.transition = ''; buildDots(); updateCounter(); });
+      track.style.transform  = 'translateX(0)';
+      requestAnimationFrame(() => { buildDots(); updateUI(); });
     });
 
-    document.getElementById('menuPrev').addEventListener('click', () => goTo(cur - 1));
-    document.getElementById('menuNext').addEventListener('click', () => goTo(cur + 1));
-    document.getElementById('menuOverlayPrev').addEventListener('click', () => goTo(cur - 1));
-    document.getElementById('menuOverlayNext').addEventListener('click', () => goTo(cur + 1));
+    document.getElementById('menuPrev').addEventListener('click', () => scrollByOne(-1));
+    document.getElementById('menuNext').addEventListener('click', () => scrollByOne(1));
+    document.getElementById('menuOverlayPrev').addEventListener('click', () => scrollByOne(-1));
+    document.getElementById('menuOverlayNext').addEventListener('click', () => scrollByOne(1));
 
-    let startX = 0, dragging = false, startOffset = 0;
+    /* Drag */
+    let dragging = false, dragStartX = 0, dragStartOffset = 0, velX = 0, lastX = 0, lastT = 0;
     window.menuDragged = false;
-    wrap.addEventListener('mousedown', e => {
-      startX = e.clientX; window.menuDragged = false;
-      const v = getVisible(); if(!v.length) return;
-      let off = 0;
-      const allCards = [...track.querySelectorAll('.mcard')];
-      for(const c of allCards) { if(c === v[cur]) break; if(!c.classList.contains('hidden')) off += c.offsetWidth + gap; }
-      startOffset = off;
-      dragging = true; track.style.transition = 'none';
-    });
-    window.addEventListener('mousemove', e => {
+
+    function onDragStart(x) {
+      if(rafId) { cancelAnimationFrame(rafId); rafId = null; }
+      dragStartX = x; dragStartOffset = offset;
+      velX = 0; lastX = x; lastT = Date.now();
+      dragging = true; window.menuDragged = false;
+      track.style.transition = 'none';
+    }
+
+    function onDragMove(x) {
       if(!dragging) return;
-      if(Math.abs(e.clientX - startX) > 6) window.menuDragged = true;
-      track.style.transform = `translateX(${-startOffset + (e.clientX - startX)}px)`;
-    });
-    window.addEventListener('mouseup', e => {
-      if(!dragging) return; dragging = false; track.style.transition = '';
-      const diff = e.clientX - startX;
-      if(Math.abs(diff) > 60) goTo(diff < 0 ? cur+1 : cur-1); else goTo(cur);
-    });
+      const dx = x - dragStartX;
+      if(Math.abs(dx) > 5) window.menuDragged = true;
+      const now = Date.now(), dt = Math.max(now - lastT, 1);
+      velX = (x - lastX) / dt;
+      lastX = x; lastT = now;
+      offset = Math.max(0, Math.min(dragStartOffset - dx, getMaxOffset()));
+      track.style.transform = `translateX(-${offset}px)`;
+      updateUI();
+    }
 
-    let tStartX = 0;
-    wrap.addEventListener('touchstart', e => { tStartX = e.touches[0].clientX; }, {passive:true});
-    wrap.addEventListener('touchend', e => {
-      const diff = e.changedTouches[0].clientX - tStartX;
-      if(Math.abs(diff) > 50) goTo(diff < 0 ? cur+1 : cur-1);
-    }, {passive:true});
+    function onDragEnd() {
+      if(!dragging) return;
+      dragging = false;
+      /* Short inertia, then snap */
+      let v = -velX * 10;
+      function tick() {
+        v *= 0.84;
+        if(Math.abs(v) < 0.5) { snapNearest(); return; }
+        offset = Math.max(0, Math.min(offset + v, getMaxOffset()));
+        track.style.transform = `translateX(-${offset}px)`;
+        updateUI();
+        rafId = requestAnimationFrame(tick);
+      }
+      rafId = requestAnimationFrame(tick);
+    }
 
-    buildDots();
-    updateCounter();
+    wrap.addEventListener('mousedown', e => { onDragStart(e.clientX); e.preventDefault(); });
+    window.addEventListener('mousemove', e => { onDragMove(e.clientX); });
+    window.addEventListener('mouseup',   () => { onDragEnd(); });
+
+    wrap.addEventListener('touchstart', e => { onDragStart(e.touches[0].clientX); }, {passive:true});
+    wrap.addEventListener('touchmove',  e => { onDragMove(e.touches[0].clientX);  }, {passive:true});
+    wrap.addEventListener('touchend',   () => { onDragEnd(); },                       {passive:true});
+
+    function init() { buildDots(); goToIndex(0); }
+    requestAnimationFrame(init);
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const cur = findNearest(offset).index;
+        goToIndex(cur);
+      }, 100);
+    });
   })();
 
   /* Active nav link */
