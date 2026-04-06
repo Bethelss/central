@@ -400,7 +400,7 @@
     .img-gallery-item img { width: 100%; height: auto; display: block; opacity: 0; transition: opacity 1s ease-in-out, transform 0.6s var(--ease); }
     .img-gallery-item img.img-visible { opacity: 1; }
     .img-gallery-item:hover img { transform: scale(1.04); }
-    @media (max-width: 768px) { .img-gallery { columns: 2; column-gap: 8px; } .img-gallery-item { margin-bottom: 8px; } }
+    @media (max-width: 768px) { .img-gallery { columns: 2; column-gap: 8px; } .img-gallery-item { margin-bottom: 8px; } .gallery-video-item { column-span: all; } }
 
     .img-gallery-item video { width: 100%; display: block; transition: transform 0.85s var(--ease); }
     .img-gallery-item:hover video { transform: scale(1.04); }
@@ -1125,7 +1125,7 @@
 
     <!-- 3-column masonry gallery (CSS columns — reflows to 2 on mobile) -->
     <div class="img-gallery">
-      <div class="img-gallery-item" style="position:relative;overflow:hidden;cursor:pointer;" onclick="openVideoLB('photos/Welcome%20+%20Party.MOV')">
+      <div class="img-gallery-item gallery-video-item" style="position:relative;overflow:hidden;cursor:pointer;" onclick="openVideoLB('photos/Welcome%20+%20Party.MOV')">
         <video autoplay muted loop playsinline preload="metadata" src="photos/Welcome%20+%20Party.MOV"></video>
         <div class="gitem-video-ov"><div class="video-play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div>
       </div>
