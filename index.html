@@ -609,6 +609,7 @@
     .menu-sec .tag::before { background: var(--br-4); opacity: 1; }
     .menu-pdf-inline { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; color: rgba(130,102,81,0.75); font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; transition: color 0.25s; }
     .menu-pdf-inline:hover { color: var(--br-3); }
+    .menu-pdf-mobile { display: none; }
     .menu-tabs { display: flex; flex-direction: column; gap: 0; position: relative; z-index: 3; margin-top: 36px; border-left: 1px solid rgba(130,102,81,0.15); }
     .mtab { padding: 9px 0 9px 20px; border: none; border-left: 2px solid transparent; background: transparent; color: rgba(43,42,41,0.28); font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; cursor: pointer; transition: color 0.3s, border-color 0.3s; margin-left: -1px; text-align: left; }
     .mtab:hover { color: rgba(43,42,41,0.7); }
@@ -860,7 +861,9 @@
       .menu-nav-row { margin-top: 20px; }
       .menu-dots { margin-top: 10px; }
       .menu-left-col::after { display: none; }
-      .menu-right-col { padding-bottom: 56px; }
+      .menu-right-col { padding-bottom: 32px; }
+      .menu-pdf-inline:not(.menu-pdf-mobile) { display: none; }
+      .menu-pdf-mobile { display: inline-flex; margin: 0 24px 40px; }
       .menu-tabs { flex-direction: row; flex-wrap: wrap; border-left: none; border-bottom: 1px solid rgba(130,102,81,0.15); margin-top: 24px; }
       .mtab { padding: 10px 20px 10px 0; border-left: none; border-bottom: 2px solid transparent; margin-left: 0; }
       .mtab.active { border-left-color: transparent; border-bottom-color: var(--br-3); }
@@ -1312,6 +1315,10 @@
       </div>
       </div><!-- /.menu-right-col -->
     </div><!-- /.menu-layout -->
+    <a href="Банкетный%20комплекс%20Центральный/меню/Банкетный%20комплекс%20МЕНЮ%20(2)%20(1).pdf" target="_blank" class="menu-pdf-inline menu-pdf-mobile">
+      <svg width="11" height="11" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Полное меню с ценами (PDF)
+    </a>
 
 
 </section>
