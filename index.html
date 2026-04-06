@@ -402,9 +402,13 @@
     .img-gallery-item:hover img { transform: scale(1.04); }
     @media (max-width: 768px) { .img-gallery { columns: 2; column-gap: 8px; } .img-gallery-item { margin-bottom: 8px; } }
 
-    .gallery-video-row { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 8px; max-width: 560px; }
+    .gallery-video-block { display: grid; grid-template-columns: 1fr 220px 1fr; gap: 8px; margin-bottom: 8px; align-items: stretch; }
+    .gallery-video-side { display: grid; grid-template-rows: 1fr 1fr; gap: 8px; }
+    .gallery-video-side .img-gallery-item { margin: 0; break-inside: unset; overflow: hidden; }
+    .gallery-video-side .img-gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.85s var(--ease); }
+    .gallery-video-side .img-gallery-item:hover img { transform: scale(1.04); }
     .gitem-video { overflow: hidden; position: relative; cursor: pointer; aspect-ratio: 9/16; }
-    .gitem-video video { width: 100%; height: 100%; object-fit: contain; background: #000; display: block; transition: transform 0.85s var(--ease); }
+    .gitem-video video { width: 100%; height: 100%; object-fit: cover; background: #000; display: block; transition: transform 0.85s var(--ease); }
     .gitem-video:hover video { transform: scale(1.03); }
     .gitem-video-ov { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(43,42,41,0); transition: background 0.3s; }
     .gitem-video:hover .gitem-video-ov { background: rgba(43,42,41,0.32); }
@@ -847,7 +851,8 @@
       .gitem:nth-child(4) { grid-column: span 2; }
       .gitem:nth-child(4) img { height: 100%; }
       .gitem:nth-child(1) img { min-height: 300px; }
-      .gallery-video-row { grid-template-columns: 1fr; }
+      .gallery-video-block { grid-template-columns: 1fr; }
+      .gallery-video-side { display: none; }
       .events-grid { grid-template-columns: 1fr; }
       .form-grid { grid-template-columns: 1fr; }
       .ff.full { grid-column: span 1; }
@@ -1126,11 +1131,19 @@
       <h2 class="gallery-h">Галерея</h2>
     </div>
 
-    <!-- Video row -->
-    <div class="gallery-video-row">
+    <!-- Video + flanking photos -->
+    <div class="gallery-video-block">
+      <div class="gallery-video-side">
+        <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/photo_1_2026-04-06_11-24-56.jpg"><img src="Банкетный%20комплекс%20Центральный/photo_1_2026-04-06_11-24-56.jpg" alt="Атмосфера" loading="lazy"></div>
+        <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/photo_2_2026-04-06_11-24-56.jpg"><img src="Банкетный%20комплекс%20Центральный/photo_2_2026-04-06_11-24-56.jpg" alt="Атмосфера" loading="lazy"></div>
+      </div>
       <div class="gitem-video r" onclick="openVideoLB('photos/Welcome%20+%20Party.MOV')">
         <video autoplay muted loop playsinline preload="metadata" src="photos/Welcome%20+%20Party.MOV"></video>
         <div class="gitem-video-ov"><div class="video-play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+      <div class="gallery-video-side">
+        <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/photo_3_2026-04-06_11-24-56.jpg"><img src="Банкетный%20комплекс%20Центральный/photo_3_2026-04-06_11-24-56.jpg" alt="Атмосфера" loading="lazy"></div>
+        <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/photo_4_2026-04-06_11-24-56.jpg"><img src="Банкетный%20комплекс%20Центральный/photo_4_2026-04-06_11-24-56.jpg" alt="Атмосфера" loading="lazy"></div>
       </div>
     </div>
 
@@ -1149,10 +1162,6 @@
       <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/официант.jpg"><img src="Банкетный%20комплекс%20Центральный/официант.jpg" alt="Сервис" loading="lazy"></div>
       <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-58.jpg"><img src="Банкетный%20комплекс%20Центральный/photo_2026-03-19_12-03-58.jpg" alt="Атмосфера вечера" loading="lazy"></div>
       <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/столы.webp"><img src="Банкетный%20комплекс%20Центральный/столы.webp" alt="Свадебная сервировка" loading="lazy"></div>
-      <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/photo_1_2026-04-06_11-24-56.jpg"><img src="Банкетный%20комплекс%20Центральный/photo_1_2026-04-06_11-24-56.jpg" alt="Атмосфера" loading="lazy"></div>
-      <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/photo_2_2026-04-06_11-24-56.jpg"><img src="Банкетный%20комплекс%20Центральный/photo_2_2026-04-06_11-24-56.jpg" alt="Атмосфера" loading="lazy"></div>
-      <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/photo_3_2026-04-06_11-24-56.jpg"><img src="Банкетный%20комплекс%20Центральный/photo_3_2026-04-06_11-24-56.jpg" alt="Атмосфера" loading="lazy"></div>
-      <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/photo_4_2026-04-06_11-24-56.jpg"><img src="Банкетный%20комплекс%20Центральный/photo_4_2026-04-06_11-24-56.jpg" alt="Атмосфера" loading="lazy"></div>
       <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/photo_5_2026-04-06_11-24-56.jpg"><img src="Банкетный%20комплекс%20Центральный/photo_5_2026-04-06_11-24-56.jpg" alt="Атмосфера" loading="lazy"></div>
       <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/photo_6_2026-04-06_11-24-56.jpg"><img src="Банкетный%20комплекс%20Центральный/photo_6_2026-04-06_11-24-56.jpg" alt="Атмосфера" loading="lazy"></div>
       <div class="img-gallery-item" data-src="Банкетный%20комплекс%20Центральный/photo_8_2026-04-06_11-24-56.jpg"><img src="Банкетный%20комплекс%20Центральный/photo_8_2026-04-06_11-24-56.jpg" alt="Атмосфера" loading="lazy"></div>
