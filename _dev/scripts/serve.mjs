@@ -3,7 +3,7 @@ import { readFile } from 'fs/promises';
 import { join, extname } from 'path';
 import { fileURLToPath } from 'url';
 
-const __dirname = fileURLToPath(new URL('.', import.meta.url));
+const __dirname = process.cwd();
 const PORT = 3000;
 
 const mime = {
